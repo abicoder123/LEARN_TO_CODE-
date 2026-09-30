@@ -3,888 +3,837 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Code Club</title>
+<title>Remember How to Code</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-
-*{box-sizing:border-box}
-
-:root{
-    --bg:#faf9f4;
-    --white:#fff;
-    --ink:#252520;
-    --muted:#85847b;
-    --line:#e7e5dd;
-    --green:#91ad83;
-    --green-dark:#57714f;
-    --green-light:#edf4e9;
-    --yellow:#f5d76c;
-    --orange:#e99858;
-    --shadow:0 8px 30px rgba(40,40,30,.06);
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+    --cream: #fffaf0;
+    --paper: #fffdf7;
+    --sage: #a9c7ad;
+    --sage-dark: #668c70;
+    --green: #dcebd8;
+    --yellow: #f7df9c;
+    --pink: #f4cfd5;
+    --blue: #cfe1ed;
+    --lavender: #ded7ed;
+    --brown: #51483f;
+    --muted: #8b837a;
+    --white: #ffffff;
+    --shadow: 0 8px 30px rgba(83, 73, 59, 0.09);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+    color: var(--brown);
+    background:
+        radial-gradient(circle at 8% 12%, rgba(247,223,156,.28) 0 45px, transparent 46px),
+        radial-gradient(circle at 94% 78%, rgba(220,235,216,.65) 0 80px, transparent 81px),
+        var(--cream);
+    min-height: 100vh;
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+    height: 78px;
+    background: rgba(255,253,247,.94);
+    border-bottom: 1px solid #eee6d8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-duck {
+    width: 43px;
+    height: 36px;
+    position: relative;
+}
+
+.logo-body {
+    width: 32px;
+    height: 24px;
+    background: #f5d879;
+    border-radius: 55% 48% 45% 55%;
+    position: absolute;
+    bottom: 1px;
+    left: 2px;
+}
+
+.logo-head {
+    width: 20px;
+    height: 20px;
+    background: #f7df83;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 19px;
+}
+
+.logo-eye {
+    width: 3px;
+    height: 3px;
+    background: #51483f;
+    border-radius: 50%;
+    position: absolute;
+    top: 7px;
+    left: 31px;
 }
 
-body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:"DM Sans",Arial,sans-serif;
-}
-
-button{
-    font:inherit;
-}
-
-button:focus-visible{
-    outline:3px solid #9bbd8e;
-    outline-offset:2px;
+.logo-beak {
+    width: 8px;
+    height: 5px;
+    background: #e7a84c;
+    border-radius: 80% 20% 20% 80%;
+    position: absolute;
+    top: 10px;
+    left: 36px;
 }
 
-/* ---------------- HEADER ---------------- */
-
-.top{
-    height:74px;
-    background:rgba(255,255,255,.94);
-    border-bottom:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 38px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    backdrop-filter:blur(12px);
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-family:"Space Grotesk";
-    font-size:23px;
-    font-weight:700;
-    letter-spacing:-1px;
+.logo-text h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 21px;
+    margin: 0;
 }
 
-.brand-mark{
-    width:36px;
-    height:36px;
-    background:var(--green);
-    color:white;
-    border-radius:11px;
-    display:grid;
-    place-items:center;
-    font-size:13px;
-    font-weight:700;
+.logo-text span {
+    color: var(--sage-dark);
 }
 
-.top-stats{
-    display:flex;
-    gap:9px;
+.streak {
+    background: #fff4ce;
+    border: 1px solid #f1dfaa;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
 }
 
-.pill{
-    border:1px solid var(--line);
-    background:white;
-    border-radius:30px;
-    padding:9px 14px;
-    font-size:13px;
-    font-weight:700;
-}
+/* ---------- APP ---------- */
 
-.pill.streak{
-    color:#bd713b;
+.app {
+    display: flex;
+    max-width: 1450px;
+    margin: auto;
 }
 
-/* ---------------- SIDEBAR ---------------- */
+/* ---------- SIDEBAR ---------- */
 
-.app{
-    display:flex;
-    min-height:calc(100vh - 74px);
+.sidebar {
+    width: 245px;
+    min-height: calc(100vh - 78px);
+    padding: 25px 18px;
+    border-right: 1px solid #eee6d8;
+    background: rgba(255,253,247,.72);
 }
 
-.sidebar{
-    width:235px;
-    background:white;
-    border-right:1px solid var(--line);
-    padding:27px 16px;
-    flex-shrink:0;
+.side-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #9c9285;
+    font-weight: 700;
+    margin: 7px 12px 12px;
 }
 
-.side-label{
-    font-size:10px;
-    color:#aaa89f;
-    font-weight:700;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    margin:0 12px 12px;
+.language-button {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--brown);
+    text-align: left;
+    padding: 12px 13px;
+    border-radius: 14px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    margin-bottom: 4px;
+    transition: .2s;
 }
 
-.language{
-    width:100%;
-    border:0;
-    background:transparent;
-    padding:12px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    cursor:pointer;
-    color:#5c5b54;
-    text-align:left;
-    margin-bottom:5px;
+.language-button:hover {
+    background: #f5f0e6;
 }
 
-.language:hover{
-    background:#f6f6f1;
+.language-button.active {
+    background: var(--green);
+    color: #49694f;
 }
 
-.language.active{
-    background:var(--green-light);
-    color:var(--green-dark);
-    font-weight:700;
+.unit-list {
+    margin-top: 25px;
 }
 
-.lang-icon{
-    width:35px;
-    height:35px;
-    background:#f5f4ee;
-    border-radius:10px;
-    display:grid;
-    place-items:center;
-    font-size:11px;
-    font-family:"Space Grotesk";
-    font-weight:700;
+.unit {
+    padding: 10px 12px;
+    margin: 3px 0;
+    border-radius: 11px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #776e65;
+    transition: .2s;
 }
 
-.active .lang-icon{
-    background:white;
+.unit:hover {
+    background: #f4efe6;
 }
 
-/* ---------------- MAIN ---------------- */
-
-.main{
-    flex:1;
-    min-width:0;
-    max-width:1250px;
-    padding:42px 48px 80px;
-    position:relative;
-    overflow:hidden;
+.unit.current {
+    background: #e8f1e4;
+    color: #55735b;
+    font-weight: 700;
 }
 
-.hero{
-    margin-bottom:27px;
+.unit.locked {
+    opacity: .42;
+    cursor: not-allowed;
 }
 
-.eyebrow{
-    color:var(--green-dark);
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:1.6px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+.unit-number {
+    display: inline-block;
+    width: 24px;
+    font-size: 11px;
+    color: #a59b90;
 }
 
-.hero h1{
-    font-family:"Space Grotesk";
-    font-size:42px;
-    letter-spacing:-2px;
-    margin:0 0 8px;
-}
+/* ---------- MAIN ---------- */
 
-.hero p{
-    color:var(--muted);
-    margin:0;
+main {
+    flex: 1;
+    padding: 38px clamp(25px, 5vw, 65px);
+    min-width: 0;
 }
 
-/* ---------------- DASHBOARD ---------------- */
-
-.dashboard{
-    display:grid;
-    grid-template-columns:1.5fr .75fr;
-    gap:17px;
+.page {
+    max-width: 930px;
+    margin: auto;
 }
 
-.card{
-    background:white;
-    border:1px solid var(--line);
-    border-radius:20px;
-    box-shadow:var(--shadow);
+.welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 25px;
+    margin-bottom: 30px;
 }
 
-.progress-card{
-    padding:24px;
+.welcome h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(31px, 4vw, 47px);
+    line-height: 1.05;
+    margin: 0 0 9px;
 }
 
-.progress-top{
-    display:flex;
-    justify-content:space-between;
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:14px;
+.welcome p {
+    margin: 0;
+    color: var(--muted);
 }
 
-.percent{
-    color:var(--green-dark);
+.progress-box {
+    width: 190px;
 }
 
-.progress-bar{
-    height:11px;
-    background:#efeee8;
-    border-radius:20px;
-    overflow:hidden;
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
 }
 
-.progress-fill{
-    height:100%;
-    width:0;
-    background:var(--green);
-    border-radius:20px;
-    transition:.5s;
+.progress {
+    height: 9px;
+    background: #eee7dc;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.progress-info{
-    display:flex;
-    justify-content:space-between;
-    margin-top:11px;
-    font-size:12px;
-    color:var(--muted);
+.progress-bar {
+    height: 100%;
+    background: var(--sage-dark);
+    border-radius: inherit;
+    transition: width .4s;
 }
 
-.streak-card{
-    background:#fff9df;
-    border-color:#f0e4af;
-    padding:22px;
-    position:relative;
-    overflow:hidden;
-}
+/* ---------- DASHBOARD CARDS ---------- */
 
-.streak-card h3{
-    font-family:"Space Grotesk";
-    margin:0 0 3px;
-    font-size:18px;
+.cards {
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
-.big-streak{
-    font-family:"Space Grotesk";
-    font-size:35px;
-    font-weight:700;
-    color:#ad6b38;
+.card {
+    background: rgba(255,255,255,.76);
+    border: 1px solid #eee6da;
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: var(--shadow);
 }
 
-.streak-card p{
-    font-size:12px;
-    color:#9a8566;
-    margin:0;
+.continue-card {
+    background: linear-gradient(135deg, #e5f0e1, #f7f4e8);
 }
-
-/* ---------------- COURSE ---------------- */
 
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:34px 0 15px;
+.card-kicker {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--sage-dark);
+    font-weight: 800;
+    margin-bottom: 7px;
 }
 
-.section-title h2{
-    font-family:"Space Grotesk";
-    margin:0;
-    font-size:23px;
+.card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+    margin: 0 0 7px;
 }
 
-.section-title span{
-    color:#9b9990;
-    font-size:12px;
+.card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
 }
 
-.jump{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-    margin-bottom:18px;
+.big-button {
+    margin-top: 12px;
+    border: 0;
+    background: var(--sage-dark);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 13px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.jump button{
-    border:1px solid var(--line);
-    background:white;
-    border-radius:9px;
-    padding:8px 12px;
-    cursor:pointer;
-    font-size:12px;
-    color:#67665f;
+.big-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(102,140,112,.22);
 }
 
-.jump button.locked{
-    color:#aaa;
-    cursor:not-allowed;
-    background:#f6f5f0;
+.stats-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.units{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:17px;
+.stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e7dfd2;
 }
 
-.unit{
-    background:white;
-    border:1px solid var(--line);
-    border-radius:18px;
-    overflow:hidden;
-    transition:.2s;
+.stat:last-child {
+    border-bottom: 0;
 }
 
-.unit:hover{
-    box-shadow:var(--shadow);
+.stat span {
+    color: var(--muted);
+    font-size: 13px;
 }
 
-.unit-header{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:20px;
-    border-bottom:1px solid #f0efe9;
+.stat strong {
+    font-size: 14px;
 }
 
-.unit-number{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    background:var(--green-light);
-    color:var(--green-dark);
-    display:grid;
-    place-items:center;
-    font-weight:700;
-    font-size:12px;
-}
+/* ---------- DUCK AREA ---------- */
 
-.unit-name{
-    font-family:"Space Grotesk";
-    font-weight:700;
-    font-size:16px;
+.duck-area {
+    height: 145px;
+    position: relative;
+    overflow: hidden;
+    margin: 15px 0 25px;
+    border-radius: 24px;
+    background: #fff6dc;
+    border: 1px solid #f0dfb7;
 }
 
-.unit-count{
-    margin-left:auto;
-    color:#aaa89e;
-    font-size:11px;
+.duck-area::before {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.45);
+    top: -65px;
+    right: 15%;
 }
 
-.lesson{
-    width:100%;
-    border:0;
-    background:white;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:10px 16px;
-    text-align:left;
-    cursor:pointer;
-    color:var(--ink);
+.duck-note {
+    position: absolute;
+    color: #c6ad72;
+    font-family: serif;
+    font-size: 18px;
 }
 
-.lesson:hover:not(.locked){
-    background:#fafaf7;
-}
+/* ---------- DUCK ---------- */
 
-.lesson.locked{
-    color:#b6b5ad;
-    cursor:not-allowed;
+.duck {
+    width: 65px;
+    height: 58px;
+    position: absolute;
+    cursor: pointer;
+    transition: transform .25s;
+    z-index: 3;
 }
 
-.lesson-circle{
-    width:27px;
-    height:27px;
-    border:1px solid #dddcd4;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    font-size:11px;
-    flex-shrink:0;
+.duck:hover {
+    transform: rotate(-5deg) scale(1.08);
 }
 
-.lesson.completed .lesson-circle{
-    background:var(--green);
-    border-color:var(--green);
-    color:white;
+.duck .body {
+    position: absolute;
+    width: 44px;
+    height: 32px;
+    background: #f4d76e;
+    border-radius: 55% 50% 48% 55%;
+    bottom: 5px;
+    left: 5px;
+    box-shadow: inset -3px -3px 0 rgba(210,177,75,.18);
 }
 
-.lesson-name{
-    font-size:13px;
-    font-weight:600;
+.duck .head {
+    position: absolute;
+    width: 31px;
+    height: 31px;
+    background: #f7df83;
+    border-radius: 50%;
+    top: 2px;
+    left: 29px;
 }
 
-.lock-text{
-    margin-left:auto;
-    font-size:11px;
-    color:#aaa9a0;
+.duck .eye {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #4d463e;
+    border-radius: 50%;
+    top: 12px;
+    left: 48px;
 }
 
-/* ---------------- LESSON ---------------- */
-
-.lesson-page{
-    display:none;
+.duck .beak {
+    position: absolute;
+    width: 13px;
+    height: 8px;
+    background: #e8a64d;
+    border-radius: 80% 20% 20% 80%;
+    top: 17px;
+    left: 55px;
 }
 
-.lesson-page.show{
-    display:block;
+.duck .wing {
+    position: absolute;
+    width: 21px;
+    height: 14px;
+    background: #eacb62;
+    border-radius: 60% 40% 60% 40%;
+    bottom: 12px;
+    left: 21px;
+    transform: rotate(-15deg);
 }
 
-.back{
-    border:0;
-    background:none;
-    color:#77766e;
-    cursor:pointer;
-    padding:0;
-    margin-bottom:22px;
-    font-size:13px;
+.duck .foot {
+    position: absolute;
+    width: 13px;
+    height: 5px;
+    background: #e6a44b;
+    border-radius: 50%;
+    bottom: 1px;
 }
 
-.lesson-container{
-    max-width:850px;
-    margin:auto;
+.duck .foot.one {
+    left: 14px;
 }
 
-.lesson-card{
-    background:white;
-    border:1px solid var(--line);
-    border-radius:22px;
-    padding:42px;
-    box-shadow:var(--shadow);
+.duck .foot.two {
+    left: 32px;
 }
 
-.lesson-label{
-    color:var(--green-dark);
-    font-size:10px;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    font-weight:700;
+.duck.clicked {
+    animation: duckPop .4s forwards;
 }
 
-.lesson-card h1{
-    font-family:"Space Grotesk";
-    font-size:38px;
-    letter-spacing:-1.5px;
-    margin:9px 0 17px;
+@keyframes duckPop {
+    0% { transform: scale(1); opacity: 1; }
+    60% { transform: scale(1.35) rotate(10deg); }
+    100% { transform: scale(0); opacity: 0; }
 }
 
-.lesson-card p{
-    color:#5e5d57;
-    line-height:1.75;
-}
+/* ---------- LESSON LIST ---------- */
 
-.lesson-card h2{
-    font-family:"Space Grotesk";
-    margin-top:32px;
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 28px 0 13px;
 }
 
-.tip{
-    background:var(--green-light);
-    border-left:4px solid var(--green);
-    padding:15px 17px;
-    border-radius:7px;
-    line-height:1.6;
-    color:#52624d;
+.section-title h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    margin: 0;
 }
 
-.code{
-    background:#222320;
-    color:#f4f2e8;
-    border-radius:12px;
-    padding:20px;
-    white-space:pre-wrap;
-    font-family:monospace;
-    line-height:1.65;
-    overflow:auto;
+.lesson-list {
+    display: grid;
+    gap: 8px;
 }
 
-.lesson-actions{
-    border-top:1px solid var(--line);
-    margin-top:32px;
-    padding-top:23px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
+.lesson {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 17px;
+    background: rgba(255,255,255,.74);
+    border: 1px solid #eee6da;
+    border-radius: 15px;
+    transition: .2s;
 }
 
-.complete{
-    background:var(--green-dark);
-    color:white;
-    border:0;
-    border-radius:10px;
-    padding:13px 20px;
-    font-weight:700;
-    cursor:pointer;
+.lesson.unlocked {
+    cursor: pointer;
 }
 
-.complete:hover{
-    background:#45603f;
+.lesson.unlocked:hover {
+    transform: translateX(4px);
+    box-shadow: 0 5px 18px rgba(80,70,55,.07);
 }
 
-.next-message{
-    color:#88877f;
-    font-size:12px;
+.lesson.locked {
+    opacity: .45;
 }
-
-/* ---------------- PLACEMENT TEST ---------------- */
 
-.test-screen{
-    display:none;
-    min-height:calc(100vh - 74px);
-    padding:40px 20px 70px;
-    background:#faf9f4;
+.lesson-number {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    background: #f2eee6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
 }
 
-.test-screen.show{
-    display:block;
+.lesson.completed .lesson-number {
+    background: var(--sage);
+    color: white;
 }
 
-.test-wrap{
-    max-width:850px;
-    margin:auto;
+.lesson-info {
+    flex: 1;
 }
 
-.test-top{
-    text-align:center;
-    margin-bottom:27px;
+.lesson-title {
+    font-weight: 700;
+    font-size: 14px;
 }
 
-.test-top .small{
-    color:var(--green-dark);
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:1.7px;
-    text-transform:uppercase;
+.lesson-sub {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
 }
 
-.test-top h1{
-    font-family:"Space Grotesk";
-    font-size:40px;
-    letter-spacing:-1.7px;
-    margin:8px 0;
+.lesson-arrow {
+    color: #aaa197;
 }
 
-.test-top p{
-    color:var(--muted);
-}
+/* ---------- LESSON PAGE ---------- */
 
-.test-card{
-    background:white;
-    border:1px solid var(--line);
-    border-radius:24px;
-    box-shadow:var(--shadow);
-    padding:36px;
-    position:relative;
-    overflow:hidden;
+.lesson-page {
+    max-width: 850px;
+    margin: auto;
 }
 
-.test-duck-area{
-    display:flex;
-    align-items:center;
-    gap:20px;
-    margin-bottom:25px;
+.back-button {
+    border: 0;
+    background: transparent;
+    color: var(--sage-dark);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 24px;
 }
 
-.speech{
-    background:#f5f4ed;
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:15px 18px;
-    font-size:14px;
-    line-height:1.5;
-    flex:1;
+.lesson-header {
+    background: linear-gradient(135deg, #edf5e9, #fff8e6);
+    border: 1px solid #e2e8dc;
+    border-radius: 26px;
+    padding: 32px;
+    margin-bottom: 20px;
 }
 
-.question-number{
-    font-size:11px;
-    color:#99978e;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    font-weight:700;
-    margin-bottom:8px;
+.lesson-header .tag {
+    display: inline-block;
+    padding: 6px 10px;
+    background: rgba(255,255,255,.7);
+    border-radius: 10px;
+    color: var(--sage-dark);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.question{
-    font-family:"Space Grotesk";
-    font-size:24px;
-    line-height:1.3;
-    margin-bottom:22px;
+.lesson-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(30px, 4vw, 43px);
+    margin: 13px 0 8px;
 }
 
-.answers{
-    display:grid;
-    gap:10px;
+.lesson-header p {
+    color: var(--muted);
+    margin: 0;
 }
 
-.answer{
-    width:100%;
-    background:white;
-    border:1px solid #deddd5;
-    border-radius:12px;
-    padding:15px;
-    text-align:left;
-    cursor:pointer;
-    transition:.15s;
+.lesson-content {
+    background: white;
+    border: 1px solid #eee6da;
+    border-radius: 23px;
+    padding: 30px;
+    box-shadow: var(--shadow);
 }
 
-.answer:hover{
-    border-color:var(--green);
-    background:#fafcf8;
+.lesson-content h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    margin-top: 0;
 }
 
-.answer.selected{
-    border-color:var(--green);
-    background:var(--green-light);
+.lesson-content p {
+    line-height: 1.7;
+    color: #655c53;
 }
 
-.test-bottom{
-    margin-top:25px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.code-box {
+    background: #292b28;
+    color: #f6f3e8;
+    border-radius: 15px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 20px 0;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-.test-progress{
-    color:#99978e;
-    font-size:12px;
+.tip {
+    background: #fff5cf;
+    border-left: 4px solid #e8c96c;
+    border-radius: 10px;
+    padding: 14px 17px;
+    margin-top: 20px;
+    font-size: 14px;
 }
 
-.test-next{
-    border:0;
-    background:var(--green-dark);
-    color:white;
-    border-radius:10px;
-    padding:12px 20px;
-    cursor:pointer;
-    font-weight:700;
+.lesson-complete {
+    margin-top: 25px;
+    background: #eef6eb;
+    border: 1px solid #d4e5cf;
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
 }
 
-.test-next:disabled{
-    background:#d4d4cc;
-    cursor:not-allowed;
+.lesson-complete strong {
+    display: block;
+    margin-bottom: 3px;
 }
-
-/* ---------------- RESULT ---------------- */
 
-.result{
-    display:none;
-    text-align:center;
+.lesson-complete span {
+    color: var(--muted);
+    font-size: 13px;
 }
 
-.result.show{
-    display:block;
+.next-button {
+    border: 0;
+    background: var(--sage-dark);
+    color: white;
+    border-radius: 13px;
+    padding: 13px 19px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: .2s;
 }
 
-.result h1{
-    font-family:"Space Grotesk";
-    font-size:38px;
+.next-button:hover {
+    transform: translateY(-2px);
 }
 
-.result p{
-    color:var(--muted);
-    line-height:1.7;
-}
+/* ---------- PLACEMENT TEST ---------- */
 
-.start-button{
-    margin-top:15px;
-    border:0;
-    background:var(--green-dark);
-    color:white;
-    border-radius:11px;
-    padding:14px 25px;
-    font-weight:700;
-    cursor:pointer;
+.test-screen {
+    max-width: 700px;
+    margin: 30px auto;
 }
 
-/* ---------------- DUCK ---------------- */
+.test-card {
+    background: white;
+    border: 1px solid #eee6da;
+    border-radius: 27px;
+    padding: 35px;
+    box-shadow: var(--shadow);
+}
 
-.duck{
-    width:84px;
-    height:76px;
-    position:relative;
-    flex-shrink:0;
-    cursor:pointer;
-    user-select:none;
+.test-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 34px;
+    margin: 0 0 8px;
 }
 
-.duck-body{
-    position:absolute;
-    width:55px;
-    height:43px;
-    background:#f3d365;
-    border:2px solid #d1b64c;
-    border-radius:48% 48% 43% 43%;
-    bottom:5px;
-    left:11px;
+.test-card > p {
+    color: var(--muted);
+    line-height: 1.6;
 }
 
-.duck-head{
-    position:absolute;
-    width:45px;
-    height:45px;
-    background:#f8dd76;
-    border:2px solid #d1b64c;
-    border-radius:50%;
-    top:0;
-    left:25px;
-    z-index:3;
+.test-progress {
+    height: 7px;
+    background: #eee8dc;
+    border-radius: 8px;
+    margin: 25px 0;
+    overflow: hidden;
 }
 
-.eye{
-    position:absolute;
-    width:5px;
-    height:7px;
-    background:#38342a;
-    border-radius:50%;
-    top:17px;
-    left:27px;
+.test-progress-bar {
+    height: 100%;
+    background: var(--sage-dark);
+    transition: width .3s;
 }
 
-.beak{
-    position:absolute;
-    width:18px;
-    height:10px;
-    background:#df8841;
-    border:1px solid #c87234;
-    border-radius:60% 35% 35% 60%;
-    right:-11px;
-    top:23px;
+.question {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin-bottom: 17px;
 }
 
-.wing{
-    position:absolute;
-    width:23px;
-    height:27px;
-    background:#e9c85b;
-    border-radius:50%;
-    top:8px;
-    left:12px;
-    transform:rotate(28deg);
-    z-index:2;
+.answers {
+    display: grid;
+    gap: 9px;
 }
 
-.foot{
-    position:absolute;
-    width:15px;
-    height:7px;
-    background:#df8841;
-    border-radius:50%;
-    bottom:0;
+.answer {
+    text-align: left;
+    border: 1px solid #e6dfd3;
+    background: #fffdf8;
+    padding: 14px 15px;
+    border-radius: 13px;
+    font: inherit;
+    cursor: pointer;
+    color: var(--brown);
+    transition: .18s;
 }
 
-.foot.a{left:21px}
-.foot.b{left:45px}
+.answer:hover {
+    background: #f0f5ed;
+    border-color: #b7ceb9;
+}
 
-.duck:hover{
-    transform:rotate(-4deg) scale(1.05);
+.result {
+    text-align: center;
 }
 
-@keyframes duckGone{
-    0%{transform:scale(1) rotate(0)}
-    30%{transform:scale(1.15) rotate(-7deg)}
-    100%{transform:scale(0) rotate(35deg);opacity:0}
+.result h2 {
+    margin-bottom: 10px;
 }
 
-.duck.bursting{
-    animation:duckGone .35s ease forwards;
+.result p {
+    color: var(--muted);
+    line-height: 1.6;
 }
 
-/* ---------------- CONFETTI ---------------- */
+/* ---------- CONFETTI ---------- */
 
-.confetti{
-    position:fixed;
-    width:7px;
-    height:7px;
-    border-radius:2px;
-    pointer-events:none;
-    z-index:999;
-    animation:confettiFly .9s ease-out forwards;
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 100;
+    animation: confettiFall .9s ease-out forwards;
 }
 
-@keyframes confettiFly{
-    0%{
-        opacity:1;
-        transform:translate(0,0) rotate(0);
+@keyframes confettiFall {
+    0% {
+        transform: translate(0,0) rotate(0deg);
+        opacity: 1;
     }
-    100%{
-        opacity:0;
-        transform:translate(var(--x),var(--y)) rotate(500deg);
+    100% {
+        transform: translate(var(--x), var(--y)) rotate(500deg);
+        opacity: 0;
     }
 }
 
-/* ---------------- MOBILE ---------------- */
+/* ---------- MOBILE ---------- */
 
-@media(max-width:900px){
-    .sidebar{
-        width:190px;
+@media (max-width: 800px) {
+    .sidebar {
+        display: none;
     }
 
-    .main{
-        padding:30px;
+    header {
+        padding: 0 17px;
     }
 
-    .units{
-        grid-template-columns:1fr;
+    main {
+        padding: 25px 16px;
     }
 
-    .dashboard{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:650px){
-
-    .top{
-        padding:0 15px;
+    .cards {
+        grid-template-columns: 1fr;
     }
 
-    .top-stats{
-        gap:5px;
+    .welcome {
+        display: block;
     }
 
-    .pill{
-        padding:8px 9px;
-        font-size:11px;
+    .progress-box {
+        width: 100%;
+        margin-top: 20px;
     }
 
-    .app{
-        display:block;
+    .lesson-complete {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .sidebar{
-        width:100%;
-        border-right:0;
-        border-bottom:1px solid var(--line);
-        padding:12px;
+    .next-button {
+        width: 100%;
     }
 
-    .main{
-        padding:25px 15px 60px;
-    }
-
-    .hero h1{
-        font-size:32px;
-    }
-
-    .lesson-card,
-    .test-card{
-        padding:24px;
-    }
-
-    .lesson-card h1,
-    .test-top h1{
-        font-size:30px;
-    }
-
-    .test-duck-area{
-        align-items:flex-start;
-    }
-
-    .lesson-actions{
-        flex-direction:column;
-        align-items:stretch;
+    .lesson-content,
+    .test-card {
+        padding: 23px;
     }
 }
 </style>
@@ -892,1032 +841,1340 @@ button:focus-visible{
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
-<header class="top">
-
-    <div class="brand">
-        <div class="brand-mark">&lt;/&gt;</div>
-        Code Club
-    </div>
-
-    <div class="top-stats">
-        <div class="pill streak">
-            🔥 <span id="topStreak">0</span>
+<header>
+    <div class="logo">
+        <div class="logo-duck">
+            <div class="logo-body"></div>
+            <div class="logo-head"></div>
+            <div class="logo-eye"></div>
+            <div class="logo-beak"></div>
         </div>
 
-        <div class="pill">
-            ★ <span id="topXP">0</span> XP
+        <div class="logo-text">
+            <h1>Remember How to <span>Code</span></h1>
         </div>
     </div>
 
+    <div class="streak">
+        ✦ <span id="streakNumber">0</span> day streak
+    </div>
 </header>
 
-
-<!-- ================= PLACEMENT TEST ================= -->
-
-<section class="test-screen" id="placementScreen">
-
-    <div class="test-wrap">
-
-        <div class="test-top">
-
-            <div class="small">Before you start</div>
-
-            <h1>Meet the Code Ducks.</h1>
-
-            <p>
-                They'll ask you a few questions to figure out
-                where you should begin.
-            </p>
-
-        </div>
-
-
-        <div class="test-card" id="testCard">
-
-            <div class="test-duck-area">
-
-                <div class="duck" id="testDuck">
-
-                    <div class="duck-head">
-                        <div class="eye"></div>
-                        <div class="beak"></div>
-                    </div>
-
-                    <div class="duck-body">
-                        <div class="wing"></div>
-                    </div>
-
-                    <div class="foot a"></div>
-                    <div class="foot b"></div>
-
-                </div>
-
-                <div class="speech" id="duckSpeech">
-                    Quack! Let's see what you already know.
-                </div>
-
-            </div>
-
-
-            <div class="question-number" id="questionNumber">
-                Question 1 of 10
-            </div>
-
-            <div class="question" id="questionText"></div>
-
-            <div class="answers" id="answers"></div>
-
-
-            <div class="test-bottom">
-
-                <div class="test-progress" id="testProgress">
-                    1 / 10
-                </div>
-
-                <button class="test-next" id="testNext" disabled>
-                    Next
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="test-card result" id="testResult">
-
-            <div class="duck" style="margin:auto">
-
-                <div class="duck-head">
-                    <div class="eye"></div>
-                    <div class="beak"></div>
-                </div>
-
-                <div class="duck-body">
-                    <div class="wing"></div>
-                </div>
-
-                <div class="foot a"></div>
-                <div class="foot b"></div>
-
-            </div>
-
-            <h1 id="resultTitle">You’re ready!</h1>
-
-            <p id="resultText"></p>
-
-            <button class="start-button" id="startCourse">
-                Start learning
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= MAIN APP ================= -->
-
-<div class="app" id="mainApp">
+<div class="app">
 
 <aside class="sidebar">
+    <div class="side-title">Languages</div>
 
-    <div class="side-label">Languages</div>
-
-    <button class="language active" data-language="python">
-        <span class="lang-icon">PY</span>
+    <button class="language-button active" onclick="changeLanguage('Python')">
         Python
     </button>
 
-    <button class="language" data-language="javascript">
-        <span class="lang-icon">JS</span>
+    <button class="language-button" onclick="changeLanguage('JavaScript')">
         JavaScript
     </button>
 
-    <button class="language" data-language="html">
-        <span class="lang-icon">&lt;/&gt;</span>
+    <button class="language-button" onclick="changeLanguage('HTML')">
         HTML
     </button>
 
-    <button class="language" data-language="css">
-        <span class="lang-icon">#</span>
+    <button class="language-button" onclick="changeLanguage('CSS')">
         CSS
     </button>
 
+    <div class="unit-list">
+        <div class="side-title">Your units</div>
+        <div id="unitList"></div>
+    </div>
 </aside>
 
-
-<main class="main">
-
-<section id="home">
-
-    <div class="hero">
-
-        <div class="eyebrow">Your coding journey</div>
-
-        <h1 id="courseTitle">Learn Python.</h1>
-
-        <p id="courseDescription"></p>
-
-    </div>
-
-
-    <div class="dashboard">
-
-        <div class="card progress-card">
-
-            <div class="progress-top">
-                <span>Your progress</span>
-                <span class="percent" id="percent">0%</span>
-            </div>
-
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-
-            <div class="progress-info">
-                <span id="lessonCount">0 of 100 lessons</span>
-                <span id="courseStart">Starting at Unit 1</span>
-            </div>
-
-        </div>
-
-
-        <div class="card streak-card">
-
-            <h3>Daily streak</h3>
-
-            <div class="big-streak">
-                <span id="bigStreak">0</span> days
-            </div>
-
-            <p>Complete a lesson every day.</p>
-
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-
-        <h2>Your course</h2>
-
-        <span>10 units · 100 lessons</span>
-
-    </div>
-
-
-    <div class="jump" id="unitJump"></div>
-
-    <div class="units" id="units"></div>
-
-</section>
-
-
-<section class="lesson-page" id="lessonPage">
-
-    <button class="back" id="backButton">
-        ← Back to course
-    </button>
-
-    <div class="lesson-container">
-
-        <div class="lesson-card">
-
-            <div class="lesson-label" id="lessonLabel"></div>
-
-            <h1 id="lessonTitle"></h1>
-
-            <div id="lessonContent"></div>
-
-            <div class="lesson-actions">
-
-                <div class="next-message" id="nextMessage">
-                    Complete this lesson to unlock the next one.
-                </div>
-
-                <button class="complete" id="completeButton">
-                    Complete lesson
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
+<main id="main"></main>
 
 </div>
 
-
 <script>
 
-/* ============================================================
-   COURSE DATA
-   ============================================================ */
+/* =========================================================
+   BASIC DATA
+========================================================= */
 
-const courses={
+const languages = ["Python", "JavaScript", "HTML", "CSS"];
 
-python:{
-name:"Python",
-description:"Start from the basics and work your way toward real programs.",
-units:[
-["Python Basics",["What is Python?","Your First Program","Printing Text","Numbers","Variables","Strings","Comments","Simple Calculations","Input","Your First Mini Program"]],
-["Making Decisions",["True and False","If Statements","Else","Elif","Comparison Operators","Logical Operators","Nested If Statements","Checking Input","Multiple Conditions","Decision Maker"]],
-["Loops",["Why Loops?","While Loops","For Loops","Range","Counting","Looping Through Text","Break","Continue","Nested Loops","Loop Challenge"]],
-["Lists",["What is a List?","Creating Lists","List Positions","Changing Items","Adding Items","Removing Items","List Length","Looping Through Lists","Sorting Lists","List Challenge"]],
-["Functions",["What is a Function?","Creating Functions","Calling Functions","Parameters","Arguments","Return Values","Multiple Parameters","Default Values","Reusable Code","Function Challenge"]],
-["Dictionaries",["What is a Dictionary?","Keys and Values","Creating Dictionaries","Reading Values","Changing Values","Adding Keys","Removing Keys","Looping Through Dictionaries","Nested Dictionaries","Dictionary Challenge"]],
-["Files & Data",["What is a File?","Opening Files","Reading Files","Writing Files","Adding to Files","Working With Lines","CSV Basics","JSON Basics","Saving Data","Data Project"]],
-["Useful Python",["Random Numbers","The Math Module","Dates and Time","String Methods","List Methods","Error Messages","Try and Except","Debugging","Modules","Useful Tools Project"]],
-["Projects",["Number Guessing Game","Quiz Game","Calculator","Password Generator","Rock Paper Scissors","To-Do List","Text Adventure","Score Tracker","Mini Game","Build Your Own Project"]],
-["Python Mastery",["Reviewing the Basics","Writing Cleaner Code","Combining Concepts","Planning Programs","Debugging Programs","Working With Data","Building Bigger Programs","Project Planning","Final Python Challenge","Python Final Project"]]
-]},
+const unitNames = [
+    "Getting Started",
+    "Variables & Values",
+    "Conditions",
+    "Loops",
+    "Functions",
+    "Lists & Collections",
+    "Objects & Data",
+    "Events & Interaction",
+    "Building Projects",
+    "Advanced Coding"
+];
 
-javascript:{
-name:"JavaScript",
-description:"Make websites interactive and bring your ideas to life.",
-units:[
-["JavaScript Basics",["What is JavaScript?","Your First Script","Variables","Strings","Numbers","Booleans","Comments","Math","Console","First JavaScript Project"]],
-["Decisions",["If Statements","Else","Else If","Comparisons","Logical Operators","Checking Values","Nested Decisions","Multiple Conditions","User Choices","Decision Project"]],
-["Loops",["Why Loops?","While Loops","For Loops","Counting","Loop Conditions","Break","Continue","Nested Loops","Looping Through Arrays","Loop Project"]],
-["Arrays",["What is an Array?","Creating Arrays","Array Positions","Changing Items","Adding Items","Removing Items","Array Length","Looping Arrays","Array Methods","Array Project"]],
-["Functions",["What is a Function?","Creating Functions","Parameters","Arguments","Return","Arrow Functions","Multiple Parameters","Reusable Functions","Function Logic","Function Project"]],
-["The Web",["Selecting HTML","Changing Text","Changing Styles","Buttons","Click Events","Mouse Events","Keyboard Events","Input Boxes","Forms","Interactive Page"]],
-["Objects",["What is an Object?","Properties","Reading Properties","Changing Properties","Adding Properties","Object Methods","Nested Objects","Arrays of Objects","Object Loops","Object Project"]],
-["Useful JavaScript",["Random Numbers","Dates","Timers","Local Storage","Saving Data","JSON","Debugging","Errors","Organizing Code","Useful Tools Project"]],
-["Projects",["Counter","Calculator","Quiz","To-Do List","Digital Clock","Random Generator","Click Game","Score Game","Mini App","Build Your Own App"]],
-["JavaScript Mastery",["Review","Combining Concepts","Cleaner Code","Debugging","Planning Apps","Working With Data","Events and Logic","Building Bigger Apps","Final Challenge","Final JavaScript Project"]]
-]},
+const lessonTopics = [
+    [
+        "What is coding?",
+        "Your first program",
+        "How code runs",
+        "Numbers",
+        "Text",
+        "Comments",
+        "Errors",
+        "Reading code",
+        "Writing code",
+        "Unit 1 review"
+    ],
+    [
+        "Variables",
+        "Changing values",
+        "Numbers & math",
+        "Strings",
+        "Combining text",
+        "Boolean values",
+        "Naming variables",
+        "Input",
+        "Storing information",
+        "Unit 2 review"
+    ],
+    [
+        "What is a condition?",
+        "if statements",
+        "else",
+        "elif / else if",
+        "Comparisons",
+        "Greater and less than",
+        "AND",
+        "OR",
+        "NOT",
+        "Unit 3 review"
+    ],
+    [
+        "What is a loop?",
+        "for loops",
+        "while loops",
+        "Repeating actions",
+        "Counters",
+        "Loop conditions",
+        "Nested loops",
+        "Breaking loops",
+        "Loop practice",
+        "Unit 4 review"
+    ],
+    [
+        "What is a function?",
+        "Creating functions",
+        "Calling functions",
+        "Parameters",
+        "Arguments",
+        "Return values",
+        "Reusable code",
+        "Multiple parameters",
+        "Function practice",
+        "Unit 5 review"
+    ],
+    [
+        "What is a list?",
+        "Creating lists",
+        "Getting an item",
+        "Changing items",
+        "Adding items",
+        "Removing items",
+        "List loops",
+        "Sorting",
+        "Finding information",
+        "Unit 6 review"
+    ],
+    [
+        "What is an object?",
+        "Properties",
+        "Methods",
+        "Key-value data",
+        "Nested data",
+        "Working with objects",
+        "Data structures",
+        "Organizing data",
+        "Data practice",
+        "Unit 7 review"
+    ],
+    [
+        "What is an event?",
+        "Clicks",
+        "Keyboard events",
+        "Mouse events",
+        "Changing the page",
+        "Buttons",
+        "Inputs",
+        "Timers",
+        "Interactive projects",
+        "Unit 8 review"
+    ],
+    [
+        "Planning a project",
+        "Project structure",
+        "Combining concepts",
+        "Debugging",
+        "Designing interfaces",
+        "Making a game",
+        "Keeping score",
+        "Saving progress",
+        "Project polish",
+        "Unit 9 review"
+    ],
+    [
+        "Advanced variables",
+        "Advanced functions",
+        "Advanced loops",
+        "Complex conditions",
+        "Working with data",
+        "Debugging techniques",
+        "Code organization",
+        "Optimization",
+        "Big projects",
+        "Final coding challenge"
+    ]
+];
 
-html:{
-name:"HTML",
-description:"Build webpages from the ground up with real HTML.",
-units:[
-["HTML Basics",["What is HTML?","Your First Page","Headings","Paragraphs","Text Formatting","Comments","Links","Images","Page Titles","First Webpage"]],
-["Page Structure",["HTML Document Structure","Head","Body","Divs","Spans","Sections","Headers","Footers","Navigation","Page Layout"]],
-["Lists",["Unordered Lists","Ordered Lists","List Items","Nested Lists","Description Lists","Navigation Lists","List Styling","Menu Lists","Useful Lists","List Project"]],
-["Links & Media",["Links","External Links","Page Links","Images","Image Sizes","Alt Text","Audio","Video","Embedded Content","Media Page"]],
-["Forms",["What is a Form?","Text Inputs","Labels","Buttons","Checkboxes","Radio Buttons","Dropdowns","Text Areas","Form Organization","Form Project"]],
-["Tables",["What is a Table?","Rows","Cells","Headers","Table Structure","Column Groups","Table Captions","Accessible Tables","Table Design","Table Project"]],
-["Semantic HTML",["What is Semantic HTML?","Main","Article","Section","Aside","Header","Footer","Nav","Figure","Semantic Website"]],
-["Advanced HTML",["Data Attributes","Meta Tags","Favicon","Responsive Meta","Embedding","Iframes","Accessibility","HTML Validation","Organizing HTML","Advanced Page"]],
-["Web Projects",["Profile Page","Recipe Page","Music Page","Gallery","Contact Page","Portfolio","Event Page","Game Page","Multi-Section Site","Build a Website"]],
-["HTML Mastery",["HTML Review","Better Structure","Accessibility Review","Clean HTML","Page Planning","Combining Elements","Organizing Projects","Debugging HTML","Final Challenge","Final HTML Project"]]
-]},
+/* =========================================================
+   APP STATE
+========================================================= */
 
-css:{
-name:"CSS",
-description:"Make your websites beautiful, responsive, and interactive.",
-units:[
-["CSS Basics",["What is CSS?","Your First Style","Colors","Text","Fonts","Backgrounds","Borders","Spacing","Classes","First Styled Page"]],
-["The Box Model",["The Box Model","Width","Height","Padding","Margin","Borders","Box Sizing","Overflow","Sizing Elements","Box Model Project"]],
-["Layout",["Display","Block","Inline","Inline Block","Flexbox","Flex Direction","Justify Content","Align Items","Gap","Flexbox Project"]],
-["Grid",["What is Grid?","Grid Columns","Grid Rows","Gap","Grid Areas","Spanning","Responsive Grid","Cards","Gallery Layout","Grid Project"]],
-["Positioning",["Position Basics","Relative","Absolute","Fixed","Sticky","Z Index","Layering","Centered Elements","Overlays","Position Project"]],
-["Responsive Design",["What is Responsive Design?","Viewport","Media Queries","Mobile Layouts","Flexible Widths","Responsive Images","Responsive Text","Mobile Navigation","Testing Screens","Responsive Project"]],
-["Animations",["Transitions","Hover Effects","Transform","Scale","Rotate","Keyframes","Animation Timing","Moving Elements","Loading Animations","Animation Project"]],
-["Advanced Styling",["Gradients","Shadows","Pseudo Classes","Pseudo Elements","CSS Variables","Custom Properties","Filters","Clipping","Advanced Selectors","Style Project"]],
-["Web Design",["Choosing Fonts","Color Palettes","Spacing Systems","Cards","Navigation Bars","Buttons","Hero Sections","Footers","Designing a Page","Design Project"]],
-["CSS Mastery",["CSS Review","Cleaner CSS","Responsive Review","Animation Review","Layout Review","Design Systems","Combining Techniques","Debugging CSS","Final Challenge","Final CSS Project"]]
-]}
+let currentLanguage =
+    localStorage.getItem("currentLanguage") || "Python";
 
-};
+let currentPage = "dashboard";
+
+let currentUnit = 1;
+let currentLesson = 1;
+
+let completed = JSON.parse(
+    localStorage.getItem("completedLessons") || "{}"
+);
+
+let placements = JSON.parse(
+    localStorage.getItem("placements") || "{}"
+);
+
+let streak = Number(
+    localStorage.getItem("codingStreak") || 0
+);
+
+document.getElementById("streakNumber").textContent = streak;
 
 
-/* ============================================================
+/* =========================================================
+   PLACEMENT QUESTIONS
+========================================================= */
+
+const placementQuestions = [
+    {
+        q: "Which of these is used to store a value?",
+        answers: ["Variable", "Loop", "Comment", "Browser"],
+        correct: 0
+    },
+    {
+        q: "What does an if statement do?",
+        answers: [
+            "Repeats forever",
+            "Checks a condition",
+            "Deletes code",
+            "Creates a computer"
+        ],
+        correct: 1
+    },
+    {
+        q: "Which structure repeats code?",
+        answers: [
+            "Loop",
+            "Variable",
+            "String",
+            "Comment"
+        ],
+        correct: 0
+    },
+    {
+        q: "What is a function?",
+        answers: [
+            "A reusable block of code",
+            "A color",
+            "A file",
+            "A computer"
+        ],
+        correct: 0
+    },
+    {
+        q: "Which is commonly used to hold multiple values?",
+        answers: [
+            "List",
+            "Comment",
+            "Condition",
+            "Operator"
+        ],
+        correct: 0
+    },
+    {
+        q: "What does an object usually contain?",
+        answers: [
+            "Properties and data",
+            "Only numbers",
+            "Only comments",
+            "Nothing"
+        ],
+        correct: 0
+    },
+    {
+        q: "What can an event do in an interactive website?",
+        answers: [
+            "React to something happening",
+            "Turn off the internet",
+            "Delete HTML",
+            "Create electricity"
+        ],
+        correct: 0
+    },
+    {
+        q: "What is debugging?",
+        answers: [
+            "Finding and fixing problems",
+            "Making code longer",
+            "Deleting a project",
+            "Changing your password"
+        ],
+        correct: 0
+    },
+    {
+        q: "Why should code be organized?",
+        answers: [
+            "It makes it easier to understand and maintain",
+            "It makes computers heavier",
+            "It removes all bugs automatically",
+            "It makes Wi-Fi faster"
+        ],
+        correct: 0
+    },
+    {
+        q: "What is a good way to build a large project?",
+        answers: [
+            "Break it into smaller parts",
+            "Write everything at once",
+            "Never test anything",
+            "Avoid planning"
+        ],
+        correct: 0
+    }
+];
+
+let testIndex = 0;
+let testFirstWrong = null;
+
+
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+
+function key(unit, lesson) {
+    return currentLanguage + "-" + unit + "-" + lesson;
+}
+
+function isCompleted(unit, lesson) {
+    return completed[key(unit, lesson)] === true;
+}
+
+function saveCompleted(unit, lesson) {
+    completed[key(unit, lesson)] = true;
+    localStorage.setItem(
+        "completedLessons",
+        JSON.stringify(completed)
+    );
+}
+
+function getPlacement() {
+    return placements[currentLanguage] || null;
+}
+
+
+/* =========================================================
    PLACEMENT TEST
-   ============================================================ */
+========================================================= */
 
-const testQuestions={
+function startPlacement() {
 
-python:[
-["Which symbol is used to start a comment in Python?",["//","#","<!--","**"],1],
-["Which of these stores a value in a variable?",["x = 5","x == 5","5 = x","var x == 5"],0],
-["What does an if statement do?",["Repeats code","Makes a decision","Creates a file","Deletes a variable"],1],
-["Which one is a Python loop?",["repeat","loop","for","again"],2],
-["Which brackets create a Python list?",["{}","()","[]","<>"],2],
-["What keyword creates a function?",["function","def","make","func"],1],
-["What does a dictionary store?",["Only numbers","Keys and values","Only strings","Images"],1],
-["Which can read a file?",["open()","readFile()","file()","loadText()"],0],
-["Which is a Python module for random values?",["random","chance","numbers","roll"],0],
-["Which is useful for handling errors?",["try / except","if / error","catch / error","fix / except"],0]
-],
+    testIndex = 0;
+    testFirstWrong = null;
 
-javascript:[
-["Which keyword can create a JavaScript variable?",["let","make","create","value"],0],
-["Which is used to print something to the console?",["print()","console.log()","show()","write()"],1],
-["Which value is Boolean?",["42","\"hello\"","true","[1,2]"],2],
-["Which creates a loop?",["for","repeatCode","again","loopNow"],0],
-["Which is an array?",["{a:1}","[1,2,3]","(1,2,3)","<1,2,3>"],1],
-["Which keyword creates a function?",["def","function","fun","create"],1],
-["What does an event listener do?",["Listens for an event","Creates CSS","Deletes HTML","Starts Python"],0],
-["Which stores browser data?",["localStorage","browserBox","saveData","memoryBox"],0],
-["What is an object made from?",["Properties and values","Only numbers","Only strings","HTML tags"],0],
-["Which is JavaScript?",["console.log('Hi')","print('Hi')","<p>Hi</p>","color:red"],0]
-],
+    currentPage = "test";
 
-html:[
-["What does HTML describe?",["Page structure","Only colors","Only animations","Computer hardware"],0],
-["Which creates a heading?",["<h1>","<heading>","<headtext>","<titletext>"],0],
-["Which creates a paragraph?",["<text>","<p>","<paragraph>","<para>"],1],
-["Which creates a link?",["<a>","<linkto>","<url>","<go>"],0],
-["Which creates an image?",["<img>","<image>","<picture>","<photo>"],0],
-["Which element contains the visible page?",["<head>","<body>","<meta>","<visible>"],1],
-["Which is used for user input?",["<form>","<inputbox>","<ask>","<entry>"],0],
-["Which creates a table row?",["<tr>","<row>","<tdrow>","<line>"],0],
-["Which element is semantic?",["<article>","<box>","<thing>","<container>"],0],
-["What does alt text help with?",["Image accessibility","CSS animation","JavaScript loops","Page speed only"],0]
-],
+    render();
+}
 
-css:[
-["What does CSS control?",["Webpage appearance","Database storage","Python code","Computer files"],0],
-["Which changes text color?",["font-color","color","text-paint","foreground"],1],
-["Which controls space inside an element?",["margin","padding","inside-space","gap-inside"],1],
-["Which controls space outside an element?",["padding","margin","outside","border-space"],1],
-["Which layout system is commonly used for rows and columns?",["Flexbox","Paintbox","Textbox","Colorbox"],0],
-["Which creates a grid?",["display:grid","grid:yes","layout:grid","make:grid"],0],
-["Which can keep an element attached while scrolling?",["sticky","attached","scroll-lock","hold"],0],
-["Which creates a transition?",["transition","move","animate-now","change"],0],
-["Which starts a CSS animation?",["@keyframes","@move","@animation","@start"],0],
-["Which helps websites adapt to screen size?",["media queries","screen rules","size code","device CSS"],0]
-]
+function answerTest(answer) {
 
-};
+    const question = placementQuestions[testIndex];
+
+    if (answer !== question.correct && testFirstWrong === null) {
+        testFirstWrong = testIndex + 1;
+    }
+
+    testIndex++;
+
+    if (testIndex >= placementQuestions.length) {
+
+        let startUnit;
+
+        if (testFirstWrong === null) {
+            startUnit = 10;
+        } else {
+            startUnit = Math.max(1, testFirstWrong - 1);
+        }
+
+        placements[currentLanguage] = startUnit;
+
+        localStorage.setItem(
+            "placements",
+            JSON.stringify(placements)
+        );
+
+        currentUnit = startUnit;
+        currentLesson = 1;
+        currentPage = "dashboard";
+
+        render();
+
+    } else {
+        render();
+    }
+}
 
 
-/* ============================================================
-   STATE
-   ============================================================ */
+/* =========================================================
+   LESSON LOCKING
+========================================================= */
 
-let currentLanguage="python";
-let currentQuestion=0;
-let selectedAnswer=null;
-let firstWrong=10;
-let placementStart=1;
+function lessonUnlocked(unit, lesson) {
 
-let progress=JSON.parse(
-    localStorage.getItem("codeClubProgressV4")||"{}"
-);
+    const placement = getPlacement();
 
-let placement=JSON.parse(
-    localStorage.getItem("codeClubPlacementV4")||"{}"
-);
+    if (!placement) {
+        return false;
+    }
 
-let streak=JSON.parse(
-    localStorage.getItem("codeClubStreakV4")||
-    '{"days":0,"last":""}'
-);
+    if (unit < placement) {
+        return false;
+    }
 
-const hasCompletedPlacement=
-    !!placement[currentLanguage];
+    if (unit === placement && lesson === 1) {
+        return true;
+    }
+
+    if (lesson > 1) {
+        return isCompleted(unit, lesson - 1);
+    }
+
+    return isCompleted(unit - 1, 10);
+}
 
 
-/* ============================================================
-   STREAK
-   ============================================================ */
+/* =========================================================
+   CHANGE LANGUAGE
+========================================================= */
 
-function updateStreak(){
+function changeLanguage(language) {
 
-    const today=new Date().toISOString().slice(0,10);
+    currentLanguage = language;
 
-    if(streak.last===today){
+    localStorage.setItem(
+        "currentLanguage",
+        currentLanguage
+    );
+
+    if (!getPlacement()) {
+        startPlacement();
         return;
     }
 
-    const yesterday=new Date();
+    currentPage = "dashboard";
+    render();
+}
 
-    yesterday.setDate(
-        yesterday.getDate()-1
+
+/* =========================================================
+   OPEN LESSON
+========================================================= */
+
+function openLesson(unit, lesson) {
+
+    if (!lessonUnlocked(unit, lesson)) {
+        return;
+    }
+
+    currentUnit = unit;
+    currentLesson = lesson;
+    currentPage = "lesson";
+
+    render();
+}
+
+
+/* =========================================================
+   COMPLETE LESSON
+========================================================= */
+
+function completeLesson() {
+
+    saveCompleted(
+        currentUnit,
+        currentLesson
     );
 
-    const y=yesterday.toISOString().slice(0,10);
+    updateStreak();
 
-    if(streak.last===y){
-        streak.days++;
-    }else{
-        streak.days=1;
-    }
-
-    streak.last=today;
-
-    saveAll();
+    render();
 }
 
 
-/* ============================================================
-   STORAGE
-   ============================================================ */
+/* =========================================================
+   NEXT LESSON
+========================================================= */
 
-function saveAll(){
+function nextLesson() {
 
-    localStorage.setItem(
-        "codeClubProgressV4",
-        JSON.stringify(progress)
+    saveCompleted(
+        currentUnit,
+        currentLesson
     );
 
-    localStorage.setItem(
-        "codeClubPlacementV4",
-        JSON.stringify(placement)
-    );
+    updateStreak();
 
-    localStorage.setItem(
-        "codeClubStreakV4",
-        JSON.stringify(streak)
-    );
+    if (currentLesson < 10) {
+
+        currentLesson++;
+
+    } else if (currentUnit < 10) {
+
+        currentUnit++;
+        currentLesson = 1;
+
+    } else {
+
+        currentPage = "finished";
+        render();
+        return;
+    }
+
+    currentPage = "lesson";
+    render();
+
 }
 
 
-/* ============================================================
-   PLACEMENT TEST
-   ============================================================ */
+/* =========================================================
+   STREAK
+========================================================= */
 
-function startPlacement(){
+function updateStreak() {
 
-    document.getElementById("mainApp").style.display="none";
+    const today = new Date().toDateString();
 
-    document
-        .getElementById("placementScreen")
-        .classList.add("show");
+    const lastDay =
+        localStorage.getItem("lastCodingDay");
 
-    currentQuestion=0;
-    selectedAnswer=null;
-    firstWrong=10;
+    if (lastDay !== today) {
 
-    renderQuestion();
+        streak++;
+
+        localStorage.setItem(
+            "codingStreak",
+            streak
+        );
+
+        localStorage.setItem(
+            "lastCodingDay",
+            today
+        );
+
+        document.getElementById(
+            "streakNumber"
+        ).textContent = streak;
+    }
 }
 
 
-function renderQuestion(){
+/* =========================================================
+   PROGRESS
+========================================================= */
 
-    const q=
-        testQuestions[currentLanguage][currentQuestion];
+function getProgress() {
 
-    document.getElementById("questionNumber").textContent=
-        "Question "+(currentQuestion+1)+" of 10";
+    let count = 0;
 
-    document.getElementById("testProgress").textContent=
-        (currentQuestion+1)+" / 10";
+    for (let unit = 1; unit <= 10; unit++) {
 
-    document.getElementById("questionText").textContent=
-        q[0];
+        for (let lesson = 1; lesson <= 10; lesson++) {
 
-    document.getElementById("duckSpeech").textContent=
-        duckMessage(currentQuestion);
-
-    const answers=
-        document.getElementById("answers");
-
-    answers.innerHTML="";
-
-    q[1].forEach((answer,index)=>{
-
-        const button=
-            document.createElement("button");
-
-        button.className="answer";
-        button.type="button";
-        button.textContent=answer;
-
-        button.addEventListener("click",()=>{
-
-            selectedAnswer=index;
-
-            document
-                .querySelectorAll(".answer")
-                .forEach(x=>x.classList.remove("selected"));
-
-            button.classList.add("selected");
-
-            document.getElementById("testNext")
-                .disabled=false;
-        });
-
-        answers.appendChild(button);
-    });
-
-    document.getElementById("testNext").textContent=
-        currentQuestion===9 ? "See my result" : "Next";
-
-    document.getElementById("testNext").disabled=true;
-}
-
-
-function duckMessage(n){
-
-    const messages=[
-        "Quack! Let's start with the basics.",
-        "Okay, one level deeper!",
-        "This one checks your understanding.",
-        "You're doing great. Keep going!",
-        "Halfway through!",
-        "The next duck has a tricky one.",
-        "Quack! Let's see what you remember.",
-        "Almost there!",
-        "Two more!",
-        "Final duck question!"
-    ];
-
-    return messages[n];
-}
-
-
-document.getElementById("testNext")
-.addEventListener("click",()=>{
-
-    if(selectedAnswer===null)return;
-
-    const q=
-        testQuestions[currentLanguage][currentQuestion];
-
-    if(selectedAnswer!==q[2] && firstWrong===10){
-
-        firstWrong=currentQuestion;
-    }
-
-    if(currentQuestion<9){
-
-        currentQuestion++;
-        selectedAnswer=null;
-        renderQuestion();
-
-    }else{
-
-        finishPlacement();
-    }
-
-});
-
-
-function finishPlacement(){
-
-    /*
-       Question 1 checks Unit 1.
-       If Q1 is wrong, placement is Unit 1.
-       If Q7 is the first wrong, placement is Unit 6.
-       If everything is correct, placement is Unit 10.
-    */
-
-    if(firstWrong===10){
-
-        placementStart=10;
-
-    }else{
-
-        placementStart=
-            Math.max(1,firstWrong);
-    }
-
-    placement[currentLanguage]=placementStart;
-
-    saveAll();
-
-    document.getElementById("testCard")
-        .style.display="none";
-
-    document.getElementById("testResult")
-        .classList.add("show");
-
-    if(firstWrong===10){
-
-        document.getElementById("resultTitle")
-            .textContent="Perfect score!";
-
-        document.getElementById("resultText")
-            .textContent=
-            "You got every placement question right, so all ten units are available. Start wherever you want.";
-
-    }else{
-
-        document.getElementById("resultTitle")
-            .textContent=
-            "We found your starting point.";
-
-        document.getElementById("resultText")
-            .textContent=
-            "You are starting at Unit "+
-            placementStart+
-            ". The earlier units stay available for review, and you can work forward from here.";
-    }
-
-});
-
-
-document.getElementById("startCourse")
-.addEventListener("click",()=>{
-
-    document
-        .getElementById("placementScreen")
-        .classList.remove("show");
-
-    document.getElementById("mainApp")
-        .style.display="flex";
-
-    renderCourse();
-});
-
-
-/* ============================================================
-   COURSE PROGRESS
-   ============================================================ */
-
-function progressKey(unit,lesson){
-
-    return currentLanguage+
-        "-"+
-        unit+
-        "-"+
-        lesson;
-}
-
-
-function completed(unit,lesson){
-
-    return !!progress[
-        progressKey(unit,lesson)
-    ];
-}
-
-
-function unlocked(unit,lesson){
-
-    const start=
-        placement[currentLanguage]||1;
-
-    /*
-       Units before placement are reviewable.
-       Placement unit begins at lesson 1.
-    */
-
-    if(unit+1<start){
-        return true;
-    }
-
-    if(unit+1===start && lesson===0){
-        return true;
-    }
-
-    if(lesson>0){
-        return completed(unit,lesson-1);
-    }
-
-    return completed(unit-1,9);
-}
-
-
-function completedCount(){
-
-    let total=0;
-
-    for(let unit=0;unit<10;unit++){
-
-        for(let lesson=0;lesson<10;lesson++){
-
-            if(completed(unit,lesson)){
-                total++;
+            if (isCompleted(unit, lesson)) {
+                count++;
             }
+
         }
     }
 
-    return total;
+    return count;
 }
 
 
-function totalXP(){
+/* =========================================================
+   CODE EXAMPLES
+========================================================= */
 
-    return Object.keys(progress).length*10;
+function getCodeExample(language, unit, lesson) {
+
+    if (language === "Python") {
+
+        return `name = "Abby"
+
+if name:
+    print("Hello, " + name)`;
+
+    }
+
+    if (language === "JavaScript") {
+
+        return `let name = "Abby";
+
+if (name) {
+    console.log("Hello, " + name);
+}`;
+
+    }
+
+    if (language === "HTML") {
+
+        return `<button>
+    Click me!
+</button>`;
+
+    }
+
+    return `button {
+    background: #a9c7ad;
+    padding: 12px;
+    border-radius: 10px;
+}`;
+
 }
 
 
-/* ============================================================
-   COURSE RENDERING
-   ============================================================ */
+/* =========================================================
+   LESSON PAGE
+========================================================= */
 
-function renderCourse(){
+function renderLesson() {
 
-    const course=courses[currentLanguage];
+    const topic =
+        lessonTopics[currentUnit - 1][currentLesson - 1];
 
-    document.getElementById("courseTitle").textContent=
-        "Learn "+course.name+".";
+    const done =
+        isCompleted(currentUnit, currentLesson);
 
-    document.getElementById("courseDescription")
-        .textContent=course.description;
+    let nextText = "Next Lesson →";
 
-    const count=completedCount();
+    if (currentLesson === 10 && currentUnit === 10) {
+        nextText = "Finish Course ✦";
+    } else if (currentLesson === 10) {
+        nextText = "Next Unit →";
+    }
 
-    document.getElementById("percent")
-        .textContent=Math.round(count)+"%";
+    return `
+        <div class="lesson-page">
 
-    document.getElementById("progressFill")
-        .style.width=count+"%";
+            <button class="back-button"
+                onclick="goDashboard()">
+                ← Back to lessons
+            </button>
 
-    document.getElementById("lessonCount")
-        .textContent=count+" of 100 lessons";
+            <div class="lesson-header">
 
-    document.getElementById("courseStart")
-        .textContent=
-        "Placement: Unit "+
-        (placement[currentLanguage]||1);
+                <span class="tag">
+                    ${currentLanguage} · Unit ${currentUnit}
+                </span>
 
-    document.getElementById("topStreak")
-        .textContent=streak.days;
+                <h2>${topic}</h2>
 
-    document.getElementById("bigStreak")
-        .textContent=streak.days;
+                <p>
+                    Lesson ${currentLesson} of 10
+                </p>
 
-    document.getElementById("topXP")
-        .textContent=totalXP();
+            </div>
 
-    renderJumpButtons();
-    renderUnits();
-}
+            <div class="lesson-content">
 
+                <h3>Let's learn it!</h3>
 
-function renderJumpButtons(){
+                <p>
+                    ${getLessonExplanation(
+                        currentLanguage,
+                        currentUnit,
+                        currentLesson
+                    )}
+                </p>
 
-    const container=
-        document.getElementById("unitJump");
-
-    container.innerHTML="";
-
-    courses[currentLanguage].units.forEach((unit,index)=>{
-
-        const button=
-            document.createElement("button");
-
-        const canJump=
-            index+1 <=
-            (placement[currentLanguage]||1) ||
-            completed(index-1,9);
-
-        button.textContent=
-            canJump
-            ? "Unit "+(index+1)
-            : "🔒 Unit "+(index+1);
-
-        if(!canJump){
-
-            button.classList.add("locked");
-
-        }else{
-
-            button.addEventListener("click",()=>{
-
-                document
-                    .getElementById("unit-"+index)
-                    .scrollIntoView({
-                        behavior:"smooth"
-                    });
-
-            });
-        }
-
-        container.appendChild(button);
-    });
-}
-
-
-function renderUnits(){
-
-    const container=
-        document.getElementById("units");
-
-    container.innerHTML="";
-
-    courses[currentLanguage].units.forEach((unit,unitIndex)=>{
-
-        const box=
-            document.createElement("div");
-
-        box.className="unit";
-        box.id="unit-"+unitIndex;
-
-        const completedLessons=
-            unit[1].filter(
-                (_,lessonIndex)=>
-                completed(unitIndex,lessonIndex)
-            ).length;
-
-        let html=`
-
-            <div class="unit-header">
-
-                <div class="unit-number">
-                    ${String(unitIndex+1).padStart(2,"0")}
+                <div class="code-box">
+${getCodeExample(
+    currentLanguage,
+    currentUnit,
+    currentLesson
+)}
                 </div>
 
-                <div class="unit-name">
-                    ${unit[0]}
+                <div class="tip">
+                    <strong>Little tip:</strong>
+                    Don't just read the code — try changing something
+                    and see what happens!
                 </div>
 
-                <div class="unit-count">
-                    ${completedLessons}/10
+                ${
+                    done
+                    ?
+                    `
+                    <div class="lesson-complete">
+
+                        <div>
+                            <strong>✓ Lesson complete!</strong>
+                            <span>
+                                You finished this lesson.
+                                Ready for the next one?
+                            </span>
+                        </div>
+
+                        <button
+                            class="next-button"
+                            onclick="nextLesson()">
+                            ${nextText}
+                        </button>
+
+                    </div>
+                    `
+                    :
+                    `
+                    <div class="lesson-complete">
+
+                        <div>
+                            <strong>Ready?</strong>
+                            <span>
+                                Finish this lesson to unlock the next one.
+                            </span>
+                        </div>
+
+                        <button
+                            class="next-button"
+                            onclick="completeLesson()">
+                            ✓ Complete Lesson
+                        </button>
+
+                    </div>
+                    `
+                }
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   LESSON EXPLANATIONS
+========================================================= */
+
+function getLessonExplanation(language, unit, lesson) {
+
+    const explanations = {
+
+        Python:
+        "Python is a programming language designed to let you give instructions to a computer in a readable way. In this lesson, you'll learn an important building block that you can use in your own programs.",
+
+        JavaScript:
+        "JavaScript lets websites respond to people and become interactive. It can store information, make decisions, react to clicks, and change what appears on a page.",
+
+        HTML:
+        "HTML is the structure of a webpage. Think of it like the skeleton of your website: it tells the browser what elements exist, such as headings, paragraphs, buttons, images, and sections.",
+
+        CSS:
+        "CSS controls how a webpage looks. You can use it to change colors, spacing, sizes, fonts, layouts, borders, animations, and much more."
+    };
+
+    return explanations[language];
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard() {
+
+    const progress = getProgress();
+
+    let currentUnlockedUnit =
+        getPlacement() || 1;
+
+    let html = `
+        <div class="page">
+
+            <div class="welcome">
+
+                <div>
+                    <h2>
+                        Keep coding,<br>
+                        keep creating.
+                    </h2>
+
+                    <p>
+                        You're learning ${currentLanguage}.
+                    </p>
+                </div>
+
+                <div class="progress-box">
+
+                    <div class="progress-label">
+                        <span>Your progress</span>
+                        <span>${progress}%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width:${progress}%">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="cards">
+
+                <div class="card continue-card">
+
+                    <div class="card-kicker">
+                        Continue learning
+                    </div>
+
+                    <h3>
+                        Unit ${currentUnlockedUnit} ·
+                        ${unitNames[currentUnlockedUnit - 1]}
+                    </h3>
+
+                    <p>
+                        Pick up where you left off and keep
+                        unlocking your coding journey.
+                    </p>
+
+                    <button
+                        class="big-button"
+                        onclick="openNextAvailable()">
+                        Continue lesson →
+                    </button>
+
+                </div>
+
+                <div class="card stats-card">
+
+                    <div class="stat">
+                        <span>Language</span>
+                        <strong>${currentLanguage}</strong>
+                    </div>
+
+                    <div class="stat">
+                        <span>Lessons done</span>
+                        <strong>${progress}/100</strong>
+                    </div>
+
+                    <div class="stat">
+                        <span>Streak</span>
+                        <strong>${streak} days</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="duck-area">
+
+                <span
+                    class="duck-note"
+                    style="left:18%;top:25%">
+                    ♪
+                </span>
+
+                <span
+                    class="duck-note"
+                    style="right:28%;bottom:22%">
+                    ♫
+                </span>
+
+                <div class="duck"
+                    style="left:8%;top:48%"
+                    onclick="duckClicked(this)">
+
+                    <div class="body"></div>
+                    <div class="head"></div>
+                    <div class="eye"></div>
+                    <div class="beak"></div>
+                    <div class="wing"></div>
+                    <div class="foot one"></div>
+                    <div class="foot two"></div>
+
+                </div>
+
+                <div class="duck"
+                    style="left:70%;top:35%"
+                    onclick="duckClicked(this)">
+
+                    <div class="body"></div>
+                    <div class="head"></div>
+                    <div class="eye"></div>
+                    <div class="beak"></div>
+                    <div class="wing"></div>
+                    <div class="foot one"></div>
+                    <div class="foot two"></div>
+
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <h3>Your lessons</h3>
+            </div>
+
+            <div class="lesson-list">
+    `;
+
+    const placement =
+        getPlacement() || 1;
+
+    for (
+        let lesson = 1;
+        lesson <= 10;
+        lesson++
+    ) {
+
+        const unlocked =
+            lessonUnlocked(
+                placement,
+                lesson
+            );
+
+        const done =
+            isCompleted(
+                placement,
+                lesson
+            );
+
+        html += `
+            <div
+                class="lesson
+                ${unlocked ? "unlocked" : "locked"}
+                ${done ? "completed" : ""}"
+                ${unlocked
+                    ? `onclick="openLesson(${placement},${lesson})"`
+                    : ""
+                }
+            >
+
+                <div class="lesson-number">
+                    ${done ? "✓" : lesson}
+                </div>
+
+                <div class="lesson-info">
+
+                    <div class="lesson-title">
+                        ${lessonTopics[placement - 1][lesson - 1]}
+                    </div>
+
+                    <div class="lesson-sub">
+                        Lesson ${lesson}
+                    </div>
+
+                </div>
+
+                <div class="lesson-arrow">
+                    ${unlocked ? "→" : "🔒"}
                 </div>
 
             </div>
         `;
+    }
 
-        unit[1].forEach((lessonName,lessonIndex)=>{
+    html += `
+            </div>
+        </div>
+    `;
 
-            const isCompleted=
-                completed(unitIndex,lessonIndex);
-
-            const canOpen=
-                unlocked(unitIndex,lessonIndex);
-
-            const button=
-                document.createElement("button");
-
-            button.className=
-                "lesson"+
-                (isCompleted?" completed":"")+
-                (!canOpen?" locked":"");
-
-            const circle=
-                isCompleted
-                ? "✓"
-                : canOpen
-                    ? lessonIndex+1
-                    : "🔒";
-
-            button.innerHTML=`
-
-                <span class="lesson-circle">
-                    ${circle}
-                </span>
-
-                <span class="lesson-name">
-                    ${lessonName}
-                </span>
-
-                ${
-                    !canOpen
-                    ? '<span class="lock-text">Locked</span>'
-                    : ''
-                }
-
-            `;
-
-            if(canOpen){
-
-                button.addEventListener(
-                    "click",
-                    ()=>{
-                        openLesson(
-                            unitIndex,
-                            lessonIndex
-                        );
-                    }
-                );
-
-            }
-
-            box.appendChild(
-                document.createRange()
-                .createContextualFragment(
-                    html
-                )
-            );
-
-            html="";
-
-            box.appendChild(button);
-
-        });
-
-        container.appendChild(box);
-
-    });
+    return html;
 }
 
 
-/* ============================================================
-   LESSONS
-   ============================================================ */
+/* =========================================================
+   FIND NEXT AVAILABLE LESSON
+========================================================= */
 
-function openLesson(unit,lesson){
+function openNextAvailable() {
 
-    if(!unlocked(unit,lesson)){
+    const placement =
+        getPlacement();
+
+    if (!placement) {
+        startPlacement();
         return;
     }
 
-    document.getElementById("home")
-        .style.display="none";
+    for (
+        let unit = placement;
+        unit <= 10;
+        unit++
+    ) {
 
-    document.getElementById("lessonPage")
-        .classList.add("show");
+        for (
+            let lesson = 1;
+            lesson <= 10;
+            lesson++
+        ) {
 
-    const data=courses[currentLanguage];
+            if (
+                lessonUnlocked(unit, lesson) &&
+                !isCompleted(unit, lesson)
+            ) {
 
-    document.getElementById("lessonLabel")
-        .textContent=
-        "Unit "+(unit+1)+
-        " · Lesson "+(lesson+1);
+                openLesson(unit, lesson);
+                return;
 
-    document.getElementById("lessonTitle")
-        .textContent=
-        data.units[unit][1][lesson];
-
-    document.getElementById("lessonContent")
-        .innerHTML=
-        createLesson(
-            currentLanguage,
-            unit,
-            lesson
-        );
-
-    const completeButton=
-        document.getElementById("completeButton");
-
-    if(completed(unit,lesson)){
-
-        completeButton.textContent=
-            "✓ Completed";
-
-        completeButton.style.background="#aaa";
-
-    }else{
-
-        completeButton.textContent=
-            "Complete lesson";
-
-        completeButton.style.background="";
+            }
+        }
     }
 
-    completeButton.dataset.unit=unit;
-    completeButton.dataset.lesson=lesson;
-
-    updateNextMessage(unit,lesson);
+    currentPage = "finished";
+    render();
 }
 
 
-function createLesson(language,unit,lesson){
+/* =========================================================
+   FINISHED SCREEN
+========================================================= */
 
-    const title=
-        courses[language].units[unit][1][lesson];
+function renderFinished() {
 
-    let code="";
+    return `
+        <div class="test-screen">
 
-    if(language==="python"){
+            <div class="test-card result">
 
-        code=
-`name = "Abby"
+                <h2>You finished! ✦</h2>
 
-print("Hello, " + name)`;
+                <p>
+                    You completed all 100 lessons in
+                    ${currentLanguage}.
+                </p>
 
+                <p>
+                    That's a LOT of coding.
+                    Your next step is to build something
+                    completely your own.
+                </p>
+
+                <button
+                    class="big-button"
+                    onclick="goDashboard()">
+                    Back to dashboard
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   PLACEMENT TEST SCREEN
+========================================================= */
+
+function renderTest() {
+
+    const question =
+        placementQuestions[testIndex];
+
+    const percent =
+        ((testIndex) / 10) * 100;
+
+    return `
+        <div class="test-screen">
+
+            <div class="test-card">
+
+                <div class="card-kicker">
+                    Placement test
+                </div>
+
+                <h2>
+                    Let's see where you belong.
+                </h2>
+
+                <p>
+                    Answer these 10 questions.
+                    You only get placed based on the first
+                    question you get wrong.
+                </p>
+
+                <div class="test-progress">
+                    <div
+                        class="test-progress-bar"
+                        style="width:${percent}%">
+                    </div>
+                </div>
+
+                <div class="question">
+                    ${testIndex + 1}. ${question.q}
+                </div>
+
+                <div class="answers">
+
+                    ${question.answers.map(
+                        (answer, index) => `
+                            <button
+                                class="answer"
+                                onclick="answerTest(${index})">
+                                ${answer}
+                            </button>
+                        `
+                    ).join("")}
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function renderUnits() {
+
+    const unitList =
+        document.getElementById("unitList");
+
+    const placement =
+        getPlacement();
+
+    if (!placement) {
+        unitList.innerHTML = "";
+        return;
     }
 
-    if(language==="javascript"){
+    let html = "";
 
-        code=
-`const name = "Abby";
+    for (
+        let unit = 1;
+        unit <= 10;
+        unit++
+    ) {
 
-console.log("Hello, " + name);`;
+        const unlocked =
+            unit >= placement &&
+            (
+                unit === placement ||
+                isCompleted(unit - 1, 10)
+            );
+
+        html += `
+            <div
+                class="unit
+                ${unit === currentUnit ? "current" : ""}
+                ${unlocked ? "" : "locked"}"
+                ${
+                    unlocked
+                    ? `onclick="openUnit(${unit})"`
+                    : ""
+                }
+            >
+                <span class="unit-number">
+                    ${unit}
+                </span>
+                ${unitNames[unit - 1]}
+            </div>
+        `;
+    }
+
+    unitList.innerHTML = html;
+}
+
+
+/* =========================================================
+   OPEN UNIT
+========================================================= */
+
+function openUnit(unit) {
+
+    if (!lessonUnlocked(unit, 1)) {
+        return;
+    }
+
+    currentUnit = unit;
+
+    openNextAvailable();
+}
+
+
+/* =========================================================
+   GO DASHBOARD
+========================================================= */
+
+function goDashboard() {
+
+    currentPage = "dashboard";
+
+    render();
+}
+
+
+/* =========================================================
+   DUCK CONFETTI
+========================================================= */
+
+function duckClicked(duck) {
+
+    if (duck.classList.contains("clicked")) {
+        return;
+    }
+
+    const rect =
+        duck.getBoundingClientRect();
+
+    const centerX =
+        rect.left + rect.width / 2;
+
+    const centerY =
+        rect.top + rect.height / 2;
+
+    duck.classList.add("clicked");
+
+    for (let i = 0; i < 22; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        const colors = [
+            "#f4cfd5",
+            "#a9c7ad",
+            "#f7df9c",
+            "#cfe1ed",
+            "#ded7ed"
+        ];
+
+        piece.style.background =
+            colors[i % colors.length];
+
+        piece.style.left =
+            centerX + "px";
+
+        piece.style.top =
+            centerY + "px";
+
+        piece.style.setProperty(
+            "--x",
+            ((Math.random() * 180) - 90) + "px"
+        );
+
+        piece.style.setProperty(
+            "--y",
+            ((Math.random() * 150) - 75) + "px"
+        );
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 1000);
+    }
+
+    setTimeout(() => {
+
+        duck.classList.remove("clicked");
+
+        duck.style.left =
+            (8 + Math.random() * 78) + "%";
+
+        duck.style.top =
+            (20 + Math.random() * 50) + "%";
+
+    }, 2200);
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render() {
+
+    const main =
+        document.getElementById("main");
+
+    if (currentPage === "test") {
+        main.innerHTML = renderTest();
+    }
+
+    else if (currentPage === "lesson") {
+        main.innerHTML = renderLesson();
+    }
+
+    else if (currentPage === "finished") {
+        main.innerHTML = renderFinished();
+    }
+
+    else {
+        main.innerHTML = renderDashboard();
+    }
+
+    document
+        .querySelectorAll(".language-button")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.textContent.trim() === currentLanguage
+            );
+
+        });
+
+    renderUnits();
+
+    document.getElementById(
+        "streakNumber"
+    ).textContent = streak;
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+if (!getPlacement()) {
+    currentPage = "test";
+}
+
+render();
+
+</script>
+
+</body>
+</html>
 
     }
 
