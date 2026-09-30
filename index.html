@@ -1,0 +1,1421 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Club</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f7f4;
+    color: #252525;
+}
+
+button {
+    font-family: inherit;
+}
+
+.topbar {
+    height: 68px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #6b8f71;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.stat {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.streak {
+    color: #e57b45;
+}
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 68px);
+}
+
+.sidebar {
+    width: 230px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 24px 16px;
+    position: sticky;
+    top: 68px;
+    height: calc(100vh - 68px);
+}
+
+.sidebar h3 {
+    margin: 0 10px 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+.language-btn {
+    width: 100%;
+    padding: 13px 14px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    border-radius: 9px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.language-btn:hover {
+    background: #f1f1ed;
+}
+
+.language-btn.active {
+    background: #e8f0e8;
+    color: #456a4d;
+}
+
+.main {
+    flex: 1;
+    padding: 40px;
+    max-width: 1200px;
+}
+
+.hero {
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    margin: 0 0 8px;
+    font-size: 34px;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    margin: 0;
+    color: #777;
+}
+
+.progress-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.progress {
+    height: 10px;
+    background: #ededeb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #6b8f71;
+    transition: width .3s;
+}
+
+.units {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.unit {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.unit-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.unit-number {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    font-weight: bold;
+}
+
+.unit-title {
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.lessons {
+    padding: 8px;
+}
+
+.lesson {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 13px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lesson:hover {
+    background: #f5f5f2;
+}
+
+.lesson-number {
+    width: 27px;
+    height: 27px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.lesson.completed .lesson-number {
+    background: #6b8f71;
+    color: white;
+    border-color: #6b8f71;
+}
+
+.lesson-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.check {
+    margin-left: auto;
+    color: #6b8f71;
+    font-weight: bold;
+}
+
+.lesson-page {
+    display: none;
+}
+
+.lesson-page.show {
+    display: block;
+}
+
+.back {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.lesson-box {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 35px;
+    max-width: 850px;
+}
+
+.lesson-box h1 {
+    font-size: 34px;
+    margin-top: 0;
+}
+
+.lesson-box h2 {
+    margin-top: 35px;
+}
+
+.lesson-box p {
+    line-height: 1.7;
+    color: #555;
+}
+
+.code {
+    background: #202124;
+    color: #eee;
+    border-radius: 10px;
+    padding: 18px;
+    overflow-x: auto;
+    font-family: monospace;
+    line-height: 1.6;
+    margin: 18px 0;
+}
+
+.example {
+    background: #f2f6f2;
+    border-left: 4px solid #6b8f71;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.complete-btn {
+    margin-top: 30px;
+    background: #6b8f71;
+    color: white;
+    border: 0;
+    border-radius: 9px;
+    padding: 14px 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.complete-btn:hover {
+    background: #58785e;
+}
+
+.unit-jump {
+    margin-bottom: 25px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.jump {
+    border: 1px solid #ccc;
+    background: white;
+    padding: 8px 11px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.jump:hover {
+    background: #f0f0ed;
+}
+
+@media(max-width: 800px) {
+    .sidebar {
+        width: 170px;
+    }
+
+    .main {
+        padding: 25px;
+    }
+
+    .units {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 600px) {
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    .stats {
+        gap: 8px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="logo">code<span>club</span></div>
+
+    <div class="stats">
+        <div class="stat streak">🔥 <span id="streak">0</span> day streak</div>
+        <div class="stat">⭐ <span id="xp">0</span> XP</div>
+    </div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+    <h3>Languages</h3>
+
+    <button class="language-btn active" onclick="selectLanguage('python')">
+        🐍 Python
+    </button>
+
+    <button class="language-btn" onclick="selectLanguage('javascript')">
+        JS JavaScript
+    </button>
+
+    <button class="language-btn" onclick="selectLanguage('html')">
+        &lt;/&gt; HTML
+    </button>
+
+    <button class="language-btn" onclick="selectLanguage('css')">
+        # CSS
+    </button>
+</aside>
+
+<main class="main">
+
+<section id="homePage">
+
+    <div class="hero">
+        <h1 id="languageTitle">Python</h1>
+        <p id="languageDescription">
+            Learn Python from the beginning and build your way toward real programs.
+        </p>
+    </div>
+
+    <div class="progress-card">
+        <div class="progress-top">
+            <span>Your progress</span>
+            <span id="progressText">0%</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <div class="unit-jump" id="unitJump"></div>
+
+    <div class="units" id="units"></div>
+
+</section>
+
+<section class="lesson-page" id="lessonPage">
+
+    <button class="back" onclick="showHome()">← Back to lessons</button>
+
+    <div class="lesson-box">
+
+        <div class="unit-number" id="lessonUnit"></div>
+
+        <h1 id="lessonTitle"></h1>
+
+        <div id="lessonContent"></div>
+
+        <button class="complete-btn" id="completeButton" onclick="completeLesson()">
+            Mark lesson complete
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+</div>
+
+<script>
+
+const languages = {
+
+python: {
+    name: "Python",
+    description: "Learn Python from the beginning and build your way toward real programs.",
+
+    units: [
+        ["Python Basics", [
+            "What is Python?",
+            "Your First Program",
+            "Printing Text",
+            "Numbers",
+            "Variables",
+            "Strings",
+            "Comments",
+            "Simple Calculations",
+            "Input",
+            "Your First Mini Program"
+        ]],
+        ["Making Decisions", [
+            "True and False",
+            "If Statements",
+            "Else",
+            "Elif",
+            "Comparison Operators",
+            "Logical Operators",
+            "Nested If Statements",
+            "Checking Input",
+            "Multiple Conditions",
+            "Decision Maker"
+        ]],
+        ["Loops", [
+            "Why Loops?",
+            "While Loops",
+            "For Loops",
+            "Range",
+            "Counting",
+            "Looping Through Text",
+            "Break",
+            "Continue",
+            "Nested Loops",
+            "Loop Challenge"
+        ]],
+        ["Lists", [
+            "What is a List?",
+            "Creating Lists",
+            "List Positions",
+            "Changing Items",
+            "Adding Items",
+            "Removing Items",
+            "List Length",
+            "Looping Through Lists",
+            "Sorting Lists",
+            "List Challenge"
+        ]],
+        ["Functions", [
+            "What is a Function?",
+            "Creating Functions",
+            "Calling Functions",
+            "Parameters",
+            "Arguments",
+            "Return Values",
+            "Multiple Parameters",
+            "Default Values",
+            "Reusable Code",
+            "Function Challenge"
+        ]],
+        ["Dictionaries", [
+            "What is a Dictionary?",
+            "Keys and Values",
+            "Creating Dictionaries",
+            "Reading Values",
+            "Changing Values",
+            "Adding Keys",
+            "Removing Keys",
+            "Looping Through Dictionaries",
+            "Nested Dictionaries",
+            "Dictionary Challenge"
+        ]],
+        ["Files and Data", [
+            "What is a File?",
+            "Opening Files",
+            "Reading Files",
+            "Writing Files",
+            "Adding to Files",
+            "Working With Lines",
+            "CSV Basics",
+            "JSON Basics",
+            "Saving Data",
+            "Data Project"
+        ]],
+        ["Useful Python", [
+            "Random Numbers",
+            "The Math Module",
+            "Dates and Time",
+            "String Methods",
+            "List Methods",
+            "Error Messages",
+            "Try and Except",
+            "Debugging",
+            "Modules",
+            "Useful Tools Project"
+        ]],
+        ["Projects", [
+            "Number Guessing Game",
+            "Quiz Game",
+            "Calculator",
+            "Password Generator",
+            "Rock Paper Scissors",
+            "To-Do List",
+            "Text Adventure",
+            "Score Tracker",
+            "Mini Game",
+            "Build Your Own Project"
+        ]],
+        ["Python Mastery", [
+            "Reviewing the Basics",
+            "Writing Cleaner Code",
+            "Combining Concepts",
+            "Planning Programs",
+            "Debugging Programs",
+            "Working With Data",
+            "Building Bigger Programs",
+            "Project Planning",
+            "Final Python Challenge",
+            "Python Final Project"
+        ]]
+    ]
+},
+
+javascript: {
+    name: "JavaScript",
+    description: "Make websites interactive with JavaScript.",
+
+    units: [
+        ["JavaScript Basics", [
+            "What is JavaScript?",
+            "Your First Script",
+            "Variables",
+            "Strings",
+            "Numbers",
+            "Booleans",
+            "Comments",
+            "Math",
+            "Console",
+            "First JavaScript Project"
+        ]],
+        ["Decisions", [
+            "If Statements",
+            "Else",
+            "Else If",
+            "Comparisons",
+            "Logical Operators",
+            "Checking Values",
+            "Nested Decisions",
+            "Multiple Conditions",
+            "User Choices",
+            "Decision Project"
+        ]],
+        ["Loops", [
+            "Why Loops?",
+            "While Loops",
+            "For Loops",
+            "Counting",
+            "Loop Conditions",
+            "Break",
+            "Continue",
+            "Nested Loops",
+            "Looping Through Arrays",
+            "Loop Project"
+        ]],
+        ["Arrays", [
+            "What is an Array?",
+            "Creating Arrays",
+            "Array Positions",
+            "Changing Items",
+            "Adding Items",
+            "Removing Items",
+            "Array Length",
+            "Looping Arrays",
+            "Array Methods",
+            "Array Project"
+        ]],
+        ["Functions", [
+            "What is a Function?",
+            "Creating Functions",
+            "Parameters",
+            "Arguments",
+            "Return",
+            "Arrow Functions",
+            "Multiple Parameters",
+            "Reusable Functions",
+            "Function Logic",
+            "Function Project"
+        ]],
+        ["The Web", [
+            "Selecting HTML",
+            "Changing Text",
+            "Changing Styles",
+            "Buttons",
+            "Click Events",
+            "Mouse Events",
+            "Keyboard Events",
+            "Input Boxes",
+            "Forms",
+            "Interactive Page"
+        ]],
+        ["Objects", [
+            "What is an Object?",
+            "Properties",
+            "Reading Properties",
+            "Changing Properties",
+            "Adding Properties",
+            "Object Methods",
+            "Nested Objects",
+            "Arrays of Objects",
+            "Object Loops",
+            "Object Project"
+        ]],
+        ["Useful JavaScript", [
+            "Random Numbers",
+            "Dates",
+            "Timers",
+            "Local Storage",
+            "Saving Data",
+            "JSON",
+            "Debugging",
+            "Errors",
+            "Organizing Code",
+            "Useful Tools Project"
+        ]],
+        ["Projects", [
+            "Counter",
+            "Calculator",
+            "Quiz",
+            "To-Do List",
+            "Digital Clock",
+            "Random Generator",
+            "Click Game",
+            "Score Game",
+            "Mini App",
+            "Build Your Own App"
+        ]],
+        ["JavaScript Mastery", [
+            "Review",
+            "Combining Concepts",
+            "Cleaner Code",
+            "Debugging",
+            "Planning Apps",
+            "Working With Data",
+            "Events and Logic",
+            "Building Bigger Apps",
+            "Final Challenge",
+            "Final JavaScript Project"
+        ]]
+    ]
+},
+
+html: {
+    name: "HTML",
+    description: "Learn how webpages are structured from the ground up.",
+
+    units: [
+        ["HTML Basics", [
+            "What is HTML?",
+            "Your First Page",
+            "Headings",
+            "Paragraphs",
+            "Text Formatting",
+            "Comments",
+            "Links",
+            "Images",
+            "Page Titles",
+            "First Webpage"
+        ]],
+        ["Page Structure", [
+            "HTML Document Structure",
+            "Head",
+            "Body",
+            "Divs",
+            "Spans",
+            "Sections",
+            "Headers",
+            "Footers",
+            "Navigation",
+            "Page Layout"
+        ]],
+        ["Lists", [
+            "Unordered Lists",
+            "Ordered Lists",
+            "List Items",
+            "Nested Lists",
+            "Description Lists",
+            "Navigation Lists",
+            "List Styling",
+            "Menu Lists",
+            "Useful Lists",
+            "List Project"
+        ]],
+        ["Links and Media", [
+            "Links",
+            "External Links",
+            "Page Links",
+            "Images",
+            "Image Sizes",
+            "Alt Text",
+            "Audio",
+            "Video",
+            "Embedded Content",
+            "Media Page"
+        ]],
+        ["Forms", [
+            "What is a Form?",
+            "Text Inputs",
+            "Labels",
+            "Buttons",
+            "Checkboxes",
+            "Radio Buttons",
+            "Dropdowns",
+            "Text Areas",
+            "Form Organization",
+            "Form Project"
+        ]],
+        ["Tables", [
+            "What is a Table?",
+            "Rows",
+            "Cells",
+            "Headers",
+            "Table Structure",
+            "Column Groups",
+            "Table Captions",
+            "Accessible Tables",
+            "Table Design",
+            "Table Project"
+        ]],
+        ["Semantic HTML", [
+            "What is Semantic HTML?",
+            "Main",
+            "Article",
+            "Section",
+            "Aside",
+            "Header",
+            "Footer",
+            "Nav",
+            "Figure",
+            "Semantic Website"
+        ]],
+        ["Advanced HTML", [
+            "Data Attributes",
+            "Meta Tags",
+            "Favicon",
+            "Responsive Meta",
+            "Embedding",
+            "Iframes",
+            "Accessibility",
+            "HTML Validation",
+            "Organizing HTML",
+            "Advanced Page"
+        ]],
+        ["Web Projects", [
+            "Profile Page",
+            "Recipe Page",
+            "Music Page",
+            "Gallery",
+            "Contact Page",
+            "Portfolio",
+            "Event Page",
+            "Game Page",
+            "Multi-Section Site",
+            "Build a Website"
+        ]],
+        ["HTML Mastery", [
+            "HTML Review",
+            "Better Structure",
+            "Accessibility Review",
+            "Clean HTML",
+            "Page Planning",
+            "Combining Elements",
+            "Organizing Projects",
+            "Debugging HTML",
+            "Final Challenge",
+            "Final HTML Project"
+        ]]
+    ]
+},
+
+css: {
+    name: "CSS",
+    description: "Turn plain HTML into polished, animated websites.",
+
+    units: [
+        ["CSS Basics", [
+            "What is CSS?",
+            "Your First Style",
+            "Colors",
+            "Text",
+            "Fonts",
+            "Backgrounds",
+            "Borders",
+            "Spacing",
+            "Classes",
+            "First Styled Page"
+        ]],
+        ["The Box Model", [
+            "The Box Model",
+            "Width",
+            "Height",
+            "Padding",
+            "Margin",
+            "Borders",
+            "Box Sizing",
+            "Overflow",
+            "Sizing Elements",
+            "Box Model Project"
+        ]],
+        ["Layout", [
+            "Display",
+            "Block",
+            "Inline",
+            "Inline Block",
+            "Flexbox",
+            "Flex Direction",
+            "Justify Content",
+            "Align Items",
+            "Gap",
+            "Flexbox Project"
+        ]],
+        ["Grid", [
+            "What is Grid?",
+            "Grid Columns",
+            "Grid Rows",
+            "Gap",
+            "Grid Areas",
+            "Spanning",
+            "Responsive Grid",
+            "Cards",
+            "Gallery Layout",
+            "Grid Project"
+        ]],
+        ["Positioning", [
+            "Position Basics",
+            "Relative",
+            "Absolute",
+            "Fixed",
+            "Sticky",
+            "Z Index",
+            "Layering",
+            "Centered Elements",
+            "Overlays",
+            "Position Project"
+        ]],
+        ["Responsive Design", [
+            "What is Responsive Design?",
+            "Viewport",
+            "Media Queries",
+            "Mobile Layouts",
+            "Flexible Widths",
+            "Responsive Images",
+            "Responsive Text",
+            "Mobile Navigation",
+            "Testing Screens",
+            "Responsive Project"
+        ]],
+        ["Animations", [
+            "Transitions",
+            "Hover Effects",
+            "Transform",
+            "Scale",
+            "Rotate",
+            "Keyframes",
+            "Animation Timing",
+            "Moving Elements",
+            "Loading Animations",
+            "Animation Project"
+        ]],
+        ["Advanced Styling", [
+            "Gradients",
+            "Shadows",
+            "Pseudo Classes",
+            "Pseudo Elements",
+            "CSS Variables",
+            "Custom Properties",
+            "Filters",
+            "Clipping",
+            "Advanced Selectors",
+            "Style Project"
+        ]],
+        ["Web Design", [
+            "Choosing Fonts",
+            "Color Palettes",
+            "Spacing Systems",
+            "Cards",
+            "Navigation Bars",
+            "Buttons",
+            "Hero Sections",
+            "Footers",
+            "Designing a Page",
+            "Design Project"
+        ]],
+        ["CSS Mastery", [
+            "CSS Review",
+            "Cleaner CSS",
+            "Responsive Review",
+            "Animation Review",
+            "Layout Review",
+            "Design Systems",
+            "Combining Techniques",
+            "Debugging CSS",
+            "Final Challenge",
+            "Final CSS Project"
+        ]]
+    ]
+}
+
+};
+
+let currentLanguage = "python";
+let currentLesson = null;
+
+let progressData =
+    JSON.parse(localStorage.getItem("codeClubProgress")) || {};
+
+let streakData =
+    JSON.parse(localStorage.getItem("codeClubStreak")) || {
+        streak: 0,
+        lastDate: ""
+    };
+
+function save() {
+    localStorage.setItem(
+        "codeClubProgress",
+        JSON.stringify(progressData)
+    );
+
+    localStorage.setItem(
+        "codeClubStreak",
+        JSON.stringify(streakData)
+    );
+}
+
+function updateStreak() {
+
+    const today = new Date().toISOString().slice(0,10);
+
+    if (streakData.lastDate === today) {
+        return;
+    }
+
+    const yesterday = new Date();
+
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const yesterdayString =
+        yesterday.toISOString().slice(0,10);
+
+    if (streakData.lastDate === yesterdayString) {
+        streakData.streak++;
+    } else {
+        streakData.streak = 1;
+    }
+
+    streakData.lastDate = today;
+
+    save();
+}
+
+function languageKey() {
+    return currentLanguage;
+}
+
+function completedCount() {
+
+    if (!progressData[languageKey()]) {
+        return 0;
+    }
+
+    return Object.keys(progressData[languageKey()]).length;
+}
+
+function isCompleted(unit, lesson) {
+
+    if (!progressData[languageKey()]) {
+        return false;
+    }
+
+    return progressData[languageKey()][unit + "-" + lesson];
+}
+
+function renderUnits() {
+
+    const data = languages[currentLanguage];
+
+    document.getElementById("languageTitle").textContent =
+        data.name;
+
+    document.getElementById("languageDescription").textContent =
+        data.description;
+
+    const unitsContainer =
+        document.getElementById("units");
+
+    unitsContainer.innerHTML = "";
+
+    const jump =
+        document.getElementById("unitJump");
+
+    jump.innerHTML = "<strong style='margin-right:5px;'>Jump to:</strong>";
+
+    data.units.forEach((unit, unitIndex) => {
+
+        const jumpButton =
+            document.createElement("button");
+
+        jumpButton.className = "jump";
+
+        jumpButton.textContent =
+            "Unit " + (unitIndex + 1);
+
+        jumpButton.onclick = function() {
+
+            document
+                .getElementById("unit-" + unitIndex)
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        };
+
+        jump.appendChild(jumpButton);
+
+        const unitElement =
+            document.createElement("div");
+
+        unitElement.className = "unit";
+
+        unitElement.id = "unit-" + unitIndex;
+
+        let lessonsHTML = "";
+
+        unit[1].forEach((lessonName, lessonIndex) => {
+
+            const completed =
+                isCompleted(unitIndex, lessonIndex);
+
+            lessonsHTML += `
+                <button
+                    class="lesson ${completed ? "completed" : ""}"
+                    onclick="openLesson(${unitIndex}, ${lessonIndex})">
+
+                    <span class="lesson-number">
+                        ${completed ? "✓" : lessonIndex + 1}
+                    </span>
+
+                    <span class="lesson-name">
+                        ${lessonName}
+                    </span>
+
+                    ${completed ? '<span class="check">✓</span>' : ""}
+                </button>
+            `;
+        });
+
+        unitElement.innerHTML = `
+            <div class="unit-header">
+                <div class="unit-number">
+                    Unit ${unitIndex + 1}
+                </div>
+
+                <div class="unit-title">
+                    ${unit[0]}
+                </div>
+            </div>
+
+            <div class="lessons">
+                ${lessonsHTML}
+            </div>
+        `;
+
+        unitsContainer.appendChild(unitElement);
+    });
+
+    updateProgress();
+}
+
+function updateProgress() {
+
+    const total = 100;
+
+    const completed = completedCount();
+
+    const percentage =
+        Math.round((completed / total) * 100);
+
+    document.getElementById("progressText").textContent =
+        percentage + "%";
+
+    document.getElementById("progressFill").style.width =
+        percentage + "%";
+
+    document.getElementById("streak").textContent =
+        streakData.streak;
+
+    let totalXP = 0;
+
+    Object.keys(progressData).forEach(lang => {
+
+        totalXP +=
+            Object.keys(progressData[lang]).length * 10;
+
+    });
+
+    document.getElementById("xp").textContent =
+        totalXP;
+}
+
+function selectLanguage(language) {
+
+    currentLanguage = language;
+
+    document.querySelectorAll(".language-btn")
+        .forEach(button => button.classList.remove("active"));
+
+    const buttons =
+        document.querySelectorAll(".language-btn");
+
+    if (language === "python") buttons[0].classList.add("active");
+    if (language === "javascript") buttons[1].classList.add("active");
+    if (language === "html") buttons[2].classList.add("active");
+    if (language === "css") buttons[3].classList.add("active");
+
+    showHome();
+    renderUnits();
+}
+
+function openLesson(unitIndex, lessonIndex) {
+
+    currentLesson = {
+        unit: unitIndex,
+        lesson: lessonIndex
+    };
+
+    const data = languages[currentLanguage];
+
+    const unit =
+        data.units[unitIndex];
+
+    const lesson =
+        unit[1][lessonIndex];
+
+    document.getElementById("homePage")
+        .style.display = "none";
+
+    document.getElementById("lessonPage")
+        .classList.add("show");
+
+    document.getElementById("lessonUnit")
+        .textContent =
+        "Unit " + (unitIndex + 1) + " · " + unit[0];
+
+    document.getElementById("lessonTitle")
+        .textContent =
+        lesson;
+
+    document.getElementById("lessonContent")
+        .innerHTML =
+        makeLessonContent(
+            currentLanguage,
+            unitIndex,
+            lessonIndex,
+            lesson
+        );
+
+    const button =
+        document.getElementById("completeButton");
+
+    if (isCompleted(unitIndex, lessonIndex)) {
+
+        button.textContent =
+            "✓ Lesson completed";
+
+        button.style.background =
+            "#aaa";
+
+    } else {
+
+        button.textContent =
+            "Mark lesson complete";
+
+        button.style.background =
+            "#6b8f71";
+    }
+
+    updateStreak();
+}
+
+function showHome() {
+
+    document.getElementById("lessonPage")
+        .classList.remove("show");
+
+    document.getElementById("homePage")
+        .style.display = "block";
+
+    renderUnits();
+}
+
+function completeLesson() {
+
+    if (!currentLesson) return;
+
+    if (!progressData[currentLanguage]) {
+        progressData[currentLanguage] = {};
+    }
+
+    const key =
+        currentLesson.unit +
+        "-" +
+        currentLesson.lesson;
+
+    if (!progressData[currentLanguage][key]) {
+
+        progressData[currentLanguage][key] = true;
+
+        save();
+
+        updateStreak();
+    }
+
+    const button =
+        document.getElementById("completeButton");
+
+    button.textContent =
+        "✓ Lesson completed";
+
+    button.style.background =
+        "#aaa";
+
+    updateProgress();
+}
+
+function makeLessonContent(language, unit, lesson, title) {
+
+    const lessonsInUnit =
+        languages[language].units[unit][1];
+
+    let description =
+        "In this lesson, you will learn about " +
+        title.toLowerCase() +
+        " and see how it is used when writing real code.";
+
+    let code = "";
+
+    if (language === "python") {
+
+        code =
+`# Python example
+
+name = "Alex"
+print("Hello, " + name)`;
+
+    }
+
+    if (language === "javascript") {
+
+        code =
+`// JavaScript example
+
+const name = "Alex";
+console.log("Hello, " + name);`;
+
+    }
+
+    if (language === "html") {
+
+        code =
+`<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Hello!</h1>
+<p>My first webpage.</p>
+
+</body>
+</html>`;
+
+    }
+
+    if (language === "css") {
+
+        code =
+`body {
+    background: #f5f5f5;
+    font-family: Arial;
+}
+
+h1 {
+    color: #456a4d;
+}`;
+
+    }
+
+    let lessonNumber =
+        lesson + 1;
+
+    let extra =
+        `
+        <h2>What you are learning</h2>
+
+        <p>
+            This is lesson ${lessonNumber} of this unit.
+            The goal is to understand the idea first,
+            then see how it appears in actual code.
+        </p>
+
+        <div class="example">
+            <strong>Think about it:</strong><br>
+            Good programmers do not just memorize code.
+            They understand what each part is doing.
+        </div>
+
+        <h2>Example</h2>
+
+        <div class="code">${escapeHTML(code)}</div>
+
+        <h2>Try changing it</h2>
+
+        <p>
+            Change something in the example and see what happens.
+            Experimenting is one of the fastest ways to learn programming.
+        </p>
+
+        <h2>Remember</h2>
+
+        <p>
+            You do not need to memorize everything immediately.
+            Focus on understanding what the code means and why it works.
+        </p>
+        `;
+
+    return `
+        <p>${description}</p>
+        ${extra}
+    `;
+}
+
+function escapeHTML(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+updateStreak();
+renderUnits();
+
+</script>
+
+</body>
+</html>
+```
