@@ -9,148 +9,353 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 :root {
-    --cream: #fffaf0;
-    --paper: #fffdf7;
+    --cream: #fffaf1;
+    --paper: #fffdf8;
     --sage: #a9c7ad;
-    --sage-dark: #668c70;
-    --green: #dcebd8;
-    --yellow: #f7df9c;
-    --pink: #f4cfd5;
-    --blue: #cfe1ed;
-    --lavender: #ded7ed;
-    --brown: #51483f;
-    --muted: #8b837a;
-    --white: #ffffff;
-    --shadow: 0 8px 30px rgba(83, 73, 59, 0.09);
+    --sage-dark: #62886b;
+    --sage-light: #e5f0e2;
+    --yellow: #f5d77d;
+    --yellow-light: #fff3c9;
+    --pink: #f2cbd3;
+    --blue: #cfe2ed;
+    --lavender: #ddd5eb;
+    --brown: #50483f;
+    --muted: #91887d;
+    --line: #ece4d7;
+    --dark: #292c29;
+    --shadow: 0 12px 35px rgba(78, 68, 55, .08);
 }
 
 * {
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    font-family: "DM Sans", sans-serif;
-    color: var(--brown);
-    background:
-        radial-gradient(circle at 8% 12%, rgba(247,223,156,.28) 0 45px, transparent 46px),
-        radial-gradient(circle at 94% 78%, rgba(220,235,216,.65) 0 80px, transparent 81px),
-        var(--cream);
-    min-height: 100vh;
+html {
+    scroll-behavior: smooth;
 }
 
-/* ---------- HEADER ---------- */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 8% 10%, rgba(245,215,125,.22), transparent 90px),
+        radial-gradient(circle at 92% 85%, rgba(169,199,173,.3), transparent 120px),
+        var(--cream);
+    color: var(--brown);
+    font-family: "DM Sans", sans-serif;
+}
+
+/* =========================================================
+   OPENING ANIMATION
+========================================================= */
+
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #fffaf0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: opacity .7s ease, visibility .7s ease;
+}
+
+#intro.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.intro-code {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: .12;
+    font-family: monospace;
+    color: #62886b;
+    font-size: 17px;
+    line-height: 2;
+}
+
+.intro-code span {
+    position: absolute;
+    white-space: nowrap;
+    animation: codeFloat 7s linear infinite;
+}
+
+.intro-code .one {
+    top: 15%;
+    left: -20%;
+}
+
+.intro-code .two {
+    top: 35%;
+    left: -30%;
+    animation-delay: 1.5s;
+}
+
+.intro-code .three {
+    top: 62%;
+    left: -25%;
+    animation-delay: 3s;
+}
+
+.intro-code .four {
+    top: 78%;
+    left: -30%;
+    animation-delay: 4.5s;
+}
+
+@keyframes codeFloat {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(145vw);
+    }
+}
+
+.intro-content {
+    position: relative;
+    text-align: center;
+    z-index: 3;
+    animation: introAppear 1s ease both;
+}
+
+@keyframes introAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.intro-duck {
+    width: 115px;
+    height: 95px;
+    margin: 0 auto 15px;
+    position: relative;
+    animation: duckFloat 2s ease-in-out infinite;
+}
+
+@keyframes duckFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+}
+
+.intro-duck .body {
+    position: absolute;
+    width: 76px;
+    height: 55px;
+    background: #f4d76e;
+    border-radius: 55% 50% 48% 55%;
+    left: 7px;
+    bottom: 9px;
+}
+
+.intro-duck .head {
+    position: absolute;
+    width: 53px;
+    height: 53px;
+    background: #f8df82;
+    border-radius: 50%;
+    left: 54px;
+    top: 2px;
+}
+
+.intro-duck .eye {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: #4d463e;
+    border-radius: 50%;
+    left: 91px;
+    top: 22px;
+}
+
+.intro-duck .beak {
+    position: absolute;
+    width: 23px;
+    height: 13px;
+    background: #e5a148;
+    border-radius: 80% 20% 20% 80%;
+    left: 99px;
+    top: 30px;
+}
+
+.intro-duck .wing {
+    position: absolute;
+    width: 38px;
+    height: 24px;
+    background: #e8cb61;
+    border-radius: 60% 40% 60% 40%;
+    left: 37px;
+    bottom: 23px;
+    transform: rotate(-15deg);
+}
+
+.intro-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1;
+    margin: 0;
+    letter-spacing: -.8px;
+}
+
+.intro-title span {
+    color: var(--sage-dark);
+}
+
+.intro-subtitle {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.loading-line {
+    width: 190px;
+    height: 5px;
+    background: #eee6d8;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 27px auto 0;
+}
+
+.loading-fill {
+    height: 100%;
+    width: 0;
+    background: var(--sage-dark);
+    border-radius: inherit;
+    animation: loading 2.1s ease forwards;
+}
+
+@keyframes loading {
+    to {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 header {
-    height: 78px;
-    background: rgba(255,253,247,.94);
-    border-bottom: 1px solid #eee6d8;
+    height: 76px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 30px;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(12px);
+    background: rgba(255,253,248,.93);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(14px);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 11px;
 }
 
-.logo-duck {
-    width: 43px;
-    height: 36px;
+.mini-duck {
+    width: 40px;
+    height: 33px;
     position: relative;
 }
 
-.logo-body {
-    width: 32px;
-    height: 24px;
-    background: #f5d879;
-    border-radius: 55% 48% 45% 55%;
+.mini-duck .body {
     position: absolute;
-    bottom: 1px;
-    left: 2px;
+    width: 29px;
+    height: 21px;
+    background: var(--yellow);
+    border-radius: 55%;
+    left: 1px;
+    bottom: 2px;
 }
 
-.logo-head {
-    width: 20px;
-    height: 20px;
-    background: #f7df83;
+.mini-duck .head {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    background: #f8df82;
     border-radius: 50%;
-    position: absolute;
+    left: 18px;
     top: 1px;
-    left: 19px;
 }
 
-.logo-eye {
+.mini-duck .eye {
+    position: absolute;
     width: 3px;
     height: 3px;
-    background: #51483f;
+    background: var(--brown);
     border-radius: 50%;
-    position: absolute;
+    left: 30px;
     top: 7px;
-    left: 31px;
 }
 
-.logo-beak {
+.mini-duck .beak {
+    position: absolute;
     width: 8px;
     height: 5px;
-    background: #e7a84c;
+    background: #e5a148;
     border-radius: 80% 20% 20% 80%;
-    position: absolute;
+    left: 35px;
     top: 10px;
-    left: 36px;
 }
 
-.logo-text h1 {
+.logo h1 {
     font-family: "Playfair Display", serif;
-    font-size: 21px;
+    font-size: 20px;
     margin: 0;
 }
 
-.logo-text span {
+.logo h1 span {
     color: var(--sage-dark);
 }
 
 .streak {
-    background: #fff4ce;
-    border: 1px solid #f1dfaa;
+    background: var(--yellow-light);
+    border: 1px solid #efdda8;
     padding: 9px 15px;
     border-radius: 20px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
 }
 
-/* ---------- APP ---------- */
+/* =========================================================
+   LAYOUT
+========================================================= */
 
 .app {
-    display: flex;
     max-width: 1450px;
     margin: auto;
+    display: flex;
 }
-
-/* ---------- SIDEBAR ---------- */
 
 .sidebar {
     width: 245px;
-    min-height: calc(100vh - 78px);
+    min-height: calc(100vh - 76px);
     padding: 25px 18px;
-    border-right: 1px solid #eee6d8;
-    background: rgba(255,253,247,.72);
+    background: rgba(255,253,248,.62);
+    border-right: 1px solid var(--line);
 }
 
 .side-title {
-    font-size: 11px;
-    text-transform: uppercase;
+    margin: 6px 12px 12px;
+    color: #a0988e;
+    font-size: 10px;
+    font-weight: 800;
     letter-spacing: 1.5px;
-    color: #9c9285;
-    font-weight: 700;
-    margin: 7px 12px 12px;
+    text-transform: uppercase;
 }
 
 .language-button {
@@ -158,23 +363,22 @@ header {
     border: 0;
     background: transparent;
     color: var(--brown);
-    text-align: left;
     padding: 12px 13px;
-    border-radius: 14px;
-    cursor: pointer;
+    border-radius: 13px;
     font: inherit;
     font-weight: 600;
-    margin-bottom: 4px;
+    text-align: left;
+    cursor: pointer;
     transition: .2s;
 }
 
 .language-button:hover {
-    background: #f5f0e6;
+    background: #f5f0e7;
 }
 
 .language-button.active {
-    background: var(--green);
-    color: #49694f;
+    background: var(--sage-light);
+    color: #4f7157;
 }
 
 .unit-list {
@@ -182,44 +386,46 @@ header {
 }
 
 .unit {
-    padding: 10px 12px;
+    padding: 9px 11px;
     margin: 3px 0;
     border-radius: 11px;
-    font-size: 13px;
+    color: #786f65;
+    font-size: 12px;
     cursor: pointer;
-    color: #776e65;
     transition: .2s;
 }
 
 .unit:hover {
-    background: #f4efe6;
+    background: #f5f0e7;
 }
 
 .unit.current {
-    background: #e8f1e4;
-    color: #55735b;
+    background: #e8f2e5;
+    color: #55765b;
     font-weight: 700;
 }
 
 .unit.locked {
-    opacity: .42;
+    opacity: .38;
     cursor: not-allowed;
 }
 
 .unit-number {
     display: inline-block;
     width: 24px;
-    font-size: 11px;
-    color: #a59b90;
+    color: #aaa095;
+    font-size: 10px;
 }
-
-/* ---------- MAIN ---------- */
 
 main {
     flex: 1;
-    padding: 38px clamp(25px, 5vw, 65px);
     min-width: 0;
+    padding: 40px clamp(22px, 5vw, 65px);
 }
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
 .page {
     max-width: 930px;
@@ -228,22 +434,22 @@ main {
 
 .welcome {
     display: flex;
-    justify-content: space-between;
     align-items: flex-end;
+    justify-content: space-between;
     gap: 25px;
-    margin-bottom: 30px;
+    margin-bottom: 29px;
 }
 
 .welcome h2 {
     font-family: "Playfair Display", serif;
-    font-size: clamp(31px, 4vw, 47px);
-    line-height: 1.05;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.02;
     margin: 0 0 9px;
 }
 
 .welcome p {
-    margin: 0;
     color: var(--muted);
+    margin: 0;
 }
 
 .progress-box {
@@ -253,14 +459,14 @@ main {
 .progress-label {
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 800;
     margin-bottom: 7px;
 }
 
 .progress {
-    height: 9px;
-    background: #eee7dc;
+    height: 8px;
+    background: #ece5da;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -269,67 +475,65 @@ main {
     height: 100%;
     background: var(--sage-dark);
     border-radius: inherit;
-    transition: width .4s;
+    transition: width .5s;
 }
-
-/* ---------- DASHBOARD CARDS ---------- */
 
 .cards {
     display: grid;
     grid-template-columns: 1.3fr .7fr;
-    gap: 18px;
-    margin-bottom: 25px;
+    gap: 17px;
+    margin-bottom: 20px;
 }
 
 .card {
-    background: rgba(255,255,255,.76);
-    border: 1px solid #eee6da;
-    border-radius: 24px;
+    background: rgba(255,255,255,.78);
+    border: 1px solid var(--line);
+    border-radius: 23px;
     padding: 25px;
     box-shadow: var(--shadow);
 }
 
 .continue-card {
-    background: linear-gradient(135deg, #e5f0e1, #f7f4e8);
+    background: linear-gradient(135deg, #e4f0e1, #fff7dc);
 }
 
 .card-kicker {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
     color: var(--sage-dark);
+    font-size: 10px;
     font-weight: 800;
-    margin-bottom: 7px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
 }
 
 .card h3 {
     font-family: "Playfair Display", serif;
-    font-size: 25px;
-    margin: 0 0 7px;
+    font-size: 24px;
+    margin: 8px 0;
 }
 
 .card p {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.55;
 }
 
-.big-button {
-    margin-top: 12px;
+.big-button,
+.next-button {
     border: 0;
     background: var(--sage-dark);
     color: white;
     padding: 12px 18px;
-    border-radius: 13px;
+    border-radius: 12px;
     font: inherit;
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
     transition: .2s;
 }
 
-.big-button:hover {
+.big-button:hover,
+.next-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 7px 16px rgba(102,140,112,.22);
+    box-shadow: 0 7px 18px rgba(98,136,107,.23);
 }
 
 .stats-card {
@@ -341,66 +545,62 @@ main {
 .stat {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px dashed #e7dfd2;
+    padding: 9px 0;
+    border-bottom: 1px dashed #e6ded1;
+    font-size: 13px;
 }
 
 .stat:last-child {
-    border-bottom: 0;
+    border: 0;
 }
 
 .stat span {
     color: var(--muted);
-    font-size: 13px;
 }
 
-.stat strong {
-    font-size: 14px;
-}
-
-/* ---------- DUCK AREA ---------- */
+/* =========================================================
+   DUCK AREA
+========================================================= */
 
 .duck-area {
     height: 145px;
     position: relative;
     overflow: hidden;
-    margin: 15px 0 25px;
-    border-radius: 24px;
-    background: #fff6dc;
-    border: 1px solid #f0dfb7;
+    margin: 18px 0 27px;
+    border: 1px solid #efdfb8;
+    border-radius: 23px;
+    background: linear-gradient(135deg, #fff5d4, #fff9e8);
 }
 
-.duck-area::before {
+.duck-area::after {
     content: "";
     position: absolute;
-    width: 130px;
-    height: 130px;
+    width: 210px;
+    height: 90px;
     border-radius: 50%;
-    background: rgba(255,255,255,.45);
-    top: -65px;
-    right: 15%;
+    background: rgba(255,255,255,.48);
+    right: -50px;
+    bottom: -45px;
 }
 
 .duck-note {
     position: absolute;
-    color: #c6ad72;
-    font-family: serif;
-    font-size: 18px;
+    color: #c9b27b;
+    font-family: Georgia, serif;
+    font-size: 20px;
 }
-
-/* ---------- DUCK ---------- */
 
 .duck {
     width: 65px;
     height: 58px;
     position: absolute;
     cursor: pointer;
-    transition: transform .25s;
-    z-index: 3;
+    transition: transform .2s;
+    z-index: 5;
 }
 
 .duck:hover {
-    transform: rotate(-5deg) scale(1.08);
+    transform: scale(1.08) rotate(-4deg);
 }
 
 .duck .body {
@@ -411,14 +611,13 @@ main {
     border-radius: 55% 50% 48% 55%;
     bottom: 5px;
     left: 5px;
-    box-shadow: inset -3px -3px 0 rgba(210,177,75,.18);
 }
 
 .duck .head {
     position: absolute;
     width: 31px;
     height: 31px;
-    background: #f7df83;
+    background: #f8df82;
     border-radius: 50%;
     top: 2px;
     left: 29px;
@@ -428,7 +627,7 @@ main {
     position: absolute;
     width: 4px;
     height: 4px;
-    background: #4d463e;
+    background: var(--brown);
     border-radius: 50%;
     top: 12px;
     left: 48px;
@@ -438,7 +637,7 @@ main {
     position: absolute;
     width: 13px;
     height: 8px;
-    background: #e8a64d;
+    background: #e5a148;
     border-radius: 80% 20% 20% 80%;
     top: 17px;
     left: 55px;
@@ -448,47 +647,29 @@ main {
     position: absolute;
     width: 21px;
     height: 14px;
-    background: #eacb62;
+    background: #e9cb61;
     border-radius: 60% 40% 60% 40%;
     bottom: 12px;
     left: 21px;
     transform: rotate(-15deg);
 }
 
-.duck .foot {
-    position: absolute;
-    width: 13px;
-    height: 5px;
-    background: #e6a44b;
-    border-radius: 50%;
-    bottom: 1px;
-}
-
-.duck .foot.one {
-    left: 14px;
-}
-
-.duck .foot.two {
-    left: 32px;
-}
-
 .duck.clicked {
-    animation: duckPop .4s forwards;
+    animation: duckPop .38s forwards;
 }
 
 @keyframes duckPop {
     0% { transform: scale(1); opacity: 1; }
-    60% { transform: scale(1.35) rotate(10deg); }
+    65% { transform: scale(1.3) rotate(10deg); opacity: 1; }
     100% { transform: scale(0); opacity: 0; }
 }
 
-/* ---------- LESSON LIST ---------- */
+/* =========================================================
+   LESSON LIST
+========================================================= */
 
 .section-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 28px 0 13px;
+    margin: 25px 0 13px;
 }
 
 .section-title h3 {
@@ -506,9 +687,9 @@ main {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 15px 17px;
-    background: rgba(255,255,255,.74);
-    border: 1px solid #eee6da;
+    padding: 14px 16px;
+    background: rgba(255,255,255,.75);
+    border: 1px solid var(--line);
     border-radius: 15px;
     transition: .2s;
 }
@@ -519,23 +700,24 @@ main {
 
 .lesson.unlocked:hover {
     transform: translateX(4px);
-    box-shadow: 0 5px 18px rgba(80,70,55,.07);
+    box-shadow: 0 6px 18px rgba(78,68,55,.07);
 }
 
 .lesson.locked {
-    opacity: .45;
+    opacity: .43;
 }
 
 .lesson-number {
-    width: 34px;
-    height: 34px;
-    border-radius: 11px;
-    background: #f2eee6;
+    width: 35px;
+    height: 35px;
+    flex: 0 0 35px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #f1ede5;
+    border-radius: 11px;
+    font-size: 11px;
     font-weight: 800;
-    font-size: 12px;
 }
 
 .lesson.completed .lesson-number {
@@ -548,21 +730,23 @@ main {
 }
 
 .lesson-title {
-    font-weight: 700;
     font-size: 14px;
+    font-weight: 700;
 }
 
 .lesson-sub {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 2px;
 }
 
 .lesson-arrow {
-    color: #aaa197;
+    color: #a59d93;
 }
 
-/* ---------- LESSON PAGE ---------- */
+/* =========================================================
+   LESSON PAGE
+========================================================= */
 
 .lesson-page {
     max-width: 850px;
@@ -572,38 +756,39 @@ main {
 .back-button {
     border: 0;
     background: transparent;
+    padding: 0;
+    margin-bottom: 22px;
     color: var(--sage-dark);
     font: inherit;
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
-    padding: 0;
-    margin-bottom: 24px;
 }
 
 .lesson-header {
-    background: linear-gradient(135deg, #edf5e9, #fff8e6);
-    border: 1px solid #e2e8dc;
-    border-radius: 26px;
-    padding: 32px;
-    margin-bottom: 20px;
+    padding: 31px;
+    border: 1px solid #dfe8db;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #e7f2e3, #fff7dd);
+    margin-bottom: 19px;
 }
 
-.lesson-header .tag {
+.lesson-tag {
     display: inline-block;
     padding: 6px 10px;
     background: rgba(255,255,255,.7);
-    border-radius: 10px;
+    border-radius: 9px;
     color: var(--sage-dark);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
-    text-transform: uppercase;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .lesson-header h2 {
     font-family: "Playfair Display", serif;
-    font-size: clamp(30px, 4vw, 43px);
-    margin: 13px 0 8px;
+    font-size: clamp(31px, 5vw, 44px);
+    line-height: 1.05;
+    margin: 14px 0 8px;
 }
 
 .lesson-header p {
@@ -612,94 +797,93 @@ main {
 }
 
 .lesson-content {
-    background: white;
-    border: 1px solid #eee6da;
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: 23px;
-    padding: 30px;
+    padding: 31px;
     box-shadow: var(--shadow);
 }
 
 .lesson-content h3 {
     font-family: "Playfair Display", serif;
-    font-size: 23px;
-    margin-top: 0;
+    font-size: 24px;
+    margin: 0 0 10px;
 }
 
 .lesson-content p {
-    line-height: 1.7;
-    color: #655c53;
+    color: #665e55;
+    line-height: 1.72;
+    font-size: 15px;
+}
+
+.code-label {
+    margin-top: 25px;
+    margin-bottom: 7px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
 }
 
 .code-box {
-    background: #292b28;
-    color: #f6f3e8;
+    margin: 0;
+    padding: 21px;
+    background: var(--dark);
+    color: #f7f3e8;
     border-radius: 15px;
-    padding: 20px;
     overflow-x: auto;
-    margin: 20px 0;
-    font-family: monospace;
+    font-family: Consolas, Monaco, monospace;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
+    white-space: pre;
 }
 
 .tip {
-    background: #fff5cf;
-    border-left: 4px solid #e8c96c;
+    margin-top: 19px;
+    padding: 15px 17px;
+    background: var(--yellow-light);
+    border-left: 4px solid #e7c867;
     border-radius: 10px;
-    padding: 14px 17px;
-    margin-top: 20px;
-    font-size: 14px;
+    color: #6e614b;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
-.lesson-complete {
-    margin-top: 25px;
+.lesson-actions {
+    margin-top: 24px;
+    padding: 19px;
+    border: 1px solid #d8e5d4;
+    border-radius: 17px;
     background: #eef6eb;
-    border: 1px solid #d4e5cf;
-    border-radius: 18px;
-    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
 }
 
-.lesson-complete strong {
+.lesson-actions strong {
     display: block;
     margin-bottom: 3px;
 }
 
-.lesson-complete span {
+.lesson-actions span {
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.next-button {
-    border: 0;
-    background: var(--sage-dark);
-    color: white;
-    border-radius: 13px;
-    padding: 13px 19px;
-    font: inherit;
-    font-weight: 800;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: .2s;
-}
-
-.next-button:hover {
-    transform: translateY(-2px);
-}
-
-/* ---------- PLACEMENT TEST ---------- */
+/* =========================================================
+   TEST
+========================================================= */
 
 .test-screen {
     max-width: 700px;
-    margin: 30px auto;
+    margin: 25px auto;
 }
 
 .test-card {
-    background: white;
-    border: 1px solid #eee6da;
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: 27px;
     padding: 35px;
     box-shadow: var(--shadow);
@@ -707,33 +891,32 @@ main {
 
 .test-card h2 {
     font-family: "Playfair Display", serif;
-    font-size: 34px;
-    margin: 0 0 8px;
+    font-size: 35px;
+    margin: 8px 0;
 }
 
 .test-card > p {
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 .test-progress {
     height: 7px;
-    background: #eee8dc;
-    border-radius: 8px;
-    margin: 25px 0;
+    background: #ece5da;
+    border-radius: 10px;
     overflow: hidden;
+    margin: 25px 0;
 }
 
 .test-progress-bar {
     height: 100%;
     background: var(--sage-dark);
-    transition: width .3s;
 }
 
 .question {
     font-size: 19px;
-    font-weight: 700;
     line-height: 1.45;
+    font-weight: 700;
     margin-bottom: 17px;
 }
 
@@ -743,66 +926,87 @@ main {
 }
 
 .answer {
-    text-align: left;
-    border: 1px solid #e6dfd3;
+    border: 1px solid #e6ded2;
     background: #fffdf8;
+    color: var(--brown);
     padding: 14px 15px;
     border-radius: 13px;
     font: inherit;
+    text-align: left;
     cursor: pointer;
-    color: var(--brown);
     transition: .18s;
 }
 
 .answer:hover {
-    background: #f0f5ed;
-    border-color: #b7ceb9;
+    border-color: #b4ccb7;
+    background: #f0f6ee;
 }
 
-.result {
+/* =========================================================
+   FINISHED
+========================================================= */
+
+.finished {
+    max-width: 650px;
+    margin: 45px auto;
     text-align: center;
 }
 
-.result h2 {
-    margin-bottom: 10px;
+.finished-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 45px 30px;
+    box-shadow: var(--shadow);
 }
 
-.result p {
+.finished-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 40px;
+    margin: 0 0 10px;
+}
+
+.finished-card p {
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-/* ---------- CONFETTI ---------- */
+/* =========================================================
+   CONFETTI
+========================================================= */
 
 .confetti {
     position: fixed;
     width: 8px;
     height: 12px;
+    z-index: 999;
     pointer-events: none;
-    z-index: 100;
-    animation: confettiFall .9s ease-out forwards;
+    animation: confettiFly .9s ease-out forwards;
 }
 
-@keyframes confettiFall {
-    0% {
-        transform: translate(0,0) rotate(0deg);
+@keyframes confettiFly {
+    from {
+        transform: translate(0,0) rotate(0);
         opacity: 1;
     }
-    100% {
-        transform: translate(var(--x), var(--y)) rotate(500deg);
+    to {
+        transform: translate(var(--x),var(--y)) rotate(500deg);
         opacity: 0;
     }
 }
 
-/* ---------- MOBILE ---------- */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 800px) {
-    .sidebar {
-        display: none;
-    }
 
     header {
-        padding: 0 17px;
+        padding: 0 16px;
+    }
+
+    .sidebar {
+        display: none;
     }
 
     main {
@@ -822,7 +1026,7 @@ main {
         margin-top: 20px;
     }
 
-    .lesson-complete {
+    .lesson-actions {
         flex-direction: column;
         align-items: stretch;
     }
@@ -841,51 +1045,119 @@ main {
 
 <body>
 
-<header>
-    <div class="logo">
-        <div class="logo-duck">
-            <div class="logo-body"></div>
-            <div class="logo-head"></div>
-            <div class="logo-eye"></div>
-            <div class="logo-beak"></div>
+<!-- =====================================================
+     OPENING ANIMATION
+===================================================== -->
+
+<div id="intro">
+
+    <div class="intro-code">
+        <span class="one">let creativity = true;</span>
+        <span class="two">print("Hello, coder!");</span>
+        <span class="three">&lt;button&gt;Create&lt;/button&gt;</span>
+        <span class="four">if (idea) { buildSomething(); }</span>
+    </div>
+
+    <div class="intro-content">
+
+        <div class="intro-duck">
+            <div class="body"></div>
+            <div class="head"></div>
+            <div class="eye"></div>
+            <div class="beak"></div>
+            <div class="wing"></div>
         </div>
 
-        <div class="logo-text">
-            <h1>Remember How to <span>Code</span></h1>
+        <h1 class="intro-title">
+            Remember How to <span>Code</span>
+        </h1>
+
+        <p class="intro-subtitle">
+            Learn it. Practice it. Build something cool.
+        </p>
+
+        <div class="loading-line">
+            <div class="loading-fill"></div>
         </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="mini-duck">
+            <div class="body"></div>
+            <div class="head"></div>
+            <div class="eye"></div>
+            <div class="beak"></div>
+        </div>
+
+        <h1>
+            Remember How to <span>Code</span>
+        </h1>
+
     </div>
 
     <div class="streak">
         ✦ <span id="streakNumber">0</span> day streak
     </div>
+
 </header>
 
 <div class="app">
 
-<aside class="sidebar">
-    <div class="side-title">Languages</div>
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-    <button class="language-button active" onclick="changeLanguage('Python')">
+<aside class="sidebar">
+
+    <div class="side-title">
+        Languages
+    </div>
+
+    <button class="language-button active"
+        onclick="changeLanguage('Python')">
         Python
     </button>
 
-    <button class="language-button" onclick="changeLanguage('JavaScript')">
+    <button class="language-button"
+        onclick="changeLanguage('JavaScript')">
         JavaScript
     </button>
 
-    <button class="language-button" onclick="changeLanguage('HTML')">
+    <button class="language-button"
+        onclick="changeLanguage('HTML')">
         HTML
     </button>
 
-    <button class="language-button" onclick="changeLanguage('CSS')">
+    <button class="language-button"
+        onclick="changeLanguage('CSS')">
         CSS
     </button>
 
     <div class="unit-list">
-        <div class="side-title">Your units</div>
+
+        <div class="side-title">
+            Your units
+        </div>
+
         <div id="unitList"></div>
+
     </div>
+
 </aside>
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main id="main"></main>
 
@@ -894,10 +1166,15 @@ main {
 <script>
 
 /* =========================================================
-   BASIC DATA
+   COURSE DATA
 ========================================================= */
 
-const languages = ["Python", "JavaScript", "HTML", "CSS"];
+const languages = [
+    "Python",
+    "JavaScript",
+    "HTML",
+    "CSS"
+];
 
 const unitNames = [
     "Getting Started",
@@ -918,9 +1195,9 @@ const lessonTopics = [
         "Your first program",
         "How code runs",
         "Numbers",
-        "Text",
+        "Text & strings",
         "Comments",
-        "Errors",
+        "Understanding errors",
         "Reading code",
         "Writing code",
         "Unit 1 review"
@@ -933,7 +1210,7 @@ const lessonTopics = [
         "Combining text",
         "Boolean values",
         "Naming variables",
-        "Input",
+        "Getting input",
         "Storing information",
         "Unit 2 review"
     ],
@@ -941,9 +1218,9 @@ const lessonTopics = [
         "What is a condition?",
         "if statements",
         "else",
-        "elif / else if",
+        "elif & else if",
         "Comparisons",
-        "Greater and less than",
+        "Greater & less than",
         "AND",
         "OR",
         "NOT",
@@ -980,7 +1257,7 @@ const lessonTopics = [
         "Changing items",
         "Adding items",
         "Removing items",
-        "List loops",
+        "Looping through lists",
         "Sorting",
         "Finding information",
         "Unit 6 review"
@@ -999,12 +1276,12 @@ const lessonTopics = [
     ],
     [
         "What is an event?",
-        "Clicks",
+        "Click events",
         "Keyboard events",
         "Mouse events",
         "Changing the page",
         "Buttons",
-        "Inputs",
+        "Input fields",
         "Timers",
         "Interactive projects",
         "Unit 8 review"
@@ -1036,7 +1313,125 @@ const lessonTopics = [
 ];
 
 /* =========================================================
-   APP STATE
+   PLACEMENT TEST
+========================================================= */
+
+const placementQuestions = [
+
+    {
+        q: "Which of these is used to store a value?",
+        answers: [
+            "Variable",
+            "Loop",
+            "Comment",
+            "Browser"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "What does an if statement do?",
+        answers: [
+            "Repeats forever",
+            "Checks a condition",
+            "Deletes code",
+            "Creates a computer"
+        ],
+        correct: 1
+    },
+
+    {
+        q: "Which structure repeats code?",
+        answers: [
+            "Loop",
+            "Variable",
+            "String",
+            "Comment"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "What is a function?",
+        answers: [
+            "A reusable block of code",
+            "A color",
+            "A file",
+            "A computer"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "Which structure can hold multiple values?",
+        answers: [
+            "List",
+            "Comment",
+            "Condition",
+            "Operator"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "What does an object usually contain?",
+        answers: [
+            "Properties and data",
+            "Only numbers",
+            "Only comments",
+            "Nothing"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "What can an event do?",
+        answers: [
+            "React to something happening",
+            "Turn off the internet",
+            "Delete HTML",
+            "Create electricity"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "What is debugging?",
+        answers: [
+            "Finding and fixing problems",
+            "Making code longer",
+            "Deleting a project",
+            "Changing your password"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "Why organize your code?",
+        answers: [
+            "It makes code easier to understand",
+            "It makes computers heavier",
+            "It removes every bug automatically",
+            "It makes Wi-Fi faster"
+        ],
+        correct: 0
+    },
+
+    {
+        q: "What is a good way to build a large project?",
+        answers: [
+            "Break it into smaller parts",
+            "Write everything at once",
+            "Never test anything",
+            "Avoid planning"
+        ],
+        correct: 0
+    }
+
+];
+
+/* =========================================================
+   STATE
 ========================================================= */
 
 let currentLanguage =
@@ -1059,129 +1454,26 @@ let streak = Number(
     localStorage.getItem("codingStreak") || 0
 );
 
-document.getElementById("streakNumber").textContent = streak;
-
-
-/* =========================================================
-   PLACEMENT QUESTIONS
-========================================================= */
-
-const placementQuestions = [
-    {
-        q: "Which of these is used to store a value?",
-        answers: ["Variable", "Loop", "Comment", "Browser"],
-        correct: 0
-    },
-    {
-        q: "What does an if statement do?",
-        answers: [
-            "Repeats forever",
-            "Checks a condition",
-            "Deletes code",
-            "Creates a computer"
-        ],
-        correct: 1
-    },
-    {
-        q: "Which structure repeats code?",
-        answers: [
-            "Loop",
-            "Variable",
-            "String",
-            "Comment"
-        ],
-        correct: 0
-    },
-    {
-        q: "What is a function?",
-        answers: [
-            "A reusable block of code",
-            "A color",
-            "A file",
-            "A computer"
-        ],
-        correct: 0
-    },
-    {
-        q: "Which is commonly used to hold multiple values?",
-        answers: [
-            "List",
-            "Comment",
-            "Condition",
-            "Operator"
-        ],
-        correct: 0
-    },
-    {
-        q: "What does an object usually contain?",
-        answers: [
-            "Properties and data",
-            "Only numbers",
-            "Only comments",
-            "Nothing"
-        ],
-        correct: 0
-    },
-    {
-        q: "What can an event do in an interactive website?",
-        answers: [
-            "React to something happening",
-            "Turn off the internet",
-            "Delete HTML",
-            "Create electricity"
-        ],
-        correct: 0
-    },
-    {
-        q: "What is debugging?",
-        answers: [
-            "Finding and fixing problems",
-            "Making code longer",
-            "Deleting a project",
-            "Changing your password"
-        ],
-        correct: 0
-    },
-    {
-        q: "Why should code be organized?",
-        answers: [
-            "It makes it easier to understand and maintain",
-            "It makes computers heavier",
-            "It removes all bugs automatically",
-            "It makes Wi-Fi faster"
-        ],
-        correct: 0
-    },
-    {
-        q: "What is a good way to build a large project?",
-        answers: [
-            "Break it into smaller parts",
-            "Write everything at once",
-            "Never test anything",
-            "Avoid planning"
-        ],
-        correct: 0
-    }
-];
-
 let testIndex = 0;
 let testFirstWrong = null;
 
+document.getElementById("streakNumber").textContent = streak;
 
 /* =========================================================
-   STORAGE HELPERS
+   HELPERS
 ========================================================= */
 
-function key(unit, lesson) {
+function lessonKey(unit, lesson) {
     return currentLanguage + "-" + unit + "-" + lesson;
 }
 
 function isCompleted(unit, lesson) {
-    return completed[key(unit, lesson)] === true;
+    return completed[lessonKey(unit, lesson)] === true;
 }
 
-function saveCompleted(unit, lesson) {
-    completed[key(unit, lesson)] = true;
+function completeStoredLesson(unit, lesson) {
+    completed[lessonKey(unit, lesson)] = true;
+
     localStorage.setItem(
         "completedLessons",
         JSON.stringify(completed)
@@ -1192,62 +1484,27 @@ function getPlacement() {
     return placements[currentLanguage] || null;
 }
 
+function getProgress() {
 
-/* =========================================================
-   PLACEMENT TEST
-========================================================= */
+    let total = 0;
 
-function startPlacement() {
+    for (let unit = 1; unit <= 10; unit++) {
 
-    testIndex = 0;
-    testFirstWrong = null;
+        for (let lesson = 1; lesson <= 10; lesson++) {
 
-    currentPage = "test";
+            if (isCompleted(unit, lesson)) {
+                total++;
+            }
 
-    render();
-}
-
-function answerTest(answer) {
-
-    const question = placementQuestions[testIndex];
-
-    if (answer !== question.correct && testFirstWrong === null) {
-        testFirstWrong = testIndex + 1;
-    }
-
-    testIndex++;
-
-    if (testIndex >= placementQuestions.length) {
-
-        let startUnit;
-
-        if (testFirstWrong === null) {
-            startUnit = 10;
-        } else {
-            startUnit = Math.max(1, testFirstWrong - 1);
         }
 
-        placements[currentLanguage] = startUnit;
-
-        localStorage.setItem(
-            "placements",
-            JSON.stringify(placements)
-        );
-
-        currentUnit = startUnit;
-        currentLesson = 1;
-        currentPage = "dashboard";
-
-        render();
-
-    } else {
-        render();
     }
+
+    return total;
 }
 
-
 /* =========================================================
-   LESSON LOCKING
+   LOCKING
 ========================================================= */
 
 function lessonUnlocked(unit, lesson) {
@@ -1273,9 +1530,8 @@ function lessonUnlocked(unit, lesson) {
     return isCompleted(unit - 1, 10);
 }
 
-
 /* =========================================================
-   CHANGE LANGUAGE
+   LANGUAGE
 ========================================================= */
 
 function changeLanguage(language) {
@@ -1296,6 +1552,146 @@ function changeLanguage(language) {
     render();
 }
 
+/* =========================================================
+   PLACEMENT TEST
+========================================================= */
+
+function startPlacement() {
+
+    testIndex = 0;
+    testFirstWrong = null;
+    currentPage = "test";
+
+    render();
+}
+
+function answerTest(answer) {
+
+    const question =
+        placementQuestions[testIndex];
+
+    if (
+        answer !== question.correct &&
+        testFirstWrong === null
+    ) {
+        testFirstWrong = testIndex + 1;
+    }
+
+    testIndex++;
+
+    if (testIndex >= 10) {
+
+        let startingUnit;
+
+        if (testFirstWrong === null) {
+
+            startingUnit = 10;
+
+        } else {
+
+            startingUnit =
+                Math.max(1, testFirstWrong - 1);
+
+        }
+
+        placements[currentLanguage] =
+            startingUnit;
+
+        localStorage.setItem(
+            "placements",
+            JSON.stringify(placements)
+        );
+
+        currentUnit = startingUnit;
+        currentLesson = 1;
+        currentPage = "dashboard";
+
+        render();
+
+        return;
+    }
+
+    render();
+}
+
+/* =========================================================
+   LESSON CONTENT
+========================================================= */
+
+function getLessonContent(language, unit, lesson) {
+
+    const topic =
+        lessonTopics[unit - 1][lesson - 1];
+
+    const content = {
+
+        Python: {
+            explanation:
+                "Python lets you give clear instructions to a computer. This lesson introduces " +
+                topic.toLowerCase() +
+                " and shows how it fits into a real program.",
+
+            code:
+`name = "Abby"
+
+print("Hello, " + name)`,
+
+            tip:
+                "Try changing the value of name and run the program again."
+        },
+
+        JavaScript: {
+            explanation:
+                "JavaScript makes websites interactive. In this lesson, you'll learn about " +
+                topic.toLowerCase() +
+                " and how it can become part of a real webpage.",
+
+            code:
+`let name = "Abby";
+
+console.log("Hello, " + name);`,
+
+            tip:
+                "Try changing the text inside the quotes and see what happens."
+        },
+
+        HTML: {
+            explanation:
+                "HTML creates the structure of a webpage. This lesson introduces " +
+                topic.toLowerCase() +
+                " and shows how HTML elements fit together.",
+
+            code:
+`<section>
+    <h2>Hello!</h2>
+    <p>Welcome to my website.</p>
+</section>`,
+
+            tip:
+                "Try changing the words inside the HTML tags."
+        },
+
+        CSS: {
+            explanation:
+                "CSS controls the appearance of a webpage. This lesson introduces " +
+                topic.toLowerCase() +
+                " and shows how you can use CSS to style a page.",
+
+            code:
+`.card {
+    background: #e5f0e2;
+    padding: 20px;
+    border-radius: 16px;
+}`,
+
+            tip:
+                "Try changing the padding, background color, or border radius."
+        }
+
+    };
+
+    return content[language];
+}
 
 /* =========================================================
    OPEN LESSON
@@ -1314,14 +1710,13 @@ function openLesson(unit, lesson) {
     render();
 }
 
-
 /* =========================================================
    COMPLETE LESSON
 ========================================================= */
 
 function completeLesson() {
 
-    saveCompleted(
+    completeStoredLesson(
         currentUnit,
         currentLesson
     );
@@ -1331,14 +1726,13 @@ function completeLesson() {
     render();
 }
 
-
 /* =========================================================
    NEXT LESSON
 ========================================================= */
 
 function nextLesson() {
 
-    saveCompleted(
+    completeStoredLesson(
         currentUnit,
         currentLesson
     );
@@ -1362,461 +1756,12 @@ function nextLesson() {
     }
 
     currentPage = "lesson";
+
     render();
-
 }
 
-
 /* =========================================================
-   STREAK
-========================================================= */
-
-function updateStreak() {
-
-    const today = new Date().toDateString();
-
-    const lastDay =
-        localStorage.getItem("lastCodingDay");
-
-    if (lastDay !== today) {
-
-        streak++;
-
-        localStorage.setItem(
-            "codingStreak",
-            streak
-        );
-
-        localStorage.setItem(
-            "lastCodingDay",
-            today
-        );
-
-        document.getElementById(
-            "streakNumber"
-        ).textContent = streak;
-    }
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-function getProgress() {
-
-    let count = 0;
-
-    for (let unit = 1; unit <= 10; unit++) {
-
-        for (let lesson = 1; lesson <= 10; lesson++) {
-
-            if (isCompleted(unit, lesson)) {
-                count++;
-            }
-
-        }
-    }
-
-    return count;
-}
-
-
-/* =========================================================
-   CODE EXAMPLES
-========================================================= */
-
-function getCodeExample(language, unit, lesson) {
-
-    if (language === "Python") {
-
-        return `name = "Abby"
-
-if name:
-    print("Hello, " + name)`;
-
-    }
-
-    if (language === "JavaScript") {
-
-        return `let name = "Abby";
-
-if (name) {
-    console.log("Hello, " + name);
-}`;
-
-    }
-
-    if (language === "HTML") {
-
-        return `<button>
-    Click me!
-</button>`;
-
-    }
-
-    return `button {
-    background: #a9c7ad;
-    padding: 12px;
-    border-radius: 10px;
-}`;
-
-}
-
-
-/* =========================================================
-   LESSON PAGE
-========================================================= */
-
-function renderLesson() {
-
-    const topic =
-        lessonTopics[currentUnit - 1][currentLesson - 1];
-
-    const done =
-        isCompleted(currentUnit, currentLesson);
-
-    let nextText = "Next Lesson →";
-
-    if (currentLesson === 10 && currentUnit === 10) {
-        nextText = "Finish Course ✦";
-    } else if (currentLesson === 10) {
-        nextText = "Next Unit →";
-    }
-
-    return `
-        <div class="lesson-page">
-
-            <button class="back-button"
-                onclick="goDashboard()">
-                ← Back to lessons
-            </button>
-
-            <div class="lesson-header">
-
-                <span class="tag">
-                    ${currentLanguage} · Unit ${currentUnit}
-                </span>
-
-                <h2>${topic}</h2>
-
-                <p>
-                    Lesson ${currentLesson} of 10
-                </p>
-
-            </div>
-
-            <div class="lesson-content">
-
-                <h3>Let's learn it!</h3>
-
-                <p>
-                    ${getLessonExplanation(
-                        currentLanguage,
-                        currentUnit,
-                        currentLesson
-                    )}
-                </p>
-
-                <div class="code-box">
-${getCodeExample(
-    currentLanguage,
-    currentUnit,
-    currentLesson
-)}
-                </div>
-
-                <div class="tip">
-                    <strong>Little tip:</strong>
-                    Don't just read the code — try changing something
-                    and see what happens!
-                </div>
-
-                ${
-                    done
-                    ?
-                    `
-                    <div class="lesson-complete">
-
-                        <div>
-                            <strong>✓ Lesson complete!</strong>
-                            <span>
-                                You finished this lesson.
-                                Ready for the next one?
-                            </span>
-                        </div>
-
-                        <button
-                            class="next-button"
-                            onclick="nextLesson()">
-                            ${nextText}
-                        </button>
-
-                    </div>
-                    `
-                    :
-                    `
-                    <div class="lesson-complete">
-
-                        <div>
-                            <strong>Ready?</strong>
-                            <span>
-                                Finish this lesson to unlock the next one.
-                            </span>
-                        </div>
-
-                        <button
-                            class="next-button"
-                            onclick="completeLesson()">
-                            ✓ Complete Lesson
-                        </button>
-
-                    </div>
-                    `
-                }
-
-            </div>
-
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   LESSON EXPLANATIONS
-========================================================= */
-
-function getLessonExplanation(language, unit, lesson) {
-
-    const explanations = {
-
-        Python:
-        "Python is a programming language designed to let you give instructions to a computer in a readable way. In this lesson, you'll learn an important building block that you can use in your own programs.",
-
-        JavaScript:
-        "JavaScript lets websites respond to people and become interactive. It can store information, make decisions, react to clicks, and change what appears on a page.",
-
-        HTML:
-        "HTML is the structure of a webpage. Think of it like the skeleton of your website: it tells the browser what elements exist, such as headings, paragraphs, buttons, images, and sections.",
-
-        CSS:
-        "CSS controls how a webpage looks. You can use it to change colors, spacing, sizes, fonts, layouts, borders, animations, and much more."
-    };
-
-    return explanations[language];
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function renderDashboard() {
-
-    const progress = getProgress();
-
-    let currentUnlockedUnit =
-        getPlacement() || 1;
-
-    let html = `
-        <div class="page">
-
-            <div class="welcome">
-
-                <div>
-                    <h2>
-                        Keep coding,<br>
-                        keep creating.
-                    </h2>
-
-                    <p>
-                        You're learning ${currentLanguage}.
-                    </p>
-                </div>
-
-                <div class="progress-box">
-
-                    <div class="progress-label">
-                        <span>Your progress</span>
-                        <span>${progress}%</span>
-                    </div>
-
-                    <div class="progress">
-                        <div
-                            class="progress-bar"
-                            style="width:${progress}%">
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="cards">
-
-                <div class="card continue-card">
-
-                    <div class="card-kicker">
-                        Continue learning
-                    </div>
-
-                    <h3>
-                        Unit ${currentUnlockedUnit} ·
-                        ${unitNames[currentUnlockedUnit - 1]}
-                    </h3>
-
-                    <p>
-                        Pick up where you left off and keep
-                        unlocking your coding journey.
-                    </p>
-
-                    <button
-                        class="big-button"
-                        onclick="openNextAvailable()">
-                        Continue lesson →
-                    </button>
-
-                </div>
-
-                <div class="card stats-card">
-
-                    <div class="stat">
-                        <span>Language</span>
-                        <strong>${currentLanguage}</strong>
-                    </div>
-
-                    <div class="stat">
-                        <span>Lessons done</span>
-                        <strong>${progress}/100</strong>
-                    </div>
-
-                    <div class="stat">
-                        <span>Streak</span>
-                        <strong>${streak} days</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="duck-area">
-
-                <span
-                    class="duck-note"
-                    style="left:18%;top:25%">
-                    ♪
-                </span>
-
-                <span
-                    class="duck-note"
-                    style="right:28%;bottom:22%">
-                    ♫
-                </span>
-
-                <div class="duck"
-                    style="left:8%;top:48%"
-                    onclick="duckClicked(this)">
-
-                    <div class="body"></div>
-                    <div class="head"></div>
-                    <div class="eye"></div>
-                    <div class="beak"></div>
-                    <div class="wing"></div>
-                    <div class="foot one"></div>
-                    <div class="foot two"></div>
-
-                </div>
-
-                <div class="duck"
-                    style="left:70%;top:35%"
-                    onclick="duckClicked(this)">
-
-                    <div class="body"></div>
-                    <div class="head"></div>
-                    <div class="eye"></div>
-                    <div class="beak"></div>
-                    <div class="wing"></div>
-                    <div class="foot one"></div>
-                    <div class="foot two"></div>
-
-                </div>
-
-            </div>
-
-            <div class="section-title">
-                <h3>Your lessons</h3>
-            </div>
-
-            <div class="lesson-list">
-    `;
-
-    const placement =
-        getPlacement() || 1;
-
-    for (
-        let lesson = 1;
-        lesson <= 10;
-        lesson++
-    ) {
-
-        const unlocked =
-            lessonUnlocked(
-                placement,
-                lesson
-            );
-
-        const done =
-            isCompleted(
-                placement,
-                lesson
-            );
-
-        html += `
-            <div
-                class="lesson
-                ${unlocked ? "unlocked" : "locked"}
-                ${done ? "completed" : ""}"
-                ${unlocked
-                    ? `onclick="openLesson(${placement},${lesson})"`
-                    : ""
-                }
-            >
-
-                <div class="lesson-number">
-                    ${done ? "✓" : lesson}
-                </div>
-
-                <div class="lesson-info">
-
-                    <div class="lesson-title">
-                        ${lessonTopics[placement - 1][lesson - 1]}
-                    </div>
-
-                    <div class="lesson-sub">
-                        Lesson ${lesson}
-                    </div>
-
-                </div>
-
-                <div class="lesson-arrow">
-                    ${unlocked ? "→" : "🔒"}
-                </div>
-
-            </div>
-        `;
-    }
-
-    html += `
-            </div>
-        </div>
-    `;
-
-    return html;
-}
-
-
-/* =========================================================
-   FIND NEXT AVAILABLE LESSON
+   FIND NEXT LESSON
 ========================================================= */
 
 function openNextAvailable() {
@@ -1848,115 +1793,387 @@ function openNextAvailable() {
 
                 openLesson(unit, lesson);
                 return;
-
             }
+
         }
+
     }
 
     currentPage = "finished";
     render();
 }
 
-
 /* =========================================================
-   FINISHED SCREEN
+   STREAK
 ========================================================= */
 
-function renderFinished() {
+function updateStreak() {
 
-    return `
-        <div class="test-screen">
+    const today =
+        new Date().toDateString();
 
-            <div class="test-card result">
+    const lastDay =
+        localStorage.getItem("lastCodingDay");
 
-                <h2>You finished! ✦</h2>
+    if (lastDay !== today) {
 
-                <p>
-                    You completed all 100 lessons in
-                    ${currentLanguage}.
-                </p>
+        streak++;
 
-                <p>
-                    That's a LOT of coding.
-                    Your next step is to build something
-                    completely your own.
-                </p>
+        localStorage.setItem(
+            "codingStreak",
+            streak
+        );
 
-                <button
-                    class="big-button"
-                    onclick="goDashboard()">
-                    Back to dashboard
-                </button>
+        localStorage.setItem(
+            "lastCodingDay",
+            today
+        );
 
-            </div>
-
-        </div>
-    `;
+        document.getElementById(
+            "streakNumber"
+        ).textContent = streak;
+    }
 }
-
 
 /* =========================================================
-   PLACEMENT TEST SCREEN
+   LESSON PAGE
 ========================================================= */
 
-function renderTest() {
+function renderLesson() {
 
-    const question =
-        placementQuestions[testIndex];
+    const topic =
+        lessonTopics[currentUnit - 1][currentLesson - 1];
 
-    const percent =
-        ((testIndex) / 10) * 100;
+    const content =
+        getLessonContent(
+            currentLanguage,
+            currentUnit,
+            currentLesson
+        );
 
-    return `
-        <div class="test-screen">
+    const done =
+        isCompleted(
+            currentUnit,
+            currentLesson
+        );
 
-            <div class="test-card">
+    let nextText = "Next Lesson →";
 
-                <div class="card-kicker">
-                    Placement test
-                </div>
+    if (
+        currentLesson === 10 &&
+        currentUnit === 10
+    ) {
+        nextText = "Finish Course ✦";
+    } else if (currentLesson === 10) {
+        nextText = "Next Unit →";
+    }
 
-                <h2>
-                    Let's see where you belong.
-                </h2>
+    let html = "";
 
-                <p>
-                    Answer these 10 questions.
-                    You only get placed based on the first
-                    question you get wrong.
-                </p>
+    html += '<div class="lesson-page">';
 
-                <div class="test-progress">
-                    <div
-                        class="test-progress-bar"
-                        style="width:${percent}%">
-                    </div>
-                </div>
+    html +=
+        '<button class="back-button" onclick="goDashboard()">' +
+        '← Back to lessons' +
+        '</button>';
 
-                <div class="question">
-                    ${testIndex + 1}. ${question.q}
-                </div>
+    html += '<div class="lesson-header">';
 
-                <div class="answers">
+    html +=
+        '<span class="lesson-tag">' +
+        currentLanguage +
+        ' · Unit ' +
+        currentUnit +
+        '</span>';
 
-                    ${question.answers.map(
-                        (answer, index) => `
-                            <button
-                                class="answer"
-                                onclick="answerTest(${index})">
-                                ${answer}
-                            </button>
-                        `
-                    ).join("")}
+    html +=
+        '<h2>' +
+        topic +
+        '</h2>';
 
-                </div>
+    html +=
+        '<p>Lesson ' +
+        currentLesson +
+        ' of 10</p>';
 
-            </div>
+    html += '</div>';
 
-        </div>
-    `;
+    html += '<div class="lesson-content">';
+
+    html +=
+        '<h3>Let\'s learn it!</h3>';
+
+    html +=
+        '<p>' +
+        content.explanation +
+        '</p>';
+
+    html +=
+        '<div class="code-label">Example</div>';
+
+    /*
+       IMPORTANT:
+       The code is inserted with textContent below.
+       It is NOT placed directly into HTML.
+       This prevents JavaScript/HTML examples
+       from accidentally becoming page markup.
+    */
+
+    html +=
+        '<pre class="code-box" id="lessonCode"></pre>';
+
+    html +=
+        '<div class="tip"><strong>Little tip:</strong> ' +
+        content.tip +
+        '</div>';
+
+    html += '<div class="lesson-actions">';
+
+    if (done) {
+
+        html +=
+            '<div>' +
+            '<strong>✓ Lesson complete!</strong>' +
+            '<span>You finished this lesson. Keep going!</span>' +
+            '</div>';
+
+        html +=
+            '<button class="next-button" onclick="nextLesson()">' +
+            nextText +
+            '</button>';
+
+    } else {
+
+        html +=
+            '<div>' +
+            '<strong>Ready?</strong>' +
+            '<span>Finish this lesson to unlock the next one.</span>' +
+            '</div>';
+
+        html +=
+            '<button class="next-button" onclick="completeLesson()">' +
+            '✓ Complete Lesson' +
+            '</button>';
+    }
+
+    html += '</div>';
+
+    html += '</div>';
+
+    html += '</div>';
+
+    return {
+        html: html,
+        code: content.code
+    };
 }
 
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard() {
+
+    const progress =
+        getProgress();
+
+    const placement =
+        getPlacement() || 1;
+
+    let html = "";
+
+    html += '<div class="page">';
+
+    html += '<div class="welcome">';
+
+    html += '<div>';
+
+    html +=
+        '<h2>Keep coding,<br>keep creating.</h2>';
+
+    html +=
+        '<p>You\'re learning ' +
+        currentLanguage +
+        '.</p>';
+
+    html += '</div>';
+
+    html += '<div class="progress-box">';
+
+    html +=
+        '<div class="progress-label">' +
+        '<span>Your progress</span>' +
+        '<span>' + progress + '%</span>' +
+        '</div>';
+
+    html +=
+        '<div class="progress">' +
+        '<div class="progress-bar" style="width:' +
+        progress +
+        '%"></div>' +
+        '</div>';
+
+    html += '</div>';
+
+    html += '</div>';
+
+    html += '<div class="cards">';
+
+    html += '<div class="card continue-card">';
+
+    html +=
+        '<div class="card-kicker">Continue learning</div>';
+
+    html +=
+        '<h3>Unit ' +
+        placement +
+        ' · ' +
+        unitNames[placement - 1] +
+        '</h3>';
+
+    html +=
+        '<p>Pick up where you left off and keep unlocking your coding journey.</p>';
+
+    html +=
+        '<button class="big-button" onclick="openNextAvailable()">' +
+        'Continue lesson →' +
+        '</button>';
+
+    html += '</div>';
+
+    html += '<div class="card stats-card">';
+
+    html +=
+        '<div class="stat">' +
+        '<span>Language</span>' +
+        '<strong>' + currentLanguage + '</strong>' +
+        '</div>';
+
+    html +=
+        '<div class="stat">' +
+        '<span>Lessons done</span>' +
+        '<strong>' + progress + '/100</strong>' +
+        '</div>';
+
+    html +=
+        '<div class="stat">' +
+        '<span>Streak</span>' +
+        '<strong>' + streak + ' days</strong>' +
+        '</div>';
+
+    html += '</div>';
+
+    html += '</div>';
+
+    html += '<div class="duck-area">';
+
+    html +=
+        '<span class="duck-note" style="left:18%;top:25%">♪</span>';
+
+    html +=
+        '<span class="duck-note" style="right:28%;bottom:22%">♫</span>';
+
+    html += createDuck(8, 48);
+    html += createDuck(70, 35);
+
+    html += '</div>';
+
+    html +=
+        '<div class="section-title">' +
+        '<h3>Your lessons</h3>' +
+        '</div>';
+
+    html += '<div class="lesson-list">';
+
+    for (
+        let lesson = 1;
+        lesson <= 10;
+        lesson++
+    ) {
+
+        const unlocked =
+            lessonUnlocked(
+                placement,
+                lesson
+            );
+
+        const done =
+            isCompleted(
+                placement,
+                lesson
+            );
+
+        html +=
+            '<div class="lesson ' +
+            (unlocked ? "unlocked " : "locked ") +
+            (done ? "completed" : "") +
+            '"' +
+            (
+                unlocked
+                ?
+                ' onclick="openLesson(' +
+                placement +
+                ',' +
+                lesson +
+                ')"'
+                :
+                ''
+            ) +
+            '>';
+
+        html +=
+            '<div class="lesson-number">' +
+            (done ? "✓" : lesson) +
+            '</div>';
+
+        html += '<div class="lesson-info">';
+
+        html +=
+            '<div class="lesson-title">' +
+            lessonTopics[placement - 1][lesson - 1] +
+            '</div>';
+
+        html +=
+            '<div class="lesson-sub">Lesson ' +
+            lesson +
+            '</div>';
+
+        html += '</div>';
+
+        html +=
+            '<div class="lesson-arrow">' +
+            (unlocked ? "→" : "🔒") +
+            '</div>';
+
+        html += '</div>';
+    }
+
+    html += '</div>';
+    html += '</div>';
+
+    return html;
+}
+
+/* =========================================================
+   DUCK HTML
+========================================================= */
+
+function createDuck(left, top) {
+
+    return (
+        '<div class="duck" ' +
+        'style="left:' + left + '%;top:' + top + '%"' +
+        ' onclick="duckClicked(this)">' +
+
+        '<div class="body"></div>' +
+        '<div class="head"></div>' +
+        '<div class="eye"></div>' +
+        '<div class="beak"></div>' +
+        '<div class="wing"></div>' +
+
+        '</div>'
+    );
+}
 
 /* =========================================================
    SIDEBAR
@@ -1964,14 +2181,18 @@ function renderTest() {
 
 function renderUnits() {
 
-    const unitList =
+    const list =
         document.getElementById("unitList");
+
+    if (!list) {
+        return;
+    }
 
     const placement =
         getPlacement();
 
     if (!placement) {
-        unitList.innerHTML = "";
+        list.innerHTML = "";
         return;
     }
 
@@ -1990,32 +2211,33 @@ function renderUnits() {
                 isCompleted(unit - 1, 10)
             );
 
-        html += `
-            <div
-                class="unit
-                ${unit === currentUnit ? "current" : ""}
-                ${unlocked ? "" : "locked"}"
-                ${
-                    unlocked
-                    ? `onclick="openUnit(${unit})"`
-                    : ""
-                }
-            >
-                <span class="unit-number">
-                    ${unit}
-                </span>
-                ${unitNames[unit - 1]}
-            </div>
-        `;
+        html +=
+            '<div class="unit ' +
+            (unit === currentUnit ? "current " : "") +
+            (unlocked ? "" : "locked") +
+            '"' +
+            (
+                unlocked
+                ?
+                ' onclick="openUnit(' +
+                unit +
+                ')"'
+                :
+                ''
+            ) +
+            '>';
+
+        html +=
+            '<span class="unit-number">' +
+            unit +
+            '</span>' +
+            unitNames[unit - 1];
+
+        html += '</div>';
     }
 
-    unitList.innerHTML = html;
+    list.innerHTML = html;
 }
-
-
-/* =========================================================
-   OPEN UNIT
-========================================================= */
 
 function openUnit(unit) {
 
@@ -2025,21 +2247,121 @@ function openUnit(unit) {
 
     currentUnit = unit;
 
-    openNextAvailable();
-}
+    for (
+        let lesson = 1;
+        lesson <= 10;
+        lesson++
+    ) {
 
+        if (
+            lessonUnlocked(unit, lesson) &&
+            !isCompleted(unit, lesson)
+        ) {
+
+            currentLesson = lesson;
+            currentPage = "lesson";
+            render();
+            return;
+        }
+
+    }
+}
 
 /* =========================================================
-   GO DASHBOARD
+   TEST PAGE
 ========================================================= */
 
-function goDashboard() {
+function renderTest() {
 
-    currentPage = "dashboard";
+    const question =
+        placementQuestions[testIndex];
 
-    render();
+    const percent =
+        (testIndex / 10) * 100;
+
+    let html = "";
+
+    html += '<div class="test-screen">';
+
+    html += '<div class="test-card">';
+
+    html +=
+        '<div class="card-kicker">Placement test</div>';
+
+    html +=
+        '<h2>Let\'s see where you belong.</h2>';
+
+    html +=
+        '<p>Answer these 10 questions. Your first wrong answer determines where your lessons begin.</p>';
+
+    html +=
+        '<div class="test-progress">' +
+        '<div class="test-progress-bar" style="width:' +
+        percent +
+        '%"></div>' +
+        '</div>';
+
+    html +=
+        '<div class="question">' +
+        (testIndex + 1) +
+        '. ' +
+        question.q +
+        '</div>';
+
+    html += '<div class="answers">';
+
+    for (
+        let i = 0;
+        i < question.answers.length;
+        i++
+    ) {
+
+        html +=
+            '<button class="answer" onclick="answerTest(' +
+            i +
+            ')">' +
+            question.answers[i] +
+            '</button>';
+    }
+
+    html += '</div>';
+
+    html += '</div>';
+    html += '</div>';
+
+    return html;
 }
 
+/* =========================================================
+   FINISHED PAGE
+========================================================= */
+
+function renderFinished() {
+
+    return (
+        '<div class="finished">' +
+
+        '<div class="finished-card">' +
+
+        '<h2>You finished! ✦</h2>' +
+
+        '<p>You completed all 100 lessons in ' +
+        currentLanguage +
+        '.</p>' +
+
+        '<p>' +
+        'Now you get to use what you learned to build something completely your own.' +
+        '</p>' +
+
+        '<button class="big-button" onclick="goDashboard()">' +
+        'Back to dashboard' +
+        '</button>' +
+
+        '</div>' +
+
+        '</div>'
+    );
+}
 
 /* =========================================================
    DUCK CONFETTI
@@ -2062,20 +2384,24 @@ function duckClicked(duck) {
 
     duck.classList.add("clicked");
 
-    for (let i = 0; i < 22; i++) {
+    const colors = [
+        "#f2cbd3",
+        "#a9c7ad",
+        "#f5d77d",
+        "#cfe2ed",
+        "#ddd5eb"
+    ];
+
+    for (
+        let i = 0;
+        i < 24;
+        i++
+    ) {
 
         const piece =
             document.createElement("div");
 
         piece.className = "confetti";
-
-        const colors = [
-            "#f4cfd5",
-            "#a9c7ad",
-            "#f7df9c",
-            "#cfe1ed",
-            "#ded7ed"
-        ];
 
         piece.style.background =
             colors[i % colors.length];
@@ -2098,27 +2424,37 @@ function duckClicked(duck) {
 
         document.body.appendChild(piece);
 
-        setTimeout(() => {
+        setTimeout(function() {
             piece.remove();
-        }, 1000);
+        }, 950);
     }
 
-    setTimeout(() => {
+    setTimeout(function() {
 
         duck.classList.remove("clicked");
 
         duck.style.left =
-            (8 + Math.random() * 78) + "%";
+            (5 + Math.random() * 82) + "%";
 
         duck.style.top =
-            (20 + Math.random() * 50) + "%";
+            (20 + Math.random() * 55) + "%";
 
     }, 2200);
 }
 
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function goDashboard() {
+
+    currentPage = "dashboard";
+
+    render();
+}
 
 /* =========================================================
-   RENDER
+   MAIN RENDER
 ========================================================= */
 
 function render() {
@@ -2127,24 +2463,46 @@ function render() {
         document.getElementById("main");
 
     if (currentPage === "test") {
-        main.innerHTML = renderTest();
-    }
 
-    else if (currentPage === "lesson") {
-        main.innerHTML = renderLesson();
-    }
+        main.innerHTML =
+            renderTest();
 
-    else if (currentPage === "finished") {
-        main.innerHTML = renderFinished();
-    }
+    } else if (currentPage === "lesson") {
 
-    else {
-        main.innerHTML = renderDashboard();
+        const lesson =
+            renderLesson();
+
+        main.innerHTML =
+            lesson.html;
+
+        /*
+           This is intentionally textContent.
+           The browser will display the code instead
+           of trying to run it as page HTML.
+        */
+
+        const codeBox =
+            document.getElementById("lessonCode");
+
+        if (codeBox) {
+            codeBox.textContent =
+                lesson.code;
+        }
+
+    } else if (currentPage === "finished") {
+
+        main.innerHTML =
+            renderFinished();
+
+    } else {
+
+        main.innerHTML =
+            renderDashboard();
     }
 
     document
         .querySelectorAll(".language-button")
-        .forEach(button => {
+        .forEach(function(button) {
 
             button.classList.toggle(
                 "active",
@@ -2160,6 +2518,18 @@ function render() {
     ).textContent = streak;
 }
 
+/* =========================================================
+   OPENING ANIMATION
+========================================================= */
+
+setTimeout(function() {
+
+    const intro =
+        document.getElementById("intro");
+
+    intro.classList.add("hide");
+
+}, 2500);
 
 /* =========================================================
    START
@@ -2170,406 +2540,6 @@ if (!getPlacement()) {
 }
 
 render();
-
-</script>
-
-</body>
-</html>
-
-    }
-
-    if(language==="html"){
-
-        code=
-`<h1>Hello!</h1>
-<p>Welcome to my website.</p>`;
-
-    }
-
-    if(language==="css"){
-
-        code=
-`h1 {
-    color: #58714f;
-    font-size: 36px;
-}`;
-
-    }
-
-    return `
-
-        <p>
-            In this lesson, you'll learn about
-            <strong>${title}</strong>.
-            The goal is to understand what it means,
-            see it in real code, and then experiment
-            with it yourself.
-        </p>
-
-        <h2>The idea</h2>
-
-        <p>
-            Good programmers don't just memorize lines
-            of code. They understand what each part is
-            doing and why it belongs there.
-        </p>
-
-        <div class="tip">
-            <strong>Try this:</strong><br>
-            After reading the example, change one small
-            thing and see what happens.
-        </div>
-
-        <h2>Example</h2>
-
-        <div class="code">
-${escapeHTML(code)}
-        </div>
-
-        <h2>Look closely</h2>
-
-        <p>
-            Notice how the individual pieces work together.
-            As you continue through Code Club, you'll start
-            combining these small ideas into much bigger
-            programs and websites.
-        </p>
-
-        <h2>Your challenge</h2>
-
-        <p>
-            Recreate the example yourself, then make one
-            change. If something doesn't work, don't worry.
-            Finding and fixing mistakes is part of becoming
-            a programmer.
-        </p>
-
-    `;
-}
-
-
-function escapeHTML(text){
-
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;");
-}
-
-
-function updateNextMessage(unit,lesson){
-
-    const message=
-        document.getElementById("nextMessage");
-
-    if(!completed(unit,lesson)){
-
-        message.textContent=
-            "Complete this lesson to unlock the next one.";
-
-        return;
-    }
-
-    if(lesson<9){
-
-        message.textContent=
-            "✓ Lesson "+(lesson+2)+" is unlocked!";
-
-    }else if(unit<9){
-
-        message.textContent=
-            "✓ Unit "+(unit+2)+" is unlocked!";
-
-    }else{
-
-        message.textContent=
-            "🎉 You finished the entire course!";
-    }
-}
-
-
-document.getElementById("completeButton")
-.addEventListener("click",function(){
-
-    const unit=
-        Number(this.dataset.unit);
-
-    const lesson=
-        Number(this.dataset.lesson);
-
-    const k=
-        progressKey(unit,lesson);
-
-    if(!progress[k]){
-
-        progress[k]=true;
-
-        updateStreak();
-
-        saveAll();
-
-        this.textContent="✓ Completed";
-        this.style.background="#aaa";
-
-        updateNextMessage(unit,lesson);
-    }
-
-    document.getElementById("topXP")
-        .textContent=totalXP();
-});
-
-
-document.getElementById("backButton")
-.addEventListener("click",()=>{
-
-    document.getElementById("lessonPage")
-        .classList.remove("show");
-
-    document.getElementById("home")
-        .style.display="block";
-
-    renderCourse();
-});
-
-
-/* ============================================================
-   LANGUAGE SWITCHING
-   ============================================================ */
-
-document.querySelectorAll(".language")
-.forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-        currentLanguage=
-            button.dataset.language;
-
-        document
-            .querySelectorAll(".language")
-            .forEach(x=>
-                x.classList.remove("active")
-            );
-
-        button.classList.add("active");
-
-        /*
-          If the user has never taken the placement test
-          for this language, give them that language's test.
-        */
-
-        if(!placement[currentLanguage]){
-
-            startPlacement();
-
-        }else{
-
-            document.getElementById("lessonPage")
-                .classList.remove("show");
-
-            document.getElementById("home")
-                .style.display="block";
-
-            renderCourse();
-        }
-
-    });
-
-});
-
-
-/* ============================================================
-   CLICKABLE DUCKS
-   ============================================================ */
-
-function createConfetti(x,y){
-
-    const pieces=18;
-
-    for(let i=0;i<pieces;i++){
-
-        const piece=
-            document.createElement("div");
-
-        piece.className="confetti";
-
-        piece.style.left=x+"px";
-        piece.style.top=y+"px";
-
-        const colors=[
-            "#91ad83",
-            "#f5d76c",
-            "#e99858",
-            "#d9a7c7",
-            "#9ab6d1"
-        ];
-
-        piece.style.background=
-            colors[
-                Math.floor(
-                    Math.random()*colors.length
-                )
-            ];
-
-        piece.style.setProperty(
-            "--x",
-            ((Math.random()-.5)*150)+"px"
-        );
-
-        piece.style.setProperty(
-            "--y",
-            ((Math.random()-.75)*140)+"px"
-        );
-
-        document.body.appendChild(piece);
-
-        setTimeout(
-            ()=>piece.remove(),
-            950
-        );
-    }
-}
-
-
-function makeDuckClickable(duck){
-
-    duck.addEventListener("click",event=>{
-
-        if(duck.classList.contains("bursting")){
-            return;
-        }
-
-        const rect=
-            duck.getBoundingClientRect();
-
-        createConfetti(
-            rect.left+rect.width/2,
-            rect.top+rect.height/2
-        );
-
-        duck.classList.add("bursting");
-
-        setTimeout(()=>{
-
-            duck.classList.remove("bursting");
-
-        },350);
-
-    });
-}
-
-
-/*
-   Test duck
-*/
-
-makeDuckClickable(
-    document.getElementById("testDuck")
-);
-
-
-/* ============================================================
-   FLOATING DUCKS
-   ============================================================ */
-
-function addFloatingDuck(){
-
-    const duck=
-        document.createElement("div");
-
-    duck.className="duck";
-
-    duck.innerHTML=`
-
-        <div class="duck-head">
-            <div class="eye"></div>
-            <div class="beak"></div>
-        </div>
-
-        <div class="duck-body">
-            <div class="wing"></div>
-        </div>
-
-        <div class="foot a"></div>
-        <div class="foot b"></div>
-
-    `;
-
-    duck.style.position="fixed";
-
-    const maxX=
-        Math.max(
-            20,
-            window.innerWidth-100
-        );
-
-    const maxY=
-        Math.max(
-            100,
-            window.innerHeight-120
-        );
-
-    duck.style.left=
-        (20+Math.random()*(maxX-20))+"px";
-
-    duck.style.top=
-        (100+Math.random()*(maxY-100))+"px";
-
-    duck.style.zIndex="30";
-
-    document.body.appendChild(duck);
-
-    makeDuckClickable(duck);
-
-    /*
-       The duck stays around for a while,
-       then quietly disappears and another
-       one eventually appears.
-    */
-
-    const lifetime=
-        10000+
-        Math.random()*12000;
-
-    setTimeout(()=>{
-
-        duck.remove();
-
-        setTimeout(
-            addFloatingDuck,
-            3000+
-            Math.random()*5000
-        );
-
-    },lifetime);
-}
-
-
-/* ============================================================
-   INITIALIZE
-   ============================================================ */
-
-updateStreak();
-saveAll();
-
-if(!placement[currentLanguage]){
-
-    startPlacement();
-
-}else{
-
-    document.getElementById("mainApp")
-        .style.display="flex";
-
-    renderCourse();
-}
-
-
-/*
-   Start with two little ducks.
-*/
-
-setTimeout(addFloatingDuck,2500);
-setTimeout(addFloatingDuck,7500);
 
 </script>
 
