@@ -8,1059 +8,904 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
-:root {
-    --cream: #fffaf1;
-    --paper: #fffdf8;
-    --sage: #a9c7ad;
-    --sage-dark: #62886b;
-    --sage-light: #e5f0e2;
-    --yellow: #f5d77d;
-    --yellow-light: #fff3c9;
-    --pink: #f2cbd3;
-    --blue: #cfe2ed;
-    --lavender: #ddd5eb;
-    --brown: #50483f;
-    --muted: #91887d;
-    --line: #ece4d7;
-    --dark: #292c29;
-    --shadow: 0 12px 35px rgba(78, 68, 55, .08);
+:root{
+    --cream:#fffaf1;
+    --paper:#fffdf8;
+    --sage:#a9c7ad;
+    --sageDark:#62886b;
+    --sageLight:#e5f0e2;
+    --yellow:#f5d77d;
+    --yellowLight:#fff3c9;
+    --pink:#f2cbd3;
+    --blue:#cfe2ed;
+    --lavender:#ddd5eb;
+    --brown:#50483f;
+    --muted:#91887d;
+    --line:#ece4d7;
+    --dark:#292c29;
+    --shadow:0 12px 35px rgba(78,68,55,.08);
 }
 
-* {
-    box-sizing: border-box;
-}
+*{box-sizing:border-box}
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
+body{
+    margin:0;
+    min-height:100vh;
     background:
-        radial-gradient(circle at 8% 10%, rgba(245,215,125,.22), transparent 90px),
-        radial-gradient(circle at 92% 85%, rgba(169,199,173,.3), transparent 120px),
+        radial-gradient(circle at 8% 10%,rgba(245,215,125,.22),transparent 90px),
+        radial-gradient(circle at 92% 85%,rgba(169,199,173,.3),transparent 120px),
         var(--cream);
-    color: var(--brown);
-    font-family: "DM Sans", sans-serif;
+    color:var(--brown);
+    font-family:"DM Sans",sans-serif;
 }
 
-/* =========================================================
-   OPENING ANIMATION
-========================================================= */
+/* INTRO */
 
-#intro {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: #fffaf0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition: opacity .7s ease, visibility .7s ease;
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#fffaf0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    transition:.7s;
 }
 
-#intro.hide {
-    opacity: 0;
-    visibility: hidden;
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
 }
 
-.intro-code {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    opacity: .12;
-    font-family: monospace;
-    color: #62886b;
-    font-size: 17px;
-    line-height: 2;
-}
-
-.intro-code span {
-    position: absolute;
-    white-space: nowrap;
-    animation: codeFloat 7s linear infinite;
+.introCode{
+    position:absolute;
+    inset:0;
+    opacity:.12;
+    font:17px monospace;
+    color:#62886b;
+    line-height:2;
 }
-
-.intro-code .one {
-    top: 15%;
-    left: -20%;
-}
-
-.intro-code .two {
-    top: 35%;
-    left: -30%;
-    animation-delay: 1.5s;
-}
-
-.intro-code .three {
-    top: 62%;
-    left: -25%;
-    animation-delay: 3s;
-}
-
-.intro-code .four {
-    top: 78%;
-    left: -30%;
-    animation-delay: 4.5s;
-}
-
-@keyframes codeFloat {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(145vw);
-    }
+
+.introCode span{
+    position:absolute;
+    white-space:nowrap;
+    animation:floatCode 7s linear infinite;
+}
+
+.introCode span:nth-child(1){top:15%;left:-20%}
+.introCode span:nth-child(2){top:35%;left:-30%;animation-delay:1.5s}
+.introCode span:nth-child(3){top:62%;left:-25%;animation-delay:3s}
+.introCode span:nth-child(4){top:78%;left:-30%;animation-delay:4.5s}
+
+@keyframes floatCode{
+    from{transform:translateX(0)}
+    to{transform:translateX(145vw)}
 }
-
-.intro-content {
-    position: relative;
-    text-align: center;
-    z-index: 3;
-    animation: introAppear 1s ease both;
+
+.introContent{
+    position:relative;
+    text-align:center;
+    animation:introIn 1s ease;
 }
 
-@keyframes introAppear {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(.96);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.intro-duck {
-    width: 115px;
-    height: 95px;
-    margin: 0 auto 15px;
-    position: relative;
-    animation: duckFloat 2s ease-in-out infinite;
-}
-
-@keyframes duckFloat {
-    0%, 100% {
-        transform: translateY(0) rotate(-2deg);
-    }
-    50% {
-        transform: translateY(-10px) rotate(2deg);
-    }
-}
-
-.intro-duck .body {
-    position: absolute;
-    width: 76px;
-    height: 55px;
-    background: #f4d76e;
-    border-radius: 55% 50% 48% 55%;
-    left: 7px;
-    bottom: 9px;
-}
-
-.intro-duck .head {
-    position: absolute;
-    width: 53px;
-    height: 53px;
-    background: #f8df82;
-    border-radius: 50%;
-    left: 54px;
-    top: 2px;
-}
-
-.intro-duck .eye {
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    background: #4d463e;
-    border-radius: 50%;
-    left: 91px;
-    top: 22px;
-}
-
-.intro-duck .beak {
-    position: absolute;
-    width: 23px;
-    height: 13px;
-    background: #e5a148;
-    border-radius: 80% 20% 20% 80%;
-    left: 99px;
-    top: 30px;
-}
-
-.intro-duck .wing {
-    position: absolute;
-    width: 38px;
-    height: 24px;
-    background: #e8cb61;
-    border-radius: 60% 40% 60% 40%;
-    left: 37px;
-    bottom: 23px;
-    transform: rotate(-15deg);
-}
-
-.intro-title {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(38px, 7vw, 68px);
-    line-height: 1;
-    margin: 0;
-    letter-spacing: -.8px;
-}
-
-.intro-title span {
-    color: var(--sage-dark);
-}
-
-.intro-subtitle {
-    margin: 14px 0 0;
-    color: var(--muted);
-    font-size: 15px;
-}
-
-.loading-line {
-    width: 190px;
-    height: 5px;
-    background: #eee6d8;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 27px auto 0;
-}
-
-.loading-fill {
-    height: 100%;
-    width: 0;
-    background: var(--sage-dark);
-    border-radius: inherit;
-    animation: loading 2.1s ease forwards;
-}
-
-@keyframes loading {
-    to {
-        width: 100%;
-    }
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header {
-    height: 76px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    background: rgba(255,253,248,.93);
-    border-bottom: 1px solid var(--line);
-    backdrop-filter: blur(14px);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-}
-
-.mini-duck {
-    width: 40px;
-    height: 33px;
-    position: relative;
-}
-
-.mini-duck .body {
-    position: absolute;
-    width: 29px;
-    height: 21px;
-    background: var(--yellow);
-    border-radius: 55%;
-    left: 1px;
-    bottom: 2px;
-}
-
-.mini-duck .head {
-    position: absolute;
-    width: 19px;
-    height: 19px;
-    background: #f8df82;
-    border-radius: 50%;
-    left: 18px;
-    top: 1px;
-}
-
-.mini-duck .eye {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: var(--brown);
-    border-radius: 50%;
-    left: 30px;
-    top: 7px;
-}
-
-.mini-duck .beak {
-    position: absolute;
-    width: 8px;
-    height: 5px;
-    background: #e5a148;
-    border-radius: 80% 20% 20% 80%;
-    left: 35px;
-    top: 10px;
+@keyframes introIn{
+    from{opacity:0;transform:translateY(25px) scale(.95)}
+    to{opacity:1;transform:none}
 }
 
-.logo h1 {
-    font-family: "Playfair Display", serif;
-    font-size: 20px;
-    margin: 0;
+.introDuck{
+    width:115px;
+    height:95px;
+    margin:auto auto 15px;
+    position:relative;
+    animation:bob 2s ease-in-out infinite;
 }
 
-.logo h1 span {
-    color: var(--sage-dark);
+@keyframes bob{
+    50%{transform:translateY(-10px) rotate(2deg)}
 }
 
-.streak {
-    background: var(--yellow-light);
-    border: 1px solid #efdda8;
-    padding: 9px 15px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 13px;
+.introDuck .body{
+    position:absolute;
+    width:76px;
+    height:55px;
+    background:#f4d76e;
+    border-radius:55%;
+    left:7px;
+    bottom:9px;
 }
 
-/* =========================================================
-   LAYOUT
-========================================================= */
+.introDuck .head{
+    position:absolute;
+    width:53px;
+    height:53px;
+    background:#f8df82;
+    border-radius:50%;
+    left:54px;
+    top:2px;
+}
 
-.app {
-    max-width: 1450px;
-    margin: auto;
-    display: flex;
+.introDuck .eye{
+    position:absolute;
+    width:7px;
+    height:7px;
+    background:#4d463e;
+    border-radius:50%;
+    left:91px;
+    top:22px;
 }
 
-.sidebar {
-    width: 245px;
-    min-height: calc(100vh - 76px);
-    padding: 25px 18px;
-    background: rgba(255,253,248,.62);
-    border-right: 1px solid var(--line);
+.introDuck .beak{
+    position:absolute;
+    width:23px;
+    height:13px;
+    background:#e5a148;
+    border-radius:80% 20% 20% 80%;
+    left:99px;
+    top:30px;
 }
 
-.side-title {
-    margin: 6px 12px 12px;
-    color: #a0988e;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+.introDuck .wing{
+    position:absolute;
+    width:38px;
+    height:24px;
+    background:#e8cb61;
+    border-radius:60%;
+    left:37px;
+    bottom:23px;
+    transform:rotate(-15deg);
 }
+
+.introTitle{
+    font:600 clamp(38px,7vw,68px)/1 "Playfair Display",serif;
+    margin:0;
+}
 
-.language-button {
-    width: 100%;
-    border: 0;
-    background: transparent;
-    color: var(--brown);
-    padding: 12px 13px;
-    border-radius: 13px;
-    font: inherit;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-    transition: .2s;
+.introTitle span{color:var(--sageDark)}
+
+.introSubtitle{
+    color:var(--muted);
+    margin:14px 0 0;
+}
+
+.loading{
+    width:190px;
+    height:5px;
+    background:#eee6d8;
+    border-radius:10px;
+    overflow:hidden;
+    margin:27px auto 0;
 }
 
-.language-button:hover {
-    background: #f5f0e7;
+.loadingFill{
+    height:100%;
+    width:0;
+    background:var(--sageDark);
+    animation:load 2.2s forwards;
 }
+
+@keyframes load{to{width:100%}}
+
+/* HEADER */
 
-.language-button.active {
-    background: var(--sage-light);
-    color: #4f7157;
+header{
+    height:76px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    background:rgba(255,253,248,.93);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(14px);
 }
 
-.unit-list {
-    margin-top: 25px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo h1{
+    font:600 20px "Playfair Display",serif;
+    margin:0;
 }
 
-.unit {
-    padding: 9px 11px;
-    margin: 3px 0;
-    border-radius: 11px;
-    color: #786f65;
-    font-size: 12px;
-    cursor: pointer;
-    transition: .2s;
+.logo h1 span{color:var(--sageDark)}
+
+.logoDuck{
+    width:38px;
+    height:30px;
+    position:relative;
 }
 
-.unit:hover {
-    background: #f5f0e7;
+.logoDuck .body{
+    position:absolute;
+    width:28px;
+    height:20px;
+    background:var(--yellow);
+    border-radius:55%;
+    left:1px;
+    bottom:1px;
 }
 
-.unit.current {
-    background: #e8f2e5;
-    color: #55765b;
-    font-weight: 700;
+.logoDuck .head{
+    position:absolute;
+    width:19px;
+    height:19px;
+    background:#f8df82;
+    border-radius:50%;
+    left:18px;
+    top:0;
 }
 
-.unit.locked {
-    opacity: .38;
-    cursor: not-allowed;
+.logoDuck .eye{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:#50483f;
+    border-radius:50%;
+    left:30px;
+    top:6px;
 }
 
-.unit-number {
-    display: inline-block;
-    width: 24px;
-    color: #aaa095;
-    font-size: 10px;
+.logoDuck .beak{
+    position:absolute;
+    width:8px;
+    height:5px;
+    background:#e5a148;
+    border-radius:80%;
+    left:35px;
+    top:9px;
 }
 
-main {
-    flex: 1;
-    min-width: 0;
-    padding: 40px clamp(22px, 5vw, 65px);
+.streak{
+    background:var(--yellowLight);
+    border:1px solid #efdda8;
+    padding:9px 15px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
 }
+
+/* LAYOUT */
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
+.app{
+    max-width:1450px;
+    margin:auto;
+    display:flex;
+}
 
-.page {
-    max-width: 930px;
-    margin: auto;
+.sidebar{
+    width:245px;
+    min-height:calc(100vh - 76px);
+    padding:25px 18px;
+    background:rgba(255,253,248,.62);
+    border-right:1px solid var(--line);
 }
 
-.welcome {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 25px;
-    margin-bottom: 29px;
+.sideTitle{
+    margin:6px 12px 12px;
+    color:#a0988e;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
 }
 
-.welcome h2 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(32px, 5vw, 48px);
-    line-height: 1.02;
-    margin: 0 0 9px;
+.languageButton{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:var(--brown);
+    padding:12px 13px;
+    border-radius:13px;
+    font:inherit;
+    font-weight:600;
+    text-align:left;
+    cursor:pointer;
 }
+
+.languageButton:hover{background:#f5f0e7}
 
-.welcome p {
-    color: var(--muted);
-    margin: 0;
+.languageButton.active{
+    background:var(--sageLight);
+    color:#4f7157;
 }
 
-.progress-box {
-    width: 190px;
+.unitList{margin-top:25px}
+
+.unit{
+    padding:9px 11px;
+    margin:3px 0;
+    border-radius:11px;
+    color:#786f65;
+    font-size:12px;
+    cursor:pointer;
 }
 
-.progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    font-weight: 800;
-    margin-bottom: 7px;
+.unit:hover{background:#f5f0e7}
+
+.unit.current{
+    background:#e8f2e5;
+    color:#55765b;
+    font-weight:700;
 }
 
-.progress {
-    height: 8px;
-    background: #ece5da;
-    border-radius: 10px;
-    overflow: hidden;
+.unit.locked{
+    opacity:.35;
+    cursor:not-allowed;
 }
 
-.progress-bar {
-    height: 100%;
-    background: var(--sage-dark);
-    border-radius: inherit;
-    transition: width .5s;
+.unitNumber{
+    display:inline-block;
+    width:25px;
+    color:#aaa095;
+    font-size:10px;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: 1.3fr .7fr;
-    gap: 17px;
-    margin-bottom: 20px;
+main{
+    flex:1;
+    min-width:0;
+    padding:40px clamp(22px,5vw,65px);
 }
+
+/* DASHBOARD */
 
-.card {
-    background: rgba(255,255,255,.78);
-    border: 1px solid var(--line);
-    border-radius: 23px;
-    padding: 25px;
-    box-shadow: var(--shadow);
+.page{
+    max-width:930px;
+    margin:auto;
 }
 
-.continue-card {
-    background: linear-gradient(135deg, #e4f0e1, #fff7dc);
+.welcome{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:25px;
+    margin-bottom:29px;
 }
 
-.card-kicker {
-    color: var(--sage-dark);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
+.welcome h2{
+    font:600 clamp(32px,5vw,48px)/1.02 "Playfair Display",serif;
+    margin:0 0 9px;
 }
 
-.card h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 24px;
-    margin: 8px 0;
+.welcome p{
+    color:var(--muted);
+    margin:0;
 }
 
-.card p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.55;
+.progressBox{width:190px}
+
+.progressLabel{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
-.big-button,
-.next-button {
-    border: 0;
-    background: var(--sage-dark);
-    color: white;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font: inherit;
-    font-weight: 800;
-    cursor: pointer;
-    transition: .2s;
+.progress{
+    height:8px;
+    background:#ece5da;
+    border-radius:10px;
+    overflow:hidden;
 }
 
-.big-button:hover,
-.next-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 18px rgba(98,136,107,.23);
+.progressBar{
+    height:100%;
+    background:var(--sageDark);
+    border-radius:inherit;
+    transition:.5s;
 }
 
-.stats-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.cards{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:17px;
+    margin-bottom:20px;
 }
 
-.stat {
-    display: flex;
-    justify-content: space-between;
-    padding: 9px 0;
-    border-bottom: 1px dashed #e6ded1;
-    font-size: 13px;
+.card{
+    background:rgba(255,255,255,.78);
+    border:1px solid var(--line);
+    border-radius:23px;
+    padding:25px;
+    box-shadow:var(--shadow);
 }
 
-.stat:last-child {
-    border: 0;
+.continueCard{
+    background:linear-gradient(135deg,#e4f0e1,#fff7dc);
 }
 
-.stat span {
-    color: var(--muted);
+.kicker{
+    color:var(--sageDark);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
 }
 
-/* =========================================================
-   DUCK AREA
-========================================================= */
+.card h3{
+    font:600 24px "Playfair Display",serif;
+    margin:8px 0;
+}
 
-.duck-area {
-    height: 145px;
-    position: relative;
-    overflow: hidden;
-    margin: 18px 0 27px;
-    border: 1px solid #efdfb8;
-    border-radius: 23px;
-    background: linear-gradient(135deg, #fff5d4, #fff9e8);
+.card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.55;
 }
 
-.duck-area::after {
-    content: "";
-    position: absolute;
-    width: 210px;
-    height: 90px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.48);
-    right: -50px;
-    bottom: -45px;
+.button{
+    border:0;
+    background:var(--sageDark);
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+    font:inherit;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
 }
 
-.duck-note {
-    position: absolute;
-    color: #c9b27b;
-    font-family: Georgia, serif;
-    font-size: 20px;
+.button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 7px 18px rgba(98,136,107,.23);
 }
 
-.duck {
-    width: 65px;
-    height: 58px;
-    position: absolute;
-    cursor: pointer;
-    transition: transform .2s;
-    z-index: 5;
+.statsCard{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
-.duck:hover {
-    transform: scale(1.08) rotate(-4deg);
+.stat{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px dashed #e6ded1;
+    font-size:13px;
 }
+
+.stat:last-child{border:0}
+
+.stat span{color:var(--muted)}
 
-.duck .body {
-    position: absolute;
-    width: 44px;
-    height: 32px;
-    background: #f4d76e;
-    border-radius: 55% 50% 48% 55%;
-    bottom: 5px;
-    left: 5px;
+/* DUCK AREA */
+
+.duckArea{
+    height:145px;
+    position:relative;
+    overflow:hidden;
+    margin:18px 0 27px;
+    border:1px solid #efdfb8;
+    border-radius:23px;
+    background:linear-gradient(135deg,#fff5d4,#fff9e8);
 }
 
-.duck .head {
-    position: absolute;
-    width: 31px;
-    height: 31px;
-    background: #f8df82;
-    border-radius: 50%;
-    top: 2px;
-    left: 29px;
+.duckNote{
+    position:absolute;
+    color:#c9b27b;
+    font:20px Georgia,serif;
 }
 
-.duck .eye {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--brown);
-    border-radius: 50%;
-    top: 12px;
-    left: 48px;
+.duck{
+    width:65px;
+    height:58px;
+    position:absolute;
+    cursor:pointer;
+    transition:.2s;
+    z-index:5;
 }
 
-.duck .beak {
-    position: absolute;
-    width: 13px;
-    height: 8px;
-    background: #e5a148;
-    border-radius: 80% 20% 20% 80%;
-    top: 17px;
-    left: 55px;
+.duck:hover{
+    transform:scale(1.08) rotate(-4deg);
 }
 
-.duck .wing {
-    position: absolute;
-    width: 21px;
-    height: 14px;
-    background: #e9cb61;
-    border-radius: 60% 40% 60% 40%;
-    bottom: 12px;
-    left: 21px;
-    transform: rotate(-15deg);
+.duck .body{
+    position:absolute;
+    width:44px;
+    height:32px;
+    background:#f4d76e;
+    border-radius:55%;
+    bottom:5px;
+    left:5px;
 }
 
-.duck.clicked {
-    animation: duckPop .38s forwards;
+.duck .head{
+    position:absolute;
+    width:31px;
+    height:31px;
+    background:#f8df82;
+    border-radius:50%;
+    top:2px;
+    left:29px;
 }
 
-@keyframes duckPop {
-    0% { transform: scale(1); opacity: 1; }
-    65% { transform: scale(1.3) rotate(10deg); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
+.duck .eye{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:var(--brown);
+    border-radius:50%;
+    top:12px;
+    left:48px;
 }
 
-/* =========================================================
-   LESSON LIST
-========================================================= */
+.duck .beak{
+    position:absolute;
+    width:13px;
+    height:8px;
+    background:#e5a148;
+    border-radius:80% 20% 20% 80%;
+    top:17px;
+    left:55px;
+}
 
-.section-title {
-    margin: 25px 0 13px;
+.duck .wing{
+    position:absolute;
+    width:21px;
+    height:14px;
+    background:#e9cb61;
+    border-radius:60%;
+    bottom:12px;
+    left:21px;
+    transform:rotate(-15deg);
 }
 
-.section-title h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 23px;
-    margin: 0;
+/* LESSON LIST */
+
+.sectionTitle{
+    margin:25px 0 13px;
 }
 
-.lesson-list {
-    display: grid;
-    gap: 8px;
+.sectionTitle h3{
+    font:600 23px "Playfair Display",serif;
+    margin:0;
 }
 
-.lesson {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    background: rgba(255,255,255,.75);
-    border: 1px solid var(--line);
-    border-radius: 15px;
-    transition: .2s;
+.lessonList{
+    display:grid;
+    gap:8px;
 }
 
-.lesson.unlocked {
-    cursor: pointer;
+.lesson{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 16px;
+    background:rgba(255,255,255,.75);
+    border:1px solid var(--line);
+    border-radius:15px;
+    transition:.2s;
 }
 
-.lesson.unlocked:hover {
-    transform: translateX(4px);
-    box-shadow: 0 6px 18px rgba(78,68,55,.07);
+.lesson.unlocked{
+    cursor:pointer;
 }
 
-.lesson.locked {
-    opacity: .43;
+.lesson.unlocked:hover{
+    transform:translateX(4px);
+    box-shadow:0 6px 18px rgba(78,68,55,.07);
 }
+
+.lesson.locked{opacity:.43}
 
-.lesson-number {
-    width: 35px;
-    height: 35px;
-    flex: 0 0 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f1ede5;
-    border-radius: 11px;
-    font-size: 11px;
-    font-weight: 800;
+.lessonNumber{
+    width:35px;
+    height:35px;
+    flex:0 0 35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f1ede5;
+    border-radius:11px;
+    font-size:11px;
+    font-weight:800;
 }
 
-.lesson.completed .lesson-number {
-    background: var(--sage);
-    color: white;
+.lesson.completed .lessonNumber{
+    background:var(--sage);
+    color:white;
 }
 
-.lesson-info {
-    flex: 1;
+.lessonInfo{flex:1}
+
+.lessonTitle{
+    font-size:14px;
+    font-weight:700;
 }
 
-.lesson-title {
-    font-size: 14px;
-    font-weight: 700;
+.lessonSub{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:2px;
 }
+
+.arrow{color:#a59d93}
 
-.lesson-sub {
-    color: var(--muted);
-    font-size: 11px;
-    margin-top: 2px;
+/* LESSON */
+
+.lessonPage{
+    max-width:850px;
+    margin:auto;
 }
 
-.lesson-arrow {
-    color: #a59d93;
+.back{
+    border:0;
+    background:transparent;
+    padding:0;
+    margin-bottom:22px;
+    color:var(--sageDark);
+    font:inherit;
+    font-weight:800;
+    cursor:pointer;
 }
 
-/* =========================================================
-   LESSON PAGE
-========================================================= */
+.lessonHeader{
+    padding:31px;
+    border:1px solid #dfe8db;
+    border-radius:25px;
+    background:linear-gradient(135deg,#e7f2e3,#fff7dd);
+    margin-bottom:19px;
+}
 
-.lesson-page {
-    max-width: 850px;
-    margin: auto;
+.tag{
+    display:inline-block;
+    padding:6px 10px;
+    background:rgba(255,255,255,.7);
+    border-radius:9px;
+    color:var(--sageDark);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
 }
 
-.back-button {
-    border: 0;
-    background: transparent;
-    padding: 0;
-    margin-bottom: 22px;
-    color: var(--sage-dark);
-    font: inherit;
-    font-weight: 800;
-    cursor: pointer;
+.lessonHeader h2{
+    font:600 clamp(31px,5vw,44px)/1.05 "Playfair Display",serif;
+    margin:14px 0 8px;
 }
 
-.lesson-header {
-    padding: 31px;
-    border: 1px solid #dfe8db;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #e7f2e3, #fff7dd);
-    margin-bottom: 19px;
+.lessonHeader p{
+    color:var(--muted);
+    margin:0;
 }
 
-.lesson-tag {
-    display: inline-block;
-    padding: 6px 10px;
-    background: rgba(255,255,255,.7);
-    border-radius: 9px;
-    color: var(--sage-dark);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+.lessonContent{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:23px;
+    padding:31px;
+    box-shadow:var(--shadow);
 }
 
-.lesson-header h2 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(31px, 5vw, 44px);
-    line-height: 1.05;
-    margin: 14px 0 8px;
+.lessonContent h3{
+    font:600 24px "Playfair Display",serif;
+    margin:0 0 10px;
 }
 
-.lesson-header p {
-    color: var(--muted);
-    margin: 0;
+.lessonContent p{
+    color:#665e55;
+    line-height:1.72;
+    font-size:15px;
 }
 
-.lesson-content {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 23px;
-    padding: 31px;
-    box-shadow: var(--shadow);
+.codeLabel{
+    margin-top:25px;
+    margin-bottom:7px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
 }
 
-.lesson-content h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 24px;
-    margin: 0 0 10px;
+.codeBox{
+    margin:0;
+    padding:21px;
+    background:var(--dark);
+    color:#f7f3e8;
+    border-radius:15px;
+    overflow-x:auto;
+    font:14px/1.65 Consolas,Monaco,monospace;
+    white-space:pre;
 }
 
-.lesson-content p {
-    color: #665e55;
-    line-height: 1.72;
-    font-size: 15px;
+.challenge{
+    margin-top:19px;
+    padding:17px;
+    background:#f0f5ef;
+    border:1px solid #dce8d8;
+    border-radius:13px;
 }
 
-.code-label {
-    margin-top: 25px;
-    margin-bottom: 7px;
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
+.challenge strong{
+    color:var(--sageDark);
 }
 
-.code-box {
-    margin: 0;
-    padding: 21px;
-    background: var(--dark);
-    color: #f7f3e8;
-    border-radius: 15px;
-    overflow-x: auto;
-    font-family: Consolas, Monaco, monospace;
-    font-size: 14px;
-    line-height: 1.65;
-    white-space: pre;
+.challenge p{
+    margin:7px 0 0;
+    font-size:13px;
 }
 
-.tip {
-    margin-top: 19px;
-    padding: 15px 17px;
-    background: var(--yellow-light);
-    border-left: 4px solid #e7c867;
-    border-radius: 10px;
-    color: #6e614b;
-    font-size: 13px;
-    line-height: 1.5;
+.tip{
+    margin-top:14px;
+    padding:15px 17px;
+    background:var(--yellowLight);
+    border-left:4px solid #e7c867;
+    border-radius:10px;
+    color:#6e614b;
+    font-size:13px;
+    line-height:1.5;
 }
 
-.lesson-actions {
-    margin-top: 24px;
-    padding: 19px;
-    border: 1px solid #d8e5d4;
-    border-radius: 17px;
-    background: #eef6eb;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
+.actions{
+    margin-top:24px;
+    padding:19px;
+    border:1px solid #d8e5d4;
+    border-radius:17px;
+    background:#eef6eb;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
 
-.lesson-actions strong {
-    display: block;
-    margin-bottom: 3px;
+.actions strong{
+    display:block;
+    margin-bottom:3px;
 }
 
-.lesson-actions span {
-    color: var(--muted);
-    font-size: 12px;
+.actions span{
+    color:var(--muted);
+    font-size:12px;
 }
 
-/* =========================================================
-   TEST
-========================================================= */
+/* TEST */
 
-.test-screen {
-    max-width: 700px;
-    margin: 25px auto;
+.testScreen{
+    max-width:700px;
+    margin:25px auto;
 }
 
-.test-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 27px;
-    padding: 35px;
-    box-shadow: var(--shadow);
+.testCard{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:27px;
+    padding:35px;
+    box-shadow:var(--shadow);
 }
 
-.test-card h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 35px;
-    margin: 8px 0;
+.testCard h2{
+    font:600 35px "Playfair Display",serif;
+    margin:8px 0;
 }
 
-.test-card > p {
-    color: var(--muted);
-    line-height: 1.65;
+.testCard>p{
+    color:var(--muted);
+    line-height:1.65;
 }
 
-.test-progress {
-    height: 7px;
-    background: #ece5da;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 25px 0;
+.testProgress{
+    height:7px;
+    background:#ece5da;
+    border-radius:10px;
+    overflow:hidden;
+    margin:25px 0;
 }
 
-.test-progress-bar {
-    height: 100%;
-    background: var(--sage-dark);
+.testProgressBar{
+    height:100%;
+    background:var(--sageDark);
 }
 
-.question {
-    font-size: 19px;
-    line-height: 1.45;
-    font-weight: 700;
-    margin-bottom: 17px;
+.question{
+    font-size:19px;
+    line-height:1.45;
+    font-weight:700;
+    margin-bottom:17px;
 }
 
-.answers {
-    display: grid;
-    gap: 9px;
+.answers{
+    display:grid;
+    gap:9px;
 }
 
-.answer {
-    border: 1px solid #e6ded2;
-    background: #fffdf8;
-    color: var(--brown);
-    padding: 14px 15px;
-    border-radius: 13px;
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: .18s;
+.answer{
+    border:1px solid #e6ded2;
+    background:#fffdf8;
+    color:var(--brown);
+    padding:14px 15px;
+    border-radius:13px;
+    font:inherit;
+    text-align:left;
+    cursor:pointer;
 }
 
-.answer:hover {
-    border-color: #b4ccb7;
-    background: #f0f6ee;
+.answer:hover{
+    border-color:#b4ccb7;
+    background:#f0f6ee;
 }
 
-/* =========================================================
-   FINISHED
-========================================================= */
+/* FINISHED */
 
-.finished {
-    max-width: 650px;
-    margin: 45px auto;
-    text-align: center;
+.finished{
+    max-width:650px;
+    margin:45px auto;
+    text-align:center;
 }
 
-.finished-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 28px;
-    padding: 45px 30px;
-    box-shadow: var(--shadow);
+.finishedCard{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:45px 30px;
+    box-shadow:var(--shadow);
 }
 
-.finished-card h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 40px;
-    margin: 0 0 10px;
+.finishedCard h2{
+    font:600 40px "Playfair Display",serif;
+    margin:0 0 10px;
 }
 
-.finished-card p {
-    color: var(--muted);
-    line-height: 1.7;
+.finishedCard p{
+    color:var(--muted);
+    line-height:1.7;
 }
 
-/* =========================================================
-   CONFETTI
-========================================================= */
+/* CONFETTI */
 
-.confetti {
-    position: fixed;
-    width: 8px;
-    height: 12px;
-    z-index: 999;
-    pointer-events: none;
-    animation: confettiFly .9s ease-out forwards;
+.confetti{
+    position:fixed;
+    width:8px;
+    height:12px;
+    z-index:999;
+    pointer-events:none;
+    animation:confetti .9s ease-out forwards;
 }
 
-@keyframes confettiFly {
-    from {
-        transform: translate(0,0) rotate(0);
-        opacity: 1;
-    }
-    to {
-        transform: translate(var(--x),var(--y)) rotate(500deg);
-        opacity: 0;
+@keyframes confetti{
+    to{
+        transform:translate(var(--x),var(--y)) rotate(500deg);
+        opacity:0;
     }
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 800px) {
-
-    header {
-        padding: 0 16px;
-    }
-
-    .sidebar {
-        display: none;
-    }
-
-    main {
-        padding: 25px 16px;
-    }
-
-    .cards {
-        grid-template-columns: 1fr;
-    }
-
-    .welcome {
-        display: block;
-    }
-
-    .progress-box {
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    .lesson-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .next-button {
-        width: 100%;
-    }
-
-    .lesson-content,
-    .test-card {
-        padding: 23px;
-    }
+@media(max-width:800px){
+    header{padding:0 16px}
+    .sidebar{display:none}
+    main{padding:25px 16px}
+    .cards{grid-template-columns:1fr}
+    .welcome{display:block}
+    .progressBox{width:100%;margin-top:20px}
+    .actions{flex-direction:column;align-items:stretch}
+    .actions .button{width:100%}
+    .lessonContent,.testCard{padding:23px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     OPENING ANIMATION
-===================================================== -->
+<!-- OPENING -->
 
 <div id="intro">
 
-    <div class="intro-code">
-        <span class="one">let creativity = true;</span>
-        <span class="two">print("Hello, coder!");</span>
-        <span class="three">&lt;button&gt;Create&lt;/button&gt;</span>
-        <span class="four">if (idea) { buildSomething(); }</span>
+    <div class="introCode">
+        <span>print("Hello, coder!")</span>
+        <span>const creativity = true;</span>
+        <span>&lt;button&gt;Create!&lt;/button&gt;</span>
+        <span>if (idea) { buildSomething(); }</span>
     </div>
 
-    <div class="intro-content">
+    <div class="introContent">
 
-        <div class="intro-duck">
+        <div class="introDuck">
             <div class="body"></div>
             <div class="head"></div>
             <div class="eye"></div>
@@ -1068,31 +913,26 @@ main {
             <div class="wing"></div>
         </div>
 
-        <h1 class="intro-title">
+        <h1 class="introTitle">
             Remember How to <span>Code</span>
         </h1>
 
-        <p class="intro-subtitle">
+        <p class="introSubtitle">
             Learn it. Practice it. Build something cool.
         </p>
 
-        <div class="loading-line">
-            <div class="loading-fill"></div>
+        <div class="loading">
+            <div class="loadingFill"></div>
         </div>
 
     </div>
-
 </div>
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
 
 <header>
 
     <div class="logo">
 
-        <div class="mini-duck">
+        <div class="logoDuck">
             <div class="body"></div>
             <div class="head"></div>
             <div class="eye"></div>
@@ -1106,58 +946,42 @@ main {
     </div>
 
     <div class="streak">
-        ✦ <span id="streakNumber">0</span> day streak
+        ✦ <span id="streak">0</span> day streak
     </div>
 
 </header>
 
 <div class="app">
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
 <aside class="sidebar">
 
-    <div class="side-title">
-        Languages
-    </div>
+    <div class="sideTitle">Languages</div>
 
-    <button class="language-button active"
-        onclick="changeLanguage('Python')">
+    <button class="languageButton active" onclick="changeLanguage('Python')">
         Python
     </button>
 
-    <button class="language-button"
-        onclick="changeLanguage('JavaScript')">
+    <button class="languageButton" onclick="changeLanguage('JavaScript')">
         JavaScript
     </button>
 
-    <button class="language-button"
-        onclick="changeLanguage('HTML')">
+    <button class="languageButton" onclick="changeLanguage('HTML')">
         HTML
     </button>
 
-    <button class="language-button"
-        onclick="changeLanguage('CSS')">
+    <button class="languageButton" onclick="changeLanguage('CSS')">
         CSS
     </button>
 
-    <div class="unit-list">
+    <div class="unitList">
 
-        <div class="side-title">
-            Your units
-        </div>
+        <div class="sideTitle">Your units</div>
 
-        <div id="unitList"></div>
+        <div id="units"></div>
 
     </div>
 
 </aside>
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
 
 <main id="main"></main>
 
@@ -1167,388 +991,642 @@ main {
 
 /* =========================================================
    COURSE DATA
+   Every entry is a real individual lesson.
 ========================================================= */
 
-const languages = [
-    "Python",
-    "JavaScript",
-    "HTML",
-    "CSS"
-];
+const courses = {
 
-const unitNames = [
-    "Getting Started",
-    "Variables & Values",
-    "Conditions",
-    "Loops",
-    "Functions",
-    "Lists & Collections",
-    "Objects & Data",
-    "Events & Interaction",
-    "Building Projects",
-    "Advanced Coding"
-];
+Python: [
 
-const lessonTopics = [
-    [
-        "What is coding?",
-        "Your first program",
-        "How code runs",
-        "Numbers",
-        "Text & strings",
-        "Comments",
-        "Understanding errors",
-        "Reading code",
-        "Writing code",
-        "Unit 1 review"
-    ],
-    [
-        "Variables",
-        "Changing values",
-        "Numbers & math",
-        "Strings",
-        "Combining text",
-        "Boolean values",
-        "Naming variables",
-        "Getting input",
-        "Storing information",
-        "Unit 2 review"
-    ],
-    [
-        "What is a condition?",
-        "if statements",
-        "else",
-        "elif & else if",
-        "Comparisons",
-        "Greater & less than",
-        "AND",
-        "OR",
-        "NOT",
-        "Unit 3 review"
-    ],
-    [
-        "What is a loop?",
-        "for loops",
-        "while loops",
-        "Repeating actions",
-        "Counters",
-        "Loop conditions",
-        "Nested loops",
-        "Breaking loops",
-        "Loop practice",
-        "Unit 4 review"
-    ],
-    [
-        "What is a function?",
-        "Creating functions",
-        "Calling functions",
-        "Parameters",
-        "Arguments",
-        "Return values",
-        "Reusable code",
-        "Multiple parameters",
-        "Function practice",
-        "Unit 5 review"
-    ],
-    [
-        "What is a list?",
-        "Creating lists",
-        "Getting an item",
-        "Changing items",
-        "Adding items",
-        "Removing items",
-        "Looping through lists",
-        "Sorting",
-        "Finding information",
-        "Unit 6 review"
-    ],
-    [
-        "What is an object?",
-        "Properties",
-        "Methods",
-        "Key-value data",
-        "Nested data",
-        "Working with objects",
-        "Data structures",
-        "Organizing data",
-        "Data practice",
-        "Unit 7 review"
-    ],
-    [
-        "What is an event?",
-        "Click events",
-        "Keyboard events",
-        "Mouse events",
-        "Changing the page",
-        "Buttons",
-        "Input fields",
-        "Timers",
-        "Interactive projects",
-        "Unit 8 review"
-    ],
-    [
-        "Planning a project",
-        "Project structure",
-        "Combining concepts",
-        "Debugging",
-        "Designing interfaces",
-        "Making a game",
-        "Keeping score",
-        "Saving progress",
-        "Project polish",
-        "Unit 9 review"
-    ],
-    [
-        "Advanced variables",
-        "Advanced functions",
-        "Advanced loops",
-        "Complex conditions",
-        "Working with data",
-        "Debugging techniques",
-        "Code organization",
-        "Optimization",
-        "Big projects",
-        "Final coding challenge"
-    ]
-];
+[
+["What is Python?","Python is a programming language designed to make instructions readable. You write statements and Python follows them in order.","print(\"Hello, world!\")","Change the message to something completely different.","Python is case-sensitive."],
+["Your first print()","print() sends information to the screen. It is one of the easiest ways to see what your program is doing.","print(\"I am learning Python!\")","Print your name and favorite hobby.","Strings go inside quotation marks."],
+["How Python runs","Python normally runs statements from top to bottom. The order of your instructions can change the result.","print(\"First\")\nprint(\"Second\")\nprint(\"Third\")","Swap the order of the three messages.","Programs follow instructions in order."],
+["Numbers","Python can work with whole numbers and decimals without putting them in quotation marks.","print(12)\nprint(3.5)","Print three different numbers.","Numbers and text are different types of data."],
+["Strings","A string is text. Python recognizes text because it is surrounded by quotation marks.","print(\"Coding is fun\")","Create a string containing a sentence about yourself.","Spaces inside a string are part of the string."],
+["Comments","Comments are notes for humans. Python ignores them when it runs the program.","# This is a comment\nprint(\"Hello\")","Add two comments explaining your code.","Start a Python comment with #."],
+["Reading an error","Errors are messages that help you find problems. Learning to read them is an important coding skill.","print(\"Hello\"\n","Create the missing part that fixes the example.","The last line of an error often gives a useful clue."],
+["Multiple instructions","A program can contain many statements. Each statement can perform a different job.","print(\"Name: Abby\")\nprint(\"Age: 13\")\nprint(\"Hobby: music\")","Add another line for a skill you have.","Small statements can combine into larger programs."],
+["Code formatting","Readable code is easier to understand and fix. Consistent indentation becomes especially important later.","print(\"Start\")\nprint(\"Learning\")\nprint(\"Finish\")","Put these ideas into a short three-line program of your own.","Readable code is easier to debug."],
+["Unit 1 review","You now know the basic pieces of a Python program: output, strings, numbers, comments, and simple errors.","message = \"I can code!\"\nprint(message)","Write a tiny program using at least three Unit 1 ideas.","Don't worry about memorizing everything immediately."]
+],
 
-/* =========================================================
-   PLACEMENT TEST
-========================================================= */
+[
+["What is a variable?","A variable gives a name to information so you can use that information later.","name = \"Abby\"\nprint(name)","Create a variable called favoriteColor.","A variable name should describe what it stores."],
+["Changing a variable","Variables can be reassigned. The same name can refer to a new value later in the program.","score = 5\nscore = 10\nprint(score)","Start a score at 0 and change it twice.","The newest assignment is the value Python uses."],
+["Addition","Python can perform arithmetic directly with numbers.","total = 8 + 7\nprint(total)","Calculate the total of two numbers you choose.","The + operator adds numbers."],
+["Subtraction","The minus operator subtracts one number from another.","difference = 20 - 6\nprint(difference)","Calculate how many items remain after removing some.","Arithmetic can be stored in variables."],
+["Multiplication","The * operator multiplies numbers.","points = 4 * 5\nprint(points)","Calculate a score using multiplication.","Use * rather than a multiplication symbol."],
+["Division","The / operator divides numbers and normally produces a decimal result.","average = 10 / 4\nprint(average)","Divide a number of items into equal groups.","Python can store decimal answers."],
+["Combining strings","The + operator can join strings together.","first = \"Hello\"\nsecond = \"Abby\"\nprint(first + \" \" + second)","Join two variables into one sentence.","Remember to add spaces when you need them."],
+["Booleans","A Boolean is either True or False. Booleans are useful when programs need to make decisions.","isReady = True\nprint(isReady)","Create a Boolean describing whether you like coding.","True and False are capitalized in Python."],
+["Getting input","input() lets a program ask the person running it for information.","name = input(\"What is your name? \")\nprint(\"Hi \" + name)","Ask the user for their favorite color.","input() gives you text unless you convert it."],
+["Unit 2 review","Variables let your program remember information and use it in calculations or messages.","name = \"Abby\"\npoints = 10\nprint(name, points)","Make a mini score card with three variables.","Good variable names make programs easier to understand."]
+],
 
-const placementQuestions = [
+[
+["Why conditions matter","Programs often need to choose what happens next. Conditions let code make decisions.","age = 13\nif age >= 13:\n    print(\"Teen\")","Change the condition so a different message appears.","A condition evaluates to True or False."],
+["if","An if statement runs its indented block only when its condition is true.","score = 10\nif score > 5:\n    print(\"Great score!\")","Change the score and see when the message disappears.","Indentation tells Python what belongs inside if."],
+["else","else gives a program another path when the if condition is false.","rain = False\nif rain:\n    print(\"Bring an umbrella\")\nelse:\n    print(\"No umbrella needed\")","Create your own two-choice decision.","else does not need another condition."],
+["elif","elif lets you test another condition after an if fails.","score = 75\nif score >= 90:\n    print(\"A\")\nelif score >= 70:\n    print(\"B\")","Add a third grade level.","Python checks elif conditions from top to bottom."],
+["Equal values","== checks whether two values are equal. It is different from =, which assigns a value.","password = \"duck\"\nif password == \"duck\":\n    print(\"Correct\")","Change the expected word.","One equals sign assigns; two compare."],
+["Greater and less","Comparison operators let programs compare numbers.","age = 13\nif age >= 13:\n    print(\"Allowed\")","Try >, <, <=, and >= with different numbers.","Comparisons produce Booleans."],
+["and","and requires both conditions to be true.","age = 13\nhasTicket = True\nif age >= 13 and hasTicket:\n    print(\"Enter\")","Create two requirements for an imaginary game.","Both sides of and must be true."],
+["or","or is true when at least one condition is true.","day = \"Saturday\"\nif day == \"Saturday\" or day == \"Sunday\":\n    print(\"Weekend\")","Make a condition that accepts two favorite colors.","Only one side needs to be true."],
+["not","not flips a Boolean value. True becomes False and False becomes True.","locked = False\nif not locked:\n    print(\"Open\")","Create a variable called finished and test it with not.","not is useful when checking the opposite of something."],
+["Unit 3 review","Conditions give your programs different paths depending on information.","score = 82\nif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Good\")\nelse:\n    print(\"Keep practicing\")","Add another grade category.","Clear conditions make decisions easier to follow."]
+],
 
-    {
-        q: "Which of these is used to store a value?",
-        answers: [
-            "Variable",
-            "Loop",
-            "Comment",
-            "Browser"
-        ],
-        correct: 0
-    },
+[
+["What is a loop?","A loop repeats instructions so you don't have to write the same code over and over.","for number in range(3):\n    print(\"Hello\")","Make the message print five times.","Loops are useful for repetition."],
+["range()","range() creates a sequence of numbers that a loop can use.","for number in range(5):\n    print(number)","Make it print numbers from 0 through 9.","range(5) stops before 5."],
+["Loop variables","The variable after for temporarily holds the current value from the sequence.","for animal in [\"duck\", \"dog\", \"cat\"]:\n    print(animal)","Create a list of three favorite things.","The loop variable changes each repetition."],
+["Repeating calculations","Loops can perform calculations repeatedly.","for number in range(1, 6):\n    print(number * 2)","Print the first five multiples of 3.","Put the calculation inside the loop."],
+["while","A while loop repeats while a condition remains true.","count = 1\nwhile count <= 3:\n    print(count)\n    count += 1","Change it to count to 5.","Make sure the condition eventually becomes false."],
+["Counters","A counter keeps track of how many times something happened.","count = 0\nfor item in [\"a\", \"b\", \"c\"]:\n    count += 1\nprint(count)","Count five items in a list.","+= is a shortcut for adding to a variable."],
+["Nested loops","A loop can contain another loop. The inner loop runs completely for each outer repetition.","for row in range(2):\n    for column in range(3):\n        print(row, column)","Try making a 3 by 3 grid of coordinates.","Nested loops are useful for grids and patterns."],
+["break","break stops a loop immediately when a condition is reached.","for number in range(10):\n    if number == 4:\n        break\n    print(number)","Stop a loop at a different number.","Use break when you no longer need to continue."],
+["continue","continue skips the rest of the current loop and moves to the next repetition.","for number in range(6):\n    if number == 3:\n        continue\n    print(number)","Skip another number.","continue doesn't end the entire loop."],
+["Unit 4 review","Loops make repeated work much shorter and more powerful.","for number in range(1, 6):\n    if number % 2 == 0:\n        print(number)","Modify this to print odd numbers.","Loops and conditions become especially powerful together."]
+],
 
-    {
-        q: "What does an if statement do?",
-        answers: [
-            "Repeats forever",
-            "Checks a condition",
-            "Deletes code",
-            "Creates a computer"
-        ],
-        correct: 1
-    },
+[
+["What is a function?","A function is a reusable block of code that performs a particular job.","def say_hello():\n    print(\"Hello!\")\n\nsay_hello()","Create a function that prints your favorite activity.","Functions prevent unnecessary repetition."],
+["Calling a function","Defining a function doesn't run it. You call it by writing its name with parentheses.","def cheer():\n    print(\"Go!\")\n\ncheer()\ncheer()","Call your function three times.","You can call a function whenever you need it."],
+["Parameters","Parameters let a function receive information.","def greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Abby\")","Create a function with a color parameter.","Parameters make functions flexible."],
+["Multiple parameters","Functions can accept more than one piece of information.","def add(a, b):\n    print(a + b)\n\nadd(4, 6)","Make a function that combines a first and last name.","Keep parameters in a clear order."],
+["return","return sends a result back to the code that called the function.","def double(number):\n    return number * 2\n\nanswer = double(5)\nprint(answer)","Create a function that triples a number.","A returned value can be stored in a variable."],
+["Reusable calculations","A function can package a calculation so you can use it many times.","def area(width, height):\n    return width * height\n\nprint(area(4, 5))","Make a function for a different calculation.","Think of functions as little tools."],
+["Default values","A parameter can have a default value that is used when no argument is supplied.","def greet(name=\"friend\"):\n    print(\"Hi\", name)\n\ngreet()","Give your function a useful default.","Default values make optional information easy."],
+["Local variables","Variables created inside a function normally belong to that function.","def show():\n    message = \"Inside\"\n    print(message)\n\nshow()","Create a function with a temporary variable.","Keep variables close to where they're needed."],
+["Functions with conditions","Functions can contain decisions just like the rest of your program.","def check(score):\n    if score >= 70:\n        return \"Pass\"\n    return \"Try again\"","Make your own pass/fail function.","Functions can contain many normal Python structures."],
+["Unit 5 review","Functions turn repeated ideas into reusable tools.","def welcome(name):\n    return \"Welcome, \" + name\n\nprint(welcome(\"Abby\"))","Create a function that takes two inputs and returns a result.","A good function usually has one clear job."]
+],
 
-    {
-        q: "Which structure repeats code?",
-        answers: [
-            "Loop",
-            "Variable",
-            "String",
-            "Comment"
-        ],
-        correct: 0
-    },
+[
+["What is a list?","A list stores multiple values in one ordered collection.","colors = [\"pink\", \"green\", \"blue\"]\nprint(colors)","Create a list of five foods.","Lists use square brackets."],
+["Indexing","Each item in a list has a position called an index. Python starts counting at zero.","colors = [\"pink\", \"green\", \"blue\"]\nprint(colors[0])","Print the second item.","The first index is 0."],
+["Changing an item","You can replace an item at a particular index.","colors = [\"pink\", \"green\", \"blue\"]\ncolors[1] = \"yellow\"\nprint(colors)","Change one item in your own list.","Lists are mutable, meaning they can change."],
+["append()","append() adds one new item to the end of a list.","pets = [\"Bailey\"]\npets.append(\"Duck\")\nprint(pets)","Add two items to a list.","append changes the existing list."],
+["remove()","remove() deletes the first matching value from a list.","foods = [\"pizza\", \"cake\", \"pizza\"]\nfoods.remove(\"pizza\")\nprint(foods)","Remove one item from your list.","remove searches for the value."],
+["len()","len() tells you how many items are in a collection.","colors = [\"pink\", \"green\", \"blue\"]\nprint(len(colors))","Find the length of a list you create.","len() is useful when you don't know the size ahead of time."],
+["Looping through a list","for loops can visit each item in a list.","animals = [\"duck\", \"dog\", \"cat\"]\nfor animal in animals:\n    print(animal)","Print every item in a list of your own.","This is one of the most common list patterns."],
+["Checking membership","in checks whether a value exists in a list.","colors = [\"pink\", \"green\"]\nprint(\"pink\" in colors)","Check whether a favorite item is in your list.","in produces True or False."],
+["Sorting","sort() can arrange compatible values in order.","numbers = [4, 1, 3, 2]\nnumbers.sort()\nprint(numbers)","Sort five numbers.","Sorting changes the list itself."],
+["Unit 6 review","Lists are useful whenever a program needs to manage a group of related values.","scores = [10, 8, 9]\nprint(max(scores))","Make a list and calculate something from it.","Lists become much more powerful when combined with loops."]
+],
 
-    {
-        q: "What is a function?",
-        answers: [
-            "A reusable block of code",
-            "A color",
-            "A file",
-            "A computer"
-        ],
-        correct: 0
-    },
+[
+["What is a dictionary?","A dictionary stores information using keys and values instead of simple numbered positions.","person = {\"name\":\"Abby\", \"age\":13}","Create a dictionary for a favorite movie.","Dictionaries use curly braces."],
+["Reading a value","You can use a key to retrieve its value.","person = {\"name\":\"Abby\", \"age\":13}\nprint(person[\"name\"])","Print the age from the example.","Keys act like labels."],
+["Adding dictionary data","You can create a new key and value after a dictionary exists.","pet = {\"name\":\"Bailey\"}\npet[\"age\"] = 4","Add two facts about a pet or character.","A dictionary can grow as your program runs."],
+["Changing dictionary data","Assigning a new value to an existing key replaces its old value.","game = {\"score\":10}\ngame[\"score\"] = 25","Change a score in a game dictionary.","The key stays the same while the value changes."],
+["Dictionary methods","Methods such as keys() and values() let you inspect dictionary data.","person = {\"name\":\"Abby\", \"age\":13}\nprint(person.keys())","Print the values instead.","Methods provide useful operations on data."],
+["Nested dictionaries","A dictionary can contain another dictionary as a value.","student = {\n    \"name\":\"Abby\",\n    \"favorite\":{\"color\":\"green\"}\n}","Add another nested piece of information.","Nested data is common in larger programs."],
+["Tuples","A tuple is an ordered collection that normally isn't changed after creation.","point = (4, 7)\nprint(point[0])","Create a tuple containing two coordinates.","Tuples use parentheses."],
+["Sets","A set stores unique values, so duplicates are removed.","colors = {\"pink\", \"pink\", \"green\"}\nprint(colors)","Create a set of three unique interests.","Sets are useful when uniqueness matters."],
+["Choosing a data structure","Different collections solve different problems: lists are ordered, dictionaries use labels, and sets focus on uniqueness.","names = [\"Abby\", \"Charlotte\"]\nages = {\"Abby\":13}","Decide which structure fits three example situations.","Choosing the right structure makes code clearer."],
+["Unit 7 review","Good programs organize information into structures that match what the program needs.","player = {\"name\":\"Abby\", \"score\":100}\nprint(player[\"score\"])","Create your own small data model.","Think about what information belongs together."]
+],
 
-    {
-        q: "Which structure can hold multiple values?",
-        answers: [
-            "List",
-            "Comment",
-            "Condition",
-            "Operator"
-        ],
-        correct: 0
-    },
+[
+["What is an event?","An event is something that happens, such as a button click or key press. Python programs can respond to events with libraries.","def clicked():\n    print(\"Clicked!\")","Describe an event your program could respond to.","Events connect programs to actions."],
+["Input events","A command-line program can react when a user enters information.","answer = input(\"Choose A or B: \")\nprint(answer)","Ask the user a question and respond.","User input makes programs interactive."],
+["Menu choices","Conditions can turn user input into different paths.","choice = input(\"1 or 2? \")\nif choice == \"1\":\n    print(\"One\")\nelse:\n    print(\"Two\")","Create a three-choice menu.","Combine input with conditions."],
+["Simple game input","Games often read an action from the player and then change the game state.","move = input(\"Move left or right: \")\nif move == \"left\":\n    print(\"You moved left\")","Add another possible move.","Game programs are mostly state plus rules."],
+["Random choices","The random module can make programs behave unpredictably.","import random\nprint(random.choice([\"rock\",\"paper\",\"scissors\"]))","Make a random choice from three objects.","Randomness is useful for games."],
+["Timers","The time module can pause a program for a short amount of time.","import time\nprint(\"Ready\")\ntime.sleep(1)\nprint(\"Go!\")","Change the delay.","Small delays can create simple sequences."],
+["Keeping score","A variable can represent changing game information.","score = 0\nscore += 10\nprint(score)","Add points for three imaginary actions.","Game state is often stored in variables."],
+["Player choices","A program can validate input before using it.","choice = input(\"Yes or no? \")\nif choice in [\"yes\",\"no\"]:\n    print(\"Valid\")","Add a message for invalid input.","Validation keeps unexpected input from causing problems."],
+["Interactive mini program","Combine input, variables, and conditions to make a tiny interactive program.","name = input(\"Name: \")\nchoice = input(\"Favorite color: \")\nprint(name, choice)","Turn this into a tiny personality quiz.","Build interaction one small piece at a time."],
+["Unit 8 review","Interactive programs react to information instead of always doing exactly the same thing.","choice = input(\"Pick 1 or 2: \")\nif choice == \"1\":\n    print(\"Path A\")\nelse:\n    print(\"Path B\")","Expand this into three paths.","Interaction is what makes programs feel alive."]
+],
 
-    {
-        q: "What does an object usually contain?",
-        answers: [
-            "Properties and data",
-            "Only numbers",
-            "Only comments",
-            "Nothing"
-        ],
-        correct: 0
-    },
+[
+["Plan before coding","A project becomes easier when you decide what it should do before writing every line.","# Goal: make a number guessing game\n# 1. choose a number\n# 2. ask the player\n# 3. compare","Write three steps for a project idea.","Planning prevents you from getting lost."],
+["Break a project into functions","Large programs are easier to manage when jobs are separated into functions.","def show_menu():\n    print(\"1. Play\")\n\ndef start_game():\n    print(\"Starting!\")","Name three functions your own project could use.","Each function should have a clear responsibility."],
+["Debugging with print","Temporary print statements can show you what values your program currently has.","score = 10\nprint(\"DEBUG score:\", score)","Add a debug print to a small program.","Debugging is a normal part of programming."],
+["Input validation","Good projects don't assume every user enters perfect information.","age = input(\"Age: \")\nif age.isdigit():\n    print(\"Number entered\")","Decide what invalid input your project should handle.","Think about what a user might do unexpectedly."],
+["Building a guessing game","A guessing game combines variables, input, conditions, and loops.","secret = 7\nwhile True:\n    guess = int(input(\"Guess: \"))\n    if guess == secret:\n        print(\"Correct!\")\n        break","Change the secret number and add a hint.","Projects are combinations of smaller concepts."],
+["Adding attempts","A counter can limit how many times a player can try.","attempts = 0\nwhile attempts < 3:\n    attempts += 1\n    print(\"Attempt\", attempts)","Give your game five attempts.","Counters help control game rules."],
+["High scores","A program can compare a new score with a previous score.","highScore = 100\nnewScore = 125\nif newScore > highScore:\n    highScore = newScore","Add a message when a new high score is achieved.","A high score is just data plus a rule."],
+["Saving simple data","Python can write text to a file so information can survive after the program closes.","with open(\"score.txt\",\"w\") as file:\n    file.write(\"125\")","Write a different piece of information.","Files let programs store information."],
+["Project polish","Small improvements such as clear menus and helpful messages make projects easier to use.","print(\"================\")\nprint(\"  MY GAME\")\nprint(\"================\")","Design a simple title screen.","Good programming includes the experience of using the program."],
+["Unit 9 review","A complete project combines many smaller skills into one organized program.","def play():\n    print(\"Game starting\")\n\nplay()","Sketch the pieces your final project will need.","Don't try to build everything at once."]
+],
 
-    {
-        q: "What can an event do?",
-        answers: [
-            "React to something happening",
-            "Turn off the internet",
-            "Delete HTML",
-            "Create electricity"
-        ],
-        correct: 0
-    },
+[
+["List comprehensions","A list comprehension creates a new list using a compact expression.","squares = [n*n for n in range(5)]\nprint(squares)","Create a list of doubled numbers.","Compact code should still be readable."],
+["Exception handling","try and except let programs respond to certain runtime errors instead of crashing immediately.","try:\n    number = int(input(\"Number: \"))\nexcept ValueError:\n    print(\"Please enter a number\")","Handle another kind of invalid input.","Catch errors you know how to handle."],
+["Multiple exceptions","A program can handle different expected errors with different branches.","try:\n    value = int(input(\"Number: \"))\nexcept ValueError:\n    print(\"Not a number\")","Think of another input problem your program could encounter.","Don't hide errors you don't understand."],
+["Modules","Modules let you organize code and use tools written elsewhere.","import math\nprint(math.sqrt(25))","Use another function from math.","Modules prevent every program from needing to reinvent tools."],
+["Creating a module","Your own Python file can contain reusable functions.","# helpers.py\ndef double(x):\n    return x * 2","Imagine three functions that belong in a helper file.","Separate related tools into sensible files."],
+["Classes","A class can define a type of object with its own data and behavior.","class Dog:\n    def bark(self):\n        print(\"Woof!\")","Create a class representing something you like.","Classes are useful when data and behavior belong together."],
+["Objects","An object is an instance created from a class.","class Player:\n    pass\n\nplayer = Player()","Create two objects from a class.","Objects can represent individual things in a program."],
+["Methods and self","Methods can use self to access information belonging to the current object.","class Player:\n    def __init__(self,name):\n        self.name = name\n\np = Player(\"Abby\")\nprint(p.name)","Add another property.","self refers to the current object."],
+["Clean architecture","Larger projects benefit from separating input, logic, data, and presentation.","def calculate_score(points):\n    return points * 2","Identify which part of your project each task belongs to.","Organization matters more as projects grow."],
+["Final challenge","Use variables, conditions, loops, functions, collections, and error handling to design a small program.","def main():\n    print(\"My final Python project\")\n\nmain()","Plan and build your own Python project.","The best way to learn programming is to build."]
+]
 
-    {
-        q: "What is debugging?",
-        answers: [
-            "Finding and fixing problems",
-            "Making code longer",
-            "Deleting a project",
-            "Changing your password"
-        ],
-        correct: 0
-    },
+],
 
-    {
-        q: "Why organize your code?",
-        answers: [
-            "It makes code easier to understand",
-            "It makes computers heavier",
-            "It removes every bug automatically",
-            "It makes Wi-Fi faster"
-        ],
-        correct: 0
-    },
+JavaScript: [
 
-    {
-        q: "What is a good way to build a large project?",
-        answers: [
-            "Break it into smaller parts",
-            "Write everything at once",
-            "Never test anything",
-            "Avoid planning"
-        ],
-        correct: 0
-    }
+[
+["What is JavaScript?","JavaScript is the language that can make webpages respond to users and change while they are open.","console.log(\"Hello, JavaScript!\");","Change the message.","JavaScript often runs in the browser."],
+["console.log()","console.log() sends information to the browser's developer console, which is useful for testing.","console.log(\"Testing 123\");","Log three different messages.","The console is one of a coder's best debugging tools."],
+["Statements","JavaScript normally executes statements in order from top to bottom.","console.log(\"One\");\nconsole.log(\"Two\");\nconsole.log(\"Three\");","Rearrange the messages.","Order can affect what the user sees."],
+["Numbers","JavaScript can perform arithmetic with numbers.","console.log(12 + 5);","Try three calculations.","Numbers don't need quotation marks."],
+["Strings","Strings are pieces of text surrounded by quotes.","console.log(\"Coding is fun!\");","Write a sentence about something you enjoy.","JavaScript supports several quote styles."],
+["Comments","Comments explain code for humans and aren't executed by JavaScript.","// This explains the next line\nconsole.log(\"Hi\");","Add two useful comments.","Comments should explain why or clarify what code does."],
+["Errors","JavaScript errors give clues about what went wrong in a program.","console.log(\"Hello\");","Intentionally change a line, then use the error message to fix it.","Reading errors is a real coding skill."],
+["Multiple statements","A script can contain many different instructions.","console.log(\"Name: Abby\");\nconsole.log(\"Music: violin\");","Add two more facts.","Small statements can combine into larger programs."],
+["Semicolons","Semicolons can mark the end of JavaScript statements. Modern JavaScript can often insert them automatically.","let score = 10;\nconsole.log(score);","Add semicolons to your own example.","Consistency makes code easier to read."],
+["Unit 1 review","You now have the foundation for reading and writing simple JavaScript.","console.log(\"I can write JavaScript!\");","Create a five-line introduction program.","Keep practicing tiny programs."]
+],
 
-];
+[
+["let","let creates a variable whose value can be changed later.","let score = 0;\nscore = 10;\nconsole.log(score);","Create a variable for a game level.","Use let when the value needs to change."],
+["const","const creates a variable that you don't plan to reassign.","const name = \"Abby\";\nconsole.log(name);","Create a const for your favorite color.","Prefer const when a value won't be reassigned."],
+["Changing values","Variables let programs keep track of information that changes.","let lives = 3;\nlives = lives - 1;\nconsole.log(lives);","Make a lives counter lose two lives.","Variables represent the current state."],
+["Addition","JavaScript can calculate numbers with +.","let total = 8 + 7;\nconsole.log(total);","Calculate a total price or score.","Arithmetic expressions produce values."],
+["String concatenation","The + operator can combine strings.","let first = \"Hello\";\nlet name = \"Abby\";\nconsole.log(first + \" \" + name);","Join two pieces of text.","Don't forget spaces when joining words."],
+["Template literals","Template literals use backticks and ${} to place variables inside strings.","let name = \"Abby\";\nconsole.log(`Hello ${name}!`);","Create a sentence using two variables.","Template literals are great for readable messages."],
+["Booleans","A Boolean is true or false and is useful for representing yes/no states.","let gameOver = false;\nconsole.log(gameOver);","Create two Boolean variables.","Booleans are especially useful with conditions."],
+["typeof","typeof tells you the type of a value.","let score = 25;\nconsole.log(typeof score);","Test the types of a string and Boolean.","Checking types can help debug unexpected values."],
+["User input with prompt","prompt() can ask a browser user for text.","let name = prompt(\"What is your name?\");\nconsole.log(name);","Ask the user for a favorite color.","Browser prompts return text."],
+["Unit 2 review","Variables and values let JavaScript remember information and use it later.","const name = \"Abby\";\nlet score = 10;\nscore += 5;\nconsole.log(`${name}: ${score}`);","Make your own mini score display.","Good variable names make code easier to understand."]
+],
+
+[
+["if statements","if runs code when a condition is true.","let age = 13;\nif(age >= 13){\n    console.log(\"Welcome\");\n}","Change the condition.","Conditions control decisions."],
+["else","else provides a second path when an if condition is false.","let raining = false;\nif(raining){\n    console.log(\"Umbrella\");\n}else{\n    console.log(\"No umbrella\");\n}","Create your own yes/no decision.","else doesn't need its own condition."],
+["else if","else if allows multiple possibilities to be checked.","let score = 82;\nif(score >= 90){\n    console.log(\"A\");\n}else if(score >= 70){\n    console.log(\"B\");\n}","Add another grade.","JavaScript checks conditions in order."],
+["Strict equality","=== checks both value and type.","let answer = \"7\";\nconsole.log(answer === 7);","Compare two values with different types.","=== is usually safer than ==."],
+["Greater and less","Comparison operators let code compare numbers.","let score = 80;\nconsole.log(score >= 70);","Try all four greater/less operators.","Comparisons produce Booleans."],
+["&&","&& means both conditions must be true.","let age = 13;\nlet ticket = true;\nif(age >= 13 && ticket){\n    console.log(\"Enter\");\n}","Create two requirements for a game.","Both sides must be true."],
+["||","|| means at least one condition must be true.","let day = \"Saturday\";\nif(day === \"Saturday\" || day === \"Sunday\"){\n    console.log(\"Weekend\");\n}","Create a condition accepting two choices.","Only one side needs to be true."],
+["!","! reverses a Boolean.","let locked = false;\nif(!locked){\n    console.log(\"Open\");\n}","Create a Boolean and test its opposite.","! is called the logical NOT operator."],
+["Ternary operator","The ternary operator is a compact way to choose between two values.","let age = 13;\nlet result = age >= 13 ? \"Teen\" : \"Child\";","Write your own two-choice expression.","Use it when the decision is simple."],
+["Unit 3 review","Conditions give JavaScript different paths based on information.","let score = 82;\nif(score >= 90){\n    console.log(\"Excellent\");\n}else if(score >= 70){\n    console.log(\"Good\");\n}else{\n    console.log(\"Practice\");\n}","Add another category.","Clear conditions make logic easier to understand."]
+],
+
+[
+["for loops","A for loop repeats code a controlled number of times.","for(let i=0;i<5;i++){\n    console.log(i);\n}","Make it count to 10.","The three sections control a for loop."],
+["while loops","while repeats code while a condition remains true.","let count = 1;\nwhile(count <= 3){\n    console.log(count);\n    count++;\n}","Make it count to 5.","Make sure the condition eventually changes."],
+["Counters","Counters track how many times something happened.","let score = 0;\nfor(let i=0;i<3;i++){\n    score += 10;\n}\nconsole.log(score);","Make a counter increase by 5.","Counters are useful in games and menus."],
+["Arrays","Arrays store multiple values in one ordered collection.","let colors = [\"pink\",\"green\",\"blue\"];\nconsole.log(colors);","Create an array of five things.","Arrays use square brackets."],
+["Array indexes","JavaScript arrays start at index 0.","let colors = [\"pink\",\"green\",\"blue\"];\nconsole.log(colors[0]);","Print the second item.","The first item is index 0."],
+["Looping through arrays","A loop can visit every item in an array.","let pets = [\"Bailey\",\"Duck\",\"Cat\"];\nfor(let pet of pets){\n    console.log(pet);\n}","Loop through your own array.","for...of is convenient for values."],
+["break","break immediately ends a loop.","for(let i=0;i<10;i++){\n    if(i===4) break;\n    console.log(i);\n}","Stop at a different number.","Use break when continuing isn't useful."],
+["continue","continue skips the current loop iteration.","for(let i=0;i<6;i++){\n    if(i===3) continue;\n    console.log(i);\n}","Skip another number.","continue moves to the next iteration."],
+["Nested loops","One loop can run inside another.","for(let row=0;row<2;row++){\n    for(let col=0;col<3;col++){\n        console.log(row,col);\n    }\n}","Make a 3 by 3 coordinate grid.","Nested loops are useful for grids."],
+["Unit 4 review","Loops and arrays let JavaScript process groups of information efficiently.","let scores=[10,20,30];\nfor(let score of scores){\n    console.log(score*2);\n}","Change the calculation.","Many real programs process collections this way."]
+],
+
+[
+["Function declarations","Functions package reusable behavior into a named block.","function greet(){\n    console.log(\"Hello!\");\n}\ngreet();","Create a function that prints a favorite activity.","A function runs when you call it."],
+["Parameters","Parameters allow functions to receive information.","function greet(name){\n    console.log(`Hi ${name}`);\n}\ngreet(\"Abby\");","Add a second parameter.","Parameters make functions reusable."],
+["return","return sends a value back from a function.","function double(n){\n    return n*2;\n}\nconsole.log(double(5));","Create a function that triples a number.","Returned values can be stored or used in expressions."],
+["Arrow functions","Arrow functions provide a compact function syntax.","const double = n => n * 2;\nconsole.log(double(5));","Rewrite a simple function as an arrow function.","Arrow functions are common in modern JavaScript."],
+["Multiple parameters","Functions can accept several arguments.","function add(a,b){\n    return a+b;\n}\nconsole.log(add(4,6));","Make a function that combines two strings.","Keep parameter order clear."],
+["Default parameters","A parameter can have a default value.","function greet(name=\"friend\"){\n    console.log(`Hi ${name}`);\n}","Give one of your functions a default.","Defaults are useful for optional information."],
+["Scope","Variables created inside functions normally belong to that function's scope.","function test(){\n    let message=\"inside\";\n    console.log(message);\n}\ntest();","Create a function with a local variable.","Keeping variables local reduces accidental changes."],
+["Reusable calculations","Functions are ideal for calculations used in multiple places.","function area(w,h){\n    return w*h;\n}","Create a function for another calculation.","Give functions focused jobs."],
+["Functions with conditions","A function can contain any normal JavaScript logic.","function check(score){\n    if(score>=70) return \"Pass\";\n    return \"Try again\";\n}","Create your own decision function.","Functions can return different results."],
+["Unit 5 review","Functions help organize larger programs into small reusable pieces.","function welcome(name){\n    return `Welcome, ${name}!`;\n}\nconsole.log(welcome(\"Abby\"));","Build a function with two inputs.","Good functions are easier to test."]
+],
+
+[
+["Array length","The length property tells you how many items an array contains.","let colors=[\"pink\",\"green\",\"blue\"];\nconsole.log(colors.length);","Find the length of your own array.","length is especially useful with loops."],
+["push()","push() adds an item to the end of an array.","let foods=[\"pizza\"];\nfoods.push(\"cake\");","Add two foods.","push changes the original array."],
+["pop()","pop() removes the final item from an array.","let foods=[\"pizza\",\"cake\"];\nfoods.pop();","Remove the last item from a list.","pop returns the removed item."],
+["shift()","shift() removes the first array item.","let queue=[\"A\",\"B\",\"C\"];\nqueue.shift();","Remove the first item.","shift changes indexes of remaining items."],
+["unshift()","unshift() adds an item to the beginning.","let queue=[\"B\",\"C\"];\nqueue.unshift(\"A\");","Add an item to the beginning.","Use it when order matters."],
+["includes()","includes() checks whether an array contains a value.","let colors=[\"pink\",\"green\"];\nconsole.log(colors.includes(\"pink\"));","Check for something else.","includes returns true or false."],
+["indexOf()","indexOf() tells you where a value occurs.","let colors=[\"pink\",\"green\",\"blue\"];\nconsole.log(colors.indexOf(\"green\"));","Find another item's position.","If a value isn't found, indexOf returns -1."],
+["map()","map() creates a new array by transforming every item.","let numbers=[1,2,3];\nlet doubled=numbers.map(n=>n*2);","Create a new array of squared numbers.","map does not need to change the original array."],
+["filter()","filter() creates a new array containing items that pass a test.","let scores=[40,80,95];\nlet passing=scores.filter(s=>s>=70);","Filter a list of numbers.","filter is great for selecting data."],
+["Unit 6 review","Arrays become powerful when combined with methods such as map, filter, push, and includes.","let numbers=[1,2,3,4];\nlet even=numbers.filter(n=>n%2===0);","Create your own filtered array.","Learn methods one at a time."]
+],
+
+[
+["Objects","Objects group related information into named properties.","const person={name:\"Abby\",age:13};","Create an object for a favorite character.","Objects use curly braces."],
+["Reading properties","Dot notation retrieves an object's property.","const person={name:\"Abby\",age:13};\nconsole.log(person.name);","Print another property.","Property names act like labels."],
+["Changing properties","Object properties can be reassigned.","const game={score:10};\ngame.score=25;","Change a game property.","Objects can represent changing state."],
+["Adding properties","You can add a new property by assigning it.","const pet={name:\"Bailey\"};\npet.age=4;","Add two properties.","Objects don't need every property at creation."],
+["Object methods","A property can store a function. That function is called a method.","const player={\n    sayHi(){ console.log(\"Hi!\"); }\n};\nplayer.sayHi();","Add another method.","Methods describe behavior belonging to an object."],
+["Nested objects","Objects can contain other objects.","const player={\n    name:\"Abby\",\n    stats:{score:100}\n};\nconsole.log(player.stats.score);","Add another nested property.","Nested data is common in apps."],
+["Destructuring","Destructuring lets you pull properties into variables.","const person={name:\"Abby\",age:13};\nconst {name,age}=person;","Destructure two properties from your own object.","It can make code shorter and clearer."],
+["Spread syntax","The spread operator can copy or combine object data.","const a={name:\"Abby\"};\nconst b={...a,age:13};","Create a new object from another one.","Spread is useful when creating updated data."],
+["Object keys","Object.keys() gives you an array of property names.","const person={name:\"Abby\",age:13};\nconsole.log(Object.keys(person));","Print the keys of another object.","Object.keys is useful when exploring data."],
+["Unit 7 review","Objects are excellent for representing things with multiple named pieces of information.","const player={name:\"Abby\",score:100};\nplayer.score+=25;","Create your own player object.","Think of objects as labeled containers."]
+],
+
+[
+["The DOM","The DOM represents a webpage as objects JavaScript can inspect and change.","console.log(document.body);","Think of three parts of a webpage JavaScript could change.","The DOM connects JavaScript to HTML."],
+["querySelector()","querySelector() finds the first element matching a CSS selector.","const title=document.querySelector(\"h1\");","Find an element with a class.","CSS selectors work inside querySelector."],
+["Changing text","textContent changes the text inside an element.","const title=document.querySelector(\"h1\");\ntitle.textContent=\"Hello!\";","Change a heading on your own page.","JavaScript can update the page instantly."],
+["Changing styles","JavaScript can change CSS-related properties through an element's style.","const box=document.querySelector(\".box\");\nbox.style.padding=\"20px\";","Change a different style property.","For larger styling changes, CSS classes are often cleaner."],
+["click events","addEventListener() can run code when a user clicks something.","button.addEventListener(\"click\",()=>{\n    console.log(\"Clicked!\");\n});","Make a button respond to a click.","Events are how webpages react to users."],
+["Input values","JavaScript can read what a user typed into an input.","const input=document.querySelector(\"input\");\nconsole.log(input.value);","Read a different input.","The value property contains the current text."],
+["Class changes","classList lets JavaScript add or remove CSS classes.","box.classList.add(\"active\");","Add a class when a button is clicked.","Classes are a clean bridge between JS and CSS."],
+["Timers","setTimeout() runs a function after a delay.","setTimeout(()=>{\n    console.log(\"Done!\");\n},1000);","Change the delay.","Timers are measured in milliseconds."],
+["Interactive mini project","Combine a button, DOM selection, an event, and a style change.","button.addEventListener(\"click\",()=>{\n    document.body.classList.toggle(\"dark\");\n});","Turn this into your own interactive effect.","Small interactions can become complete projects."],
+["Unit 8 review","JavaScript becomes especially powerful when it controls a webpage through the DOM.","const button=document.querySelector(\"button\");\nbutton.addEventListener(\"click\",()=>{\n    document.querySelector(\"h1\").textContent=\"Clicked!\";\n});","Build your own click interaction.","Try changing only one thing at first."]
+],
+
+[
+["Plan a webpage","Before coding, decide what the user should see and what they should be able to do.","// Home\n// Start button\n// Score\n// Reset","Sketch the structure of a project.","Planning saves time later."],
+["Separate functions","Projects become easier to manage when different jobs have different functions.","function startGame(){}\nfunction resetGame(){}\nfunction updateScore(){}","List three functions your project needs.","Keep each function focused."],
+["State","State is information that describes what is currently happening in your program.","let score=0;\nlet playing=true;","Choose three pieces of state for a game.","State changes as the user interacts."],
+["Updating state","Events can change state and then update the interface.","score += 10;\nconsole.log(score);","Make a button add points.","Separate the data from how it is displayed."],
+["Game loop thinking","Many interactive projects follow a pattern: input, update, display.","// input\n// update\n// display","Write those three steps for a game idea.","This pattern helps organize projects."],
+["Randomness","Math.random() can create unpredictable values for games and effects.","const number=Math.random();\nconsole.log(number);","Use randomness to choose between two messages.","Random values can make projects feel different each time."],
+["Score systems","Scores are simply data updated according to rules.","let score=0;\nfunction addPoints(points){\n    score += points;\n}","Create a scoring rule for three actions.","Write the rule before writing lots of code."],
+["Reset buttons","A reset function can return project state to its starting values.","function reset(){\n    score=0;\n}","Decide everything your project should reset.","Resetting is important in games."],
+["Project debugging","Use console.log() and small tests to find where your project stops behaving correctly.","console.log(\"score before\",score);\nscore+=10;\nconsole.log(\"score after\",score);","Add a debug message to your project.","Debug one problem at a time."],
+["Unit 9 review","A project is a collection of smaller systems working together.","function start(){\n    score=0;\n    updateScreen();\n}","Plan the systems your final project will contain.","Build in small stages."]
+],
+
+[
+["Array reduce()","reduce() combines many values into one result.","const numbers=[1,2,3,4];\nconst total=numbers.reduce((sum,n)=>sum+n,0);","Calculate a total from your own array.","reduce is powerful but should remain readable."],
+["find()","find() returns the first item that passes a test.","const scores=[45,72,91];\nconst result=scores.find(s=>s>70);","Find the first number over 80.","find is useful when you need one matching item."],
+["findIndex()","findIndex() returns the position of the first matching item.","const names=[\"Ava\",\"Mia\",\"Abby\"];\nconsole.log(names.findIndex(n=>n===\"Abby\"));","Find the position of another name.","It returns -1 when nothing matches."],
+["try and catch","try/catch lets code respond to certain errors.","try{\n    JSON.parse(\"bad data\");\n}catch(error){\n    console.log(\"Could not read data\");\n}","Think of an error your project could handle.","Don't use catch to hide bugs you need to fix."],
+["JSON","JSON is a common text format for structured data.","const text='{\"name\":\"Abby\"}';\nconst data=JSON.parse(text);\nconsole.log(data.name);","Create a JSON string for a game character.","JSON is common when apps exchange data."],
+["localStorage","localStorage can save small pieces of data in the browser.","localStorage.setItem(\"score\",\"100\");\nconsole.log(localStorage.getItem(\"score\"));","Save a favorite color.","Saved values come back as strings."],
+["Modules","JavaScript modules let larger projects split code into files.","export function greet(){\n    console.log(\"Hi\");\n}","Imagine how you would split a project into files.","Separate related code."],
+["Async thinking","Some operations finish later, so JavaScript provides tools for handling asynchronous work.","setTimeout(()=>{\n    console.log(\"Finished later\");\n},1000);","Describe a task that could take time in a real app.","Not everything happens instantly."],
+["Code organization","Naming, functions, modules, and comments become increasingly important as projects grow.","function calculateScore(points){\n    return points * 10;\n}","Rename one confusing variable in an old project.","Readable code is easier to maintain."],
+["Final JavaScript challenge","Combine variables, arrays, functions, events, DOM changes, and project state into something interactive.","const state={score:0};\nfunction addPoint(){\n    state.score++;\n}","Plan and build your own interactive webpage.","Build something you would actually enjoy using."]
+]
+
+],
+
+HTML: [
+
+[
+["What is HTML?","HTML provides the structure of a webpage. Elements tell the browser what different pieces of content mean.","<h1>Hello!</h1>\n<p>Welcome to my website.</p>","Create a heading and paragraph.","HTML describes content; CSS styles it."],
+["Headings","Heading elements create titles and organize information.","<h1>Main title</h1>\n<h2>Section title</h2>","Create three levels of headings.","Use heading levels in a logical order."],
+["Paragraphs","The p element contains a paragraph of text.","<p>This is my first paragraph.</p>","Write a paragraph about a hobby.","Don't use headings just to make text bigger."],
+["Links","The a element creates links to other pages or websites.","<a href=\"https://example.com\">Visit</a>","Create a link to a site you use.","href tells the browser where the link goes."],
+["Images","The img element displays an image.","<img src=\"flower.jpg\" alt=\"A flower\">","Add an image with useful alt text.","Images should have meaningful alt text."],
+["Lists","ul and ol create unordered and ordered lists.","<ul>\n<li>Violin</li>\n<li>Dance</li>\n</ul>","Make a list of five interests.","Each list item uses li."],
+["Comments","HTML comments can explain structure without appearing on the page.","<!-- Navigation goes here -->","Add two useful comments.","Comments can help you find sections later."],
+["Line structure","HTML elements can be nested inside other elements.","<section>\n<h2>About</h2>\n<p>Hello!</p>\n</section>","Create your own nested section.","Indent nested elements to make structure clear."],
+["Attributes","Attributes provide extra information about an element.","<p class=\"intro\">Hello!</p>","Add a class to two elements.","Attributes go inside the opening tag."],
+["Unit 1 review","You now know the basic building blocks of an HTML page.","<h1>My Site</h1>\n<p>Welcome!</p>\n<a href=\"#about\">About</a>","Build a tiny three-element page.","HTML is the structure of your site."]
+],
+
+[
+["The html element","The html element wraps the entire document.","<html>\n</html>","Create the outer structure of a page.","The html element contains head and body."],
+["The head","The head contains information about the document that isn't normally displayed as page content.","<head>\n<title>My Site</title>\n</head>","Add a title to your page.","The title appears in the browser tab."],
+["The body","The body contains the visible content of the webpage.","<body>\n<h1>Hello!</h1>\n</body>","Put three visible elements inside body.","Visible page content belongs in body."],
+["DOCTYPE","DOCTYPE tells the browser which HTML standard the document follows.","<!DOCTYPE html>","Put the correct DOCTYPE at the top of a page.","It should be the first line."],
+["Title","The title element controls the browser tab title.","<title>Abby's Website</title>","Choose a title for your own site.","A good title helps identify a page."],
+["Meta charset","The charset declaration tells the browser how to interpret text.","<meta charset=\"UTF-8\">","Add it to a document head.","UTF-8 supports many characters."],
+["Viewport","The viewport meta tag helps pages behave properly on phones and tablets.","<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">","Add it to your head.","Responsive pages need a suitable viewport."],
+["Semantic structure","Elements such as header, main, and footer communicate meaning.","<header>Top</header>\n<main>Content</main>\n<footer>Bottom</footer>","Structure a pretend website using semantic elements.","Semantic HTML helps people and tools understand pages."],
+["Sections","section groups related content into a meaningful part of a page.","<section>\n<h2>About Me</h2>\n<p>Hello!</p>\n</section>","Create two sections for a portfolio.","A section usually has a topic or heading."],
+["Unit 2 review","A proper document has a clear structure from DOCTYPE through body content.","<!DOCTYPE html>\n<html>\n<head><title>Site</title></head>\n<body><h1>Hello</h1></body>\n</html>","Build the skeleton of a new webpage.","Start with structure before decoration."]
+],
+
+[
+["div","div is a generic container used to group content.","<div>\n<h2>Card</h2>\n<p>Text</p>\n</div>","Create two grouped areas.","Use semantic elements when one fits better."],
+["span","span groups a small piece of inline content.","<p>This is <span>important</span>.</p>","Wrap one word in a span.","span doesn't create a new block."],
+["class","class gives elements a reusable label for styling or scripting.","<p class=\"intro\">Welcome!</p>","Give three elements classes.","A class can be reused many times."],
+["id","id gives an element a unique identifier.","<section id=\"about\">About</section>","Give a section a unique id.","An id should normally identify one element."],
+["Navigation","nav identifies a group of navigation links.","<nav>\n<a href=\"#home\">Home</a>\n<a href=\"#about\">About</a>\n</nav>","Create a three-link navigation bar.","Navigation helps users move around a site."],
+["Main content","main identifies the primary content of a page.","<main>\n<h1>Portfolio</h1>\n<p>My work.</p>\n</main>","Put your main page content inside main.","A page normally has one main element."],
+["Header","header usually contains introductory content or navigation.","<header>\n<h1>My Portfolio</h1>\n<nav>Links</nav>\n</header>","Create a header for a pretend site.","Header can contain more than just a heading."],
+["Footer","footer usually contains closing information such as copyright or links.","<footer>\n<p>Thanks for visiting!</p>\n</footer>","Create a footer message.","Footer content depends on the site."],
+["Article","article represents a self-contained piece of content.","<article>\n<h2>My Project</h2>\n<p>Description...</p>\n</article>","Create an article about something you made.","Articles can stand on their own."],
+["Unit 3 review","Containers and semantic elements help organize a page into meaningful sections.","<header>...</header>\n<main><article>...</article></main>\n<footer>...</footer>","Plan a semantic structure for your website.","Good structure makes styling easier later."]
+],
+
+[
+["Buttons","The button element creates a control the user can interact with.","<button>Click me</button>","Create three different buttons.","JavaScript can make buttons do things."],
+["Forms","form groups controls that collect or submit information.","<form>\n<input type=\"text\">\n<button>Send</button>\n</form>","Create a simple form.","Forms are designed for user input."],
+["Text inputs","input type=text creates a single-line text field.","<label>Name</label>\n<input type=\"text\">","Create a field for a favorite color.","Labels make forms easier to understand."],
+["Labels","label describes a form control.","<label for=\"name\">Name</label>\n<input id=\"name\">","Connect a label to an input.","The for value should match the input id."],
+["Checkboxes","Checkboxes let users select independent choices.","<label><input type=\"checkbox\"> Music</label>","Create three interest checkboxes.","Checkboxes work well for multiple selections."],
+["Radio buttons","Radio buttons let users choose one option from a group.","<label><input type=\"radio\" name=\"size\"> Small</label>\n<label><input type=\"radio\" name=\"size\"> Large</label>","Create a three-choice group.","Radio buttons use the same name to form a group."],
+["Select menus","select creates a dropdown list.","<select>\n<option>Red</option>\n<option>Blue</option>\n</select>","Create a dropdown of five choices.","option elements create the choices."],
+["Textarea","textarea provides a larger multi-line text field.","<textarea placeholder=\"Write here...\"></textarea>","Create a feedback box.","Textarea is useful for longer messages."],
+["Required fields","required tells the browser that an input needs a value before submission.","<input type=\"text\" required>","Make two fields required.","Browser validation can help users."],
+["Unit 4 review","HTML forms contain controls that let users provide information.","<form>\n<label for=\"name\">Name</label>\n<input id=\"name\" required>\n<button>Submit</button>\n</form>","Design a tiny sign-up form.","Keep forms clear and simple."]
+],
+
+[
+["Audio","audio embeds sound content.","<audio controls src=\"song.mp3\"></audio>","Add controls to an audio player.","Only use audio you have permission to use."],
+["Video","video embeds video content.","<video controls width=\"400\" src=\"video.mp4\"></video>","Create a video element with controls.","The controls attribute gives users playback controls."],
+["Figure","figure groups media with an optional caption.","<figure>\n<img src=\"flower.jpg\" alt=\"Flower\">\n<figcaption>Spring flower</figcaption>\n</figure>","Create a figure with a caption.","Figure is useful for illustrations and examples."],
+["Picture","picture can provide different image sources for different situations.","<picture>\n<img src=\"image.jpg\" alt=\"Example\">\n</picture>","Research how responsive image sources could be added.","picture is useful for responsive images."],
+["Iframe","iframe can embed another webpage or supported content.","<iframe src=\"https://example.com\"></iframe>","Create an iframe and give it dimensions with CSS.","Only embed content you trust and have permission to use."],
+["Download links","The download attribute can tell the browser a link is intended to download a file.","<a href=\"notes.txt\" download>Download notes</a>","Create a download link to a file in your project.","The file needs to exist at that path."],
+["Email links","mailto links can open an email application.","<a href=\"mailto:hello@example.com\">Email</a>","Create a mail link using a placeholder address.","The browser decides which mail app opens."],
+["Telephone links","tel links can make phone numbers easier to use on mobile devices.","<a href=\"tel:1234567890\">Call</a>","Create a phone link with a placeholder number.","Use real numbers only when appropriate."],
+["External links","target and rel can control how external links behave.","<a href=\"https://example.com\" target=\"_blank\" rel=\"noopener\">Open</a>","Create a safe new-tab link.","noopener helps protect the opener relationship."],
+["Unit 5 review","HTML can handle more than text: media, downloads, embeds, and useful links all have elements or attributes.","<figure>\n<img src=\"photo.jpg\" alt=\"Photo\">\n<figcaption>My photo</figcaption>\n</figure>","Build a media section.","Always consider accessibility."]
+],
+
+[
+["Tables","table represents tabular data.","<table>\n<tr><th>Name</th><th>Score</th></tr>\n<tr><td>Abby</td><td>100</td></tr>\n</table>","Create a three-row table.","Tables are for data, not page layout."],
+["Table rows","tr creates a row in a table.","<table>\n<tr><td>Pink</td></tr>\n<tr><td>Green</td></tr>\n</table>","Add two more rows.","Rows contain cells."],
+["Table headings","th identifies a heading cell.","<tr><th>Class</th><th>Time</th></tr>","Create headings for your own data.","Headings make tables easier to understand."],
+["Table cells","td contains normal table data.","<tr><td>Ballet</td><td>4:00</td></tr>","Add three pieces of data.","Keep columns consistent."],
+["Caption","caption gives a table a title.","<table>\n<caption>Class Schedule</caption>\n</table>","Add a caption to your table.","A caption explains what the table represents."],
+["Colspan","colspan lets a cell span multiple columns.","<td colspan=\"2\">Lunch</td>","Create a schedule with a combined row.","Use it when the data genuinely spans columns."],
+["Details","details creates a disclosure control users can open.","<details>\n<summary>More info</summary>\n<p>Hello!</p>\n</details>","Create an expandable FAQ item.","The browser supplies the basic interaction."],
+["Summary","summary is the visible label for a details element.","<details>\n<summary>What is HTML?</summary>\n<p>A markup language.</p>\n</details>","Create two FAQ questions.","summary belongs inside details."],
+["Progress","progress represents progress toward a known goal.","<progress value=\"70\" max=\"100\"></progress>","Create a progress indicator for a project.","The value should fit the max."],
+["Unit 6 review","HTML has elements for structured data and useful interactive content.","<table>\n<caption>Scores</caption>\n<tr><th>Name</th><th>Score</th></tr>\n</table>","Create a complete small table.","Choose elements based on meaning."]
+],
+
+[
+["Accessibility","Accessible HTML helps more people use a website successfully.","<button aria-label=\"Close\">×</button>","Find one element on a site that could use clearer labeling.","Accessibility is part of good web design."],
+["Alt text","Alt text describes meaningful images for people who can't see them.","<img src=\"duck.jpg\" alt=\"Yellow duck sitting beside a pond\">","Write alt text for an imaginary image.","Describe the important information, not every tiny detail."],
+["Heading hierarchy","Heading levels communicate the structure of content.","<h1>Site</h1>\n<h2>About</h2>\n<h2>Projects</h2>","Create a heading outline for a portfolio.","Headings should form a logical hierarchy."],
+["Language","The lang attribute tells tools what language the document uses.","<html lang=\"en\">","Add lang to a document.","Language information helps screen readers."],
+["Form accessibility","Inputs should have clear labels so users know what information belongs there.","<label for=\"email\">Email</label>\n<input id=\"email\" type=\"email\">","Label three inputs.","Visible labels are usually better than relying only on placeholders."],
+["Button vs link","Buttons perform actions while links usually navigate somewhere.","<button>Save</button>\n<a href=\"about.html\">About</a>","Decide which element belongs to three scenarios.","Choosing the correct element improves usability."],
+["Semantic HTML","Semantic elements communicate what content means rather than just how it looks.","<main>\n<article>\n<h2>News</h2>\n</article>\n</main>","Replace three generic divs with semantic elements.","Meaningful HTML helps browsers and assistive technology."],
+["Keyboard focus","Interactive elements should be usable without a mouse.","<button>Start</button>","Test a webpage using only the keyboard.","Native controls usually provide useful keyboard behavior."],
+["Accessible navigation","Navigation should have understandable labels and logical links.","<nav aria-label=\"Main navigation\">\n<a href=\"/\">Home</a>\n<a href=\"/about\">About</a>\n</nav>","Create a clear navigation structure.","Users should be able to understand where links lead."],
+["Unit 7 review","Accessibility starts with choosing meaningful HTML and giving users the information they need.","<label for=\"name\">Name</label>\n<input id=\"name\" required>","Audit a small page for three accessibility improvements.","Accessible HTML is good HTML."]
+],
+
+[
+["Metadata","Metadata gives browsers and other tools useful information about your page.","<meta name=\"description\" content=\"My coding portfolio\">","Write a description for your website.","Descriptions should accurately summarize the page."],
+["Favicon","A favicon is the small icon associated with a webpage.","<link rel=\"icon\" href=\"favicon.png\">","Add a favicon to a project.","The path must point to an existing image."],
+["Open Graph basics","Social sharing metadata can influence how a page is previewed.","<meta property=\"og:title\" content=\"My Site\">","Create a title and description for a shared page.","Different platforms may use metadata differently."],
+["Data attributes","data-* attributes store custom information directly on HTML elements.","<button data-level=\"3\">Start</button>","Add a data attribute to three elements.","JavaScript can read data attributes later."],
+["Templates","template contains HTML that isn't displayed until JavaScript uses it.","<template id=\"card\">\n<div class=\"card\">Hello</div>\n</template>","Create a simple reusable template.","Templates are useful for repeated interface pieces."],
+["Canvas","canvas provides an area where JavaScript can draw graphics.","<canvas id=\"game\" width=\"400\" height=\"250\"></canvas>","Create a canvas element for a game.","JavaScript controls what appears inside it."],
+["SVG","SVG provides scalable vector graphics directly in HTML.","<svg width=\"100\" height=\"100\">\n<circle cx=\"50\" cy=\"50\" r=\"40\" />\n</svg>","Create a simple SVG shape.","SVG is useful for crisp icons and illustrations."],
+["Custom data","HTML can store information that JavaScript later reads.","<div data-color=\"green\">Duck</div>","Create a character element with three data values.","Keep custom data descriptive."],
+["Page architecture","Large sites benefit from consistent HTML structure across pages.","<header>...</header>\n<main>...</main>\n<footer>...</footer>","Design a structure shared by three pages.","Consistency makes websites easier to maintain."],
+["Unit 8 review","Modern HTML includes useful tools for metadata, graphics, reusable content, and application interfaces.","<canvas id=\"game\"></canvas>","Think of a project where canvas or SVG would help.","Choose the simplest tool that fits."]
+],
+
+[
+["Multi-page sites","A website can contain multiple HTML documents connected by links.","<a href=\"about.html\">About me</a>","Plan three pages for a personal website.","Keep navigation consistent."],
+["Relative paths","Relative links point to files based on the current document's location.","<a href=\"pages/about.html\">About</a>","Create a link to a page inside a folder.","Folders affect relative paths."],
+["Folder structure","Organizing files into folders makes larger websites easier to manage.","project/\n  index.html\n  pages/\n  images/\n  css/","Design a folder structure for your own project.","Good organization prevents confusing paths."],
+["Reusable navigation","Repeated navigation should have consistent links and labels.","<nav>\n<a href=\"index.html\">Home</a>\n<a href=\"about.html\">About</a>\n</nav>","Create navigation for a four-page site.","Consistency helps users understand a site."],
+["Landing pages","A landing page introduces a project and guides users toward a main action.","<main>\n<h1>Learn Coding</h1>\n<p>Start here.</p>\n<a href=\"lessons.html\">Lessons</a>\n</main>","Design the HTML structure of a landing page.","Give the page one clear purpose."],
+["Portfolio structure","A portfolio can organize projects into articles or sections.","<section>\n<h2>Projects</h2>\n<article>Game</article>\n</section>","Create a portfolio outline.","Showcase information in a logical order."],
+["FAQ structure","details and summary can create simple expandable FAQ sections.","<details>\n<summary>Question?</summary>\n<p>Answer.</p>\n</details>","Write three FAQ items.","Keep questions specific."],
+["Contact structure","A contact page can combine labels, inputs, textarea, and a button.","<form>\n<label for=\"message\">Message</label>\n<textarea id=\"message\"></textarea>\n<button>Send</button>\n</form>","Design a contact form.","Keep requested information to what you actually need."],
+["Project documentation","A page can explain how a project works using headings, lists, images, and code.","<h1>How It Works</h1>\n<h2>Rules</h2>\n<ul><li>Step one</li></ul>","Create documentation for a project.","Clear documentation helps other people understand your work."],
+["Unit 9 review","A real website is usually a collection of organized pages rather than one giant file.","<nav><a href=\"index.html\">Home</a></nav>\n<main><h1>Welcome</h1></main>","Plan your own multi-page site.","Structure first, styling second."]
+],
+
+[
+["HTML validation","Validation checks whether your markup follows the rules of HTML.","<!DOCTYPE html>\n<html lang=\"en\">\n<body><h1>Valid structure</h1></body>\n</html>","Inspect an old page for missing closing tags.","Validators are useful debugging tools."],
+["Debugging nesting","Incorrect nesting can create unexpected page structure.","<p><strong>Important</strong></p>","Fix an example with mismatched tags.","Close elements in the reverse order you opened them."],
+["Reusable components","HTML structures can be repeated consistently for cards, navigation, and sections.","<article class=\"card\">\n<h2>Project</h2>\n<p>Description</p>\n</article>","Design a reusable project card.","Consistent structure makes CSS easier."],
+["Forms with validation","HTML can perform basic validation before a form is submitted.","<input type=\"email\" required>\n<input type=\"number\" min=\"1\">","Add validation to a pretend sign-up form.","Browser validation is useful but isn't the only validation needed in real apps."],
+["Responsive structure","Good HTML gives CSS enough structure to rearrange content on smaller screens.","<main>\n<section class=\"cards\">...</section>\n</main>","Plan how your cards should stack on a phone.","HTML should describe content, not lock it to one screen size."],
+["Web components idea","Custom elements can represent reusable pieces of interface.","<my-card></my-card>","Invent a custom element name for a project.","Web components are a deeper topic built on standard browser APIs."],
+["HTML and JavaScript","HTML provides elements that JavaScript can select and change.","<button id=\"start\">Start</button>","Create three elements JavaScript could interact with.","Give important interactive elements clear identifiers or classes."],
+["HTML and CSS","HTML classes and structure provide hooks for CSS styling.","<div class=\"card\">Hello</div>","Create a structure containing three CSS classes.","Keep class names meaningful."],
+["Final page architecture","A polished page combines semantic structure, accessible controls, media, navigation, and metadata.","<header>...</header>\n<main>...</main>\n<footer>...</footer>","Plan the complete HTML structure of your final site.","Don't style around a messy structure—fix the structure first."],
+["Final HTML challenge","Build a complete multi-section webpage using semantic HTML and accessible controls.","<!DOCTYPE html>\n<html lang=\"en\">\n<head><title>My Project</title></head>\n<body><main><h1>My Project</h1></main></body>\n</html>","Build your own complete HTML page.","You now have the structure skills to build real sites."]
+]
+
+],
+
+CSS: [
+
+[
+["What is CSS?","CSS controls how HTML elements look and how a webpage is arranged.","h1 {\n    color: green;\n}","Change the heading color.","CSS needs a selector and declarations."],
+["Selectors","A selector chooses which HTML elements a rule should affect.","p {\n    color: #555;\n}","Style all paragraphs.","Selectors are the first part of a CSS rule."],
+["Colors","CSS can use named colors, hex values, rgb, and more.","body {\n    background: #fffaf1;\n}","Try three background colors.","Hex colors begin with #."],
+["Font size","font-size changes the size of text.","h1 {\n    font-size: 42px;\n}","Try three sizes.","Choose sizes that remain readable."],
+["Text alignment","text-align controls horizontal text alignment.","h1 {\n    text-align: center;\n}","Center a heading and left-align a paragraph.","Alignment changes the text inside the element."],
+["Backgrounds","background properties can add colors and images behind elements.","body {\n    background: #e5f0e2;\n}","Give a card its own background.","Background styling is separate from text color."],
+["Borders","Borders create lines around an element.",".card {\n    border: 1px solid #ddd;\n}","Try a thicker border.","A border has width, style, and color."],
+["Comments","CSS comments explain styles without affecting the page.","/* Main heading */\nh1 { color: green; }","Add a comment above two rules.","Comments are useful in larger stylesheets."],
+["Multiple rules","A selector can have several declarations.","p {\n    color: #555;\n    font-size: 16px;\n}","Add three properties to a card.","Group related styles together."],
+["Unit 1 review","You can now select elements and change their basic appearance.",".card {\n    background:#fff;\n    color:#444;\n    border:1px solid #ddd;\n}","Style a complete card.","CSS becomes more powerful as properties combine."]
+],
+
+[
+["Classes","A class selector begins with a dot and can style many elements.",".card {\n    padding: 20px;\n}","Create a class called favorite.","Classes are reusable."],
+["IDs","An ID selector begins with # and targets a unique element.","#hero {\n    background: #e5f0e2;\n}","Create an id for a hero section.","Prefer classes for reusable styles."],
+["Descendant selectors","A selector can target elements inside another element.",".card p {\n    color:#777;\n}","Style paragraphs inside a card.","This can be useful when structure matters."],
+["Pseudo-classes","Pseudo-classes style an element in a particular state.","button:hover {\n    transform: translateY(-2px);\n}","Create a hover effect.",":hover is one of many pseudo-classes."],
+["Links","CSS can style links differently in different states.","a {\n    color:#62886b;\n}\na:hover {\n    text-decoration:none;\n}","Style a link and its hover state.","States help users understand interactions."],
+["Fonts","font-family chooses the typeface used by text.","body {\n    font-family: Arial, sans-serif;\n}","Try a different font stack.","Always include a fallback."],
+["Font weight","font-weight controls how thick text appears.","h1 {\n    font-weight:700;\n}","Try several weights.","Not every font supports every weight."],
+["Line height","line-height controls vertical spacing between lines of text.","p {\n    line-height:1.7;\n}","Make a paragraph easier to read.","Line height is especially important for body text."],
+["Letter spacing","letter-spacing changes the space between characters.",".label {\n    letter-spacing:1.5px;\n}","Create a small uppercase label.","Small amounts can improve headings and labels."],
+["Unit 2 review","Selectors and typography let you create a visual hierarchy.",".title {\n    font-size:40px;\n    font-weight:700;\n    letter-spacing:-1px;\n}","Create your own title style.","Typography strongly affects the feel of a site."]
+],
+
+[
+["Width and height","width and height control an element's dimensions.",".box {\n    width:300px;\n    height:150px;\n}","Create a rectangle.","Be careful with fixed sizes on small screens."],
+["Padding","Padding creates space inside an element's border.",".card {\n    padding:20px;\n}","Give a card more breathing room.","Padding affects the space around content."],
+["Margin","Margin creates space outside an element.",".card {\n    margin-bottom:20px;\n}","Separate two cards.","Margin controls space between elements."],
+["Box sizing","box-sizing controls how width and height account for padding and borders.","* {\n    box-sizing:border-box;\n}","Add this common rule to a project.","border-box often makes sizing easier to reason about."],
+["Border radius","border-radius rounds corners.",".card {\n    border-radius:18px;\n}","Make a button with rounded corners.","Large values create pill-like shapes."],
+["Box shadow","box-shadow creates depth around an element.",".card {\n    box-shadow:0 10px 25px rgba(0,0,0,.08);\n}","Create a subtle card shadow.","Subtle shadows usually look more natural."],
+["Opacity","opacity controls how transparent an element appears.","img {\n    opacity:.8;\n}","Make an image slightly transparent.","Opacity affects the whole element."],
+["Overflow","overflow controls what happens when content is larger than its box.",".box {\n    overflow:hidden;\n}","Try hidden and auto.","Overflow can prevent content from spilling out."],
+["Visibility","visibility can hide an element while keeping its layout space.",".hidden {\n    visibility:hidden;\n}","Test visibility and compare it with display:none.","Different hiding methods behave differently."],
+["Unit 3 review","The box model controls how much space elements occupy and how they look as boxes.",".card {\n    padding:20px;\n    margin:15px;\n    border-radius:16px;\n}","Design a polished card.","Think about inside space and outside space separately."]
+],
+
+[
+["display block","Block elements normally take their own line.","div {\n    display:block;\n}","Turn an inline element into a block.","Display changes layout behavior."],
+["display inline","Inline elements sit alongside text or other inline elements.","span {\n    display:inline;\n}","Create two inline labels.","Inline elements don't normally create new lines."],
+["inline-block","inline-block combines inline placement with box-like sizing.",".badge {\n    display:inline-block;\n    padding:6px 10px;\n}","Create a small badge.","inline-block is useful for buttons and labels."],
+["Flexbox","Flexbox arranges items along a flexible row or column.",".row {\n    display:flex;\n    gap:20px;\n}","Put three cards in a row.","Flexbox is one of the most useful CSS layout systems."],
+["justify-content","justify-content controls distribution along the main axis.",".row {\n    display:flex;\n    justify-content:space-between;\n}","Try center and space-around.","The main axis depends on flex-direction."],
+["align-items","align-items controls alignment across the cross axis.",".row {\n    display:flex;\n    align-items:center;\n}","Center items vertically.","This is great for headers."],
+["gap","gap creates consistent space between flex or grid items.",".row {\n    display:flex;\n    gap:12px;\n}","Change the gap between cards.","gap is often cleaner than individual margins."],
+["flex-direction","flex-direction chooses row or column layout.",".menu {\n    display:flex;\n    flex-direction:column;\n}","Turn a row into a column.","Switching direction can solve many layout problems."],
+["flex-wrap","flex-wrap allows items to move onto another line.",".cards {\n    display:flex;\n    flex-wrap:wrap;\n}","Make cards wrap when they don't fit.","Wrapping helps layouts adapt."],
+["Unit 4 review","Flexbox makes it much easier to create clean layouts that respond to available space.",".cards {\n    display:flex;\n    gap:16px;\n    flex-wrap:wrap;\n}","Build a flexible card row.","Start with flexbox before reaching for complicated positioning."]
+],
+
+[
+["CSS Grid","Grid creates layouts using rows and columns.",".cards {\n    display:grid;\n    grid-template-columns:repeat(3,1fr);\n}","Create a three-column grid.","Grid is excellent for structured layouts."],
+["Grid gaps","gap also works between grid rows and columns.",".cards {\n    display:grid;\n    gap:20px;\n}","Change the gap size.","One gap declaration can control both directions."],
+["Grid columns","grid-template-columns defines column sizes.",".layout {\n    display:grid;\n    grid-template-columns:2fr 1fr;\n}","Make a main area twice as wide as a sidebar.","fr means a fraction of available space."],
+["Grid rows","grid-template-rows defines row sizes.",".layout {\n    display:grid;\n    grid-template-rows:auto 1fr auto;\n}","Create header, content, and footer rows.","Grid can control both dimensions."],
+["grid-column","grid-column can make an item span columns.",".hero {\n    grid-column:1 / -1;\n}","Make one card span the entire grid.","1 / -1 covers the full grid width."],
+["Responsive grid","minmax() and auto-fit can create flexible grids.",".cards {\n    display:grid;\n    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));\n}","Change the minimum card width.","This pattern is useful for responsive cards."],
+["Position relative","position:relative creates a reference point for absolutely positioned children.",".card {\n    position:relative;\n}","Prepare a card for a badge.","Relative positioning usually doesn't remove the element from normal flow."],
+["Position absolute","absolute positioning places an element relative to a positioned ancestor.",".badge {\n    position:absolute;\n    top:10px;\n    right:10px;\n}","Place a badge in a card corner.","Use absolute positioning intentionally."],
+["z-index","z-index controls stacking order for positioned elements.",".modal {\n    position:fixed;\n    z-index:100;\n}","Create two overlapping layers.","Higher z-index values generally appear above lower ones."],
+["Unit 5 review","Grid and positioning give you more control over complex page layouts.",".cards {\n    display:grid;\n    grid-template-columns:repeat(3,1fr);\n    gap:20px;\n}","Build a three-card section.","Use the simplest layout system that fits."]
+],
+
+[
+["Transitions","transition makes property changes happen smoothly instead of instantly.","button {\n    transition:.2s;\n}\nbutton:hover {\n    transform:translateY(-2px);\n}","Animate a button hover.","Transitions make interactions feel smoother."],
+["Transform scale","transform:scale changes the visual size of an element.",".card:hover {\n    transform:scale(1.02);\n}","Create a tiny hover enlargement.","Small transforms usually look more polished."],
+["Transform rotate","rotate turns an element around its center.",".icon:hover {\n    transform:rotate(8deg);\n}","Rotate an icon slightly.","Rotation works well for playful details."],
+["Translate","translate moves an element visually.",".card:hover {\n    transform:translateY(-4px);\n}","Make a card lift upward on hover.","Transforms don't change normal document flow."],
+["Keyframes","@keyframes defines multiple stages of an animation.","@keyframes float {\n    0%{transform:translateY(0)}\n    50%{transform:translateY(-8px)}\n    100%{transform:translateY(0)}\n}","Create a simple floating animation.","Keyframes let you control animation stages."],
+["Animation timing","animation-duration controls how long an animation takes.",".duck {\n    animation:float 2s ease-in-out infinite;\n}","Try a different duration.","Timing changes the personality of an animation."],
+["Animation delay","animation-delay waits before an animation begins.",".item {\n    animation-delay:.3s;\n}","Give two elements different delays.","Small delays can create a sequence."],
+["Opacity animation","Changing opacity can create fades.","@keyframes fade {\n    from{opacity:0}\n    to{opacity:1}\n}","Fade an element into view.","Combining opacity and transforms often looks good."],
+["Hover interactions","Pseudo-classes and transitions can make interfaces feel responsive.","button:hover {\n    background:#62886b;\n    transform:translateY(-2px);\n}","Design your own hover effect.","Keep hover effects quick and subtle."],
+["Unit 6 review","Transitions and animations can add personality without making a page distracting.",".card {\n    transition:transform .2s ease;\n}\n.card:hover {\n    transform:translateY(-4px);\n}","Animate a card or button.","Animation should support the interface, not overwhelm it."]
+],
+
+[
+["CSS variables","Custom properties store reusable values.",":root {\n    --green:#62886b;\n}\nbutton {\n    background:var(--green);\n}","Create three variables for your site.","Variables make theme changes easier."],
+["Color systems","A small group of coordinated colors can make a design feel intentional.",":root {\n    --cream:#fffaf1;\n    --green:#62886b;\n    --pink:#f2cbd3;\n}","Create a five-color palette.","Use colors consistently instead of choosing a new color everywhere."],
+["calc()","calc() lets CSS perform simple calculations.",".card {\n    width:calc(100% - 40px);\n}","Create your own calc expression.","calc is useful when fixed and flexible sizes need to combine."],
+["clamp()","clamp() creates a value that scales within a minimum and maximum.","h1 {\n    font-size:clamp(32px,6vw,64px);\n}","Make a responsive heading.","clamp is excellent for responsive typography."],
+["CSS gradients","Gradients create smooth color transitions.",".hero {\n    background:linear-gradient(135deg,#e5f0e2,#fff3c9);\n}","Create a two-color gradient.","Use subtle gradients for polished backgrounds."],
+["Radial gradients","Radial gradients spread from a central point.",".page {\n    background:radial-gradient(circle,#fff,#fffaf1);\n}","Create a soft decorative glow.","Radial gradients can make backgrounds more interesting."],
+["Background images","background-image can place images behind content.",".hero {\n    background-image:url(\"flower.jpg\");\n}","Add a background image to a section.","Remember contrast when placing text over images."],
+["Filters","CSS filters can change the appearance of images and elements.","img {\n    filter:grayscale(100%);\n}","Try blur, brightness, or grayscale.","Filters can be useful for visual effects."],
+["Object-fit","object-fit controls how replaced content such as images fits inside a box.","img {\n    width:200px;\n    height:150px;\n    object-fit:cover;\n}","Try contain instead of cover.","cover fills the box but may crop the image."],
+["Unit 7 review","CSS has powerful tools for creating reusable themes and responsive visual effects.",":root {\n    --accent:#62886b;\n}\n.button {\n    background:var(--accent);\n}","Create a small theme system.","Variables make redesigns much easier."]
+],
+
+[
+["Media queries","Media queries apply styles based on conditions such as screen width.","@media(max-width:700px){\n    .sidebar{display:none;}\n}","Hide or change something on a small screen.","Responsive design adapts to the user."],
+["Mobile layouts","A desktop row may need to become a column on a phone.","@media(max-width:700px){\n    .cards{grid-template-columns:1fr;}\n}","Make a three-column layout stack.","Design for smaller screens rather than shrinking everything."],
+["Responsive padding","Padding can use flexible units or clamp().","main {\n    padding:clamp(20px,5vw,60px);\n}","Create responsive page padding.","Flexible spacing keeps layouts comfortable."],
+["Responsive typography","Text can scale within sensible limits.","h1 {\n    font-size:clamp(30px,6vw,60px);\n}","Make a heading responsive.","Avoid text becoming too small or too large."],
+["Mobile navigation","Navigation often needs a different arrangement on small screens.","@media(max-width:700px){\n    nav{flex-direction:column;}\n}","Design a mobile navigation arrangement.","Keep navigation easy to understand."],
+["Responsive images","Images should generally shrink within their containers.","img {\n    max-width:100%;\n    height:auto;\n}","Make an image responsive.","This simple rule solves many overflow problems."],
+["Grid auto-fit","auto-fit lets grid columns adapt to available width.",".cards {\n    display:grid;\n    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));\n}","Change the minimum width.","This can remove the need for several breakpoints."],
+["Testing breakpoints","Responsive CSS should be tested at multiple widths.","@media(max-width:600px){\n    /* phone */\n}","Choose three screen widths to test.","Don't assume one breakpoint works everywhere."],
+["Reduced motion","Some users prefer less animation, so CSS can respect that preference.","@media(prefers-reduced-motion:reduce){\n    *{animation:none!important;}\n}","Add reduced-motion support to an animation.","Accessibility includes motion preferences."],
+["Unit 8 review","Responsive CSS helps one website work across phones, tablets, and computers.","@media(max-width:700px){\n    .cards{grid-template-columns:1fr;}\n}","Make one of your old projects responsive.","Always test the actual layout at different sizes."]
+],
+
+[
+["Design tokens","Repeated values such as spacing, colors, and radii can become a design system.",":root {\n    --radius:16px;\n    --space:20px;\n}","Create five design variables.","Tokens keep a design consistent."],
+["Card systems","A reusable card style can make many different pieces of content feel related.",".card {\n    padding:20px;\n    border-radius:16px;\n    background:white;\n}","Design three card variations.","Change content rather than rebuilding the whole style."],
+["Button systems","A consistent button system can include primary, secondary, and disabled states.",".button {\n    padding:10px 16px;\n    border-radius:10px;\n}\n.button.primary{background:#62886b;}","Create two button variants.","Keep states visually understandable."],
+["Focus states","Keyboard users need to be able to see which interactive element is focused.","button:focus-visible {\n    outline:3px solid #f5d77d;\n}","Add focus styling to links too.","Don't remove focus indicators without replacing them."],
+["Dark themes","CSS variables make alternate color themes easier to create.","body.dark {\n    --background:#292c29;\n    --text:#fff;\n}","Design a small dark palette.","Don't simply invert every color."],
+["Layered shadows","Multiple subtle shadows can create depth.",".card {\n    box-shadow:0 4px 10px rgba(0,0,0,.04),0 18px 40px rgba(0,0,0,.08);\n}","Try creating your own layered shadow.","Keep shadows subtle."],
+["Glass effects","Backdrop filters can create a translucent interface effect.",".glass {\n    background:rgba(255,255,255,.65);\n    backdrop-filter:blur(12px);\n}","Create a glass-style navigation bar.","Make sure text still has enough contrast."],
+["Decorative shapes","Pseudo-elements can create decoration without extra HTML.",".card::before {\n    content:\"\";\n    display:block;\n}","Create a decorative dot or line.","Decorations should not interfere with content."],
+["Polished states","Good interfaces have hover, focus, active, and disabled states.","button:hover{transform:translateY(-2px);}\nbutton:active{transform:translateY(0);}","Create all four states for a button.","Think about what every interaction should communicate."],
+["Unit 9 review","A polished design system combines variables, components, responsive rules, accessibility, and interaction states.",":root{--accent:#62886b;--radius:16px;}\n.card{border-radius:var(--radius);}","Create a mini design system.","Consistency makes a site feel professionally designed."]
+],
+
+[
+["Organizing CSS","Large stylesheets need sections and consistent naming.","/* HEADER */\n/* CARDS */\n/* FOOTER */","Organize an old stylesheet into sections.","Good organization makes debugging faster."],
+["Naming classes","Class names should describe purpose rather than temporary appearance.",".profile-card{}\n.button-primary{}","Rename three vague classes.","Meaningful names survive design changes."],
+["Avoiding repetition","Repeated declarations can often be shared by a common class.",".button {\n    padding:10px 16px;\n}\n.button-primary{background:green;}\n.button-secondary{background:white;}","Find one repeated style in a project.","Shared rules keep stylesheets smaller."],
+["Specificity","When multiple rules match an element, CSS specificity helps determine which rule wins.","button{color:black;}\n.primary{color:white;}","Predict which rule will apply.","Avoid fighting specificity with increasingly complicated selectors."],
+["Inheritance","Some CSS properties naturally pass from parent elements to children.","body {\n    font-family:Arial;\n    color:#444;\n}","Use body to set a base font and color.","Inheritance can reduce repetition."],
+["Pseudo-elements","::before and ::after can create generated decorative content.",".title::after {\n    content:\"\";\n    display:block;\n    width:40px;\n    height:3px;\n}","Create an underline decoration.","Generated content is best for decoration."],
+["Transitions and accessibility","Animation should remain usable for people who prefer reduced motion.","@media(prefers-reduced-motion:reduce){\n    *{transition:none!important;}\n}","Add reduced-motion support to a project.","Accessibility should be considered while designing effects."],
+["Performance thinking","Too many huge images, animations, and expensive effects can slow a page.",".decorative {\n    /* keep effects simple */\n}","Find one effect you could simplify.","Good design also considers performance."],
+["Complete visual system","Combine typography, colors, spacing, layout, states, and responsive behavior.",":root{\n    --accent:#62886b;\n    --radius:16px;\n}\n.card{\n    border-radius:var(--radius);\n}","Create a mini style guide for your site.","Design systems make future pages faster to build."],
+["Final CSS challenge","Create a polished responsive interface using everything you've learned.",".app {\n    max-width:1100px;\n    margin:auto;\n    padding:clamp(20px,5vw,60px);\n}","Build and style a complete page from scratch.","You now have the tools to make a real website look intentional."]
+]
+
+]
+
+};
 
 /* =========================================================
    STATE
 ========================================================= */
 
-let currentLanguage =
-    localStorage.getItem("currentLanguage") || "Python";
+let language=localStorage.getItem("language")||"Python";
+let page="dashboard";
+let unit=1;
+let lesson=1;
+let testIndex=0;
+let firstWrong=null;
 
-let currentPage = "dashboard";
-
-let currentUnit = 1;
-let currentLesson = 1;
-
-let completed = JSON.parse(
-    localStorage.getItem("completedLessons") || "{}"
+let placements=JSON.parse(
+    localStorage.getItem("placements")||"{}"
 );
 
-let placements = JSON.parse(
-    localStorage.getItem("placements") || "{}"
+let completed=JSON.parse(
+    localStorage.getItem("completed")||"{}"
 );
 
-let streak = Number(
-    localStorage.getItem("codingStreak") || 0
+let streak=Number(
+    localStorage.getItem("streak")||0
 );
 
-let testIndex = 0;
-let testFirstWrong = null;
-
-document.getElementById("streakNumber").textContent = streak;
+document.getElementById("streak").textContent=streak;
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function lessonKey(unit, lesson) {
-    return currentLanguage + "-" + unit + "-" + lesson;
+function key(u,l){
+    return language+"-"+u+"-"+l;
 }
 
-function isCompleted(unit, lesson) {
-    return completed[lessonKey(unit, lesson)] === true;
+function done(u,l){
+    return completed[key(u,l)]===true;
 }
 
-function completeStoredLesson(unit, lesson) {
-    completed[lessonKey(unit, lesson)] = true;
-
-    localStorage.setItem(
-        "completedLessons",
-        JSON.stringify(completed)
-    );
+function markDone(u,l){
+    completed[key(u,l)]=true;
+    localStorage.setItem("completed",JSON.stringify(completed));
 }
 
-function getPlacement() {
-    return placements[currentLanguage] || null;
+function placement(){
+    return placements[language]||null;
 }
 
-function getProgress() {
+function course(){
+    return courses[language];
+}
 
-    let total = 0;
+function totalCompleted(){
+    let n=0;
 
-    for (let unit = 1; unit <= 10; unit++) {
-
-        for (let lesson = 1; lesson <= 10; lesson++) {
-
-            if (isCompleted(unit, lesson)) {
-                total++;
-            }
-
+    for(let u=1;u<=10;u++){
+        for(let l=1;l<=10;l++){
+            if(done(u,l)) n++;
         }
-
     }
 
-    return total;
+    return n;
 }
 
 /* =========================================================
    LOCKING
 ========================================================= */
 
-function lessonUnlocked(unit, lesson) {
+function unlocked(u,l){
 
-    const placement = getPlacement();
+    const start=placement();
 
-    if (!placement) {
-        return false;
-    }
+    if(!start)return false;
 
-    if (unit < placement) {
-        return false;
-    }
+    if(u<start)return false;
 
-    if (unit === placement && lesson === 1) {
-        return true;
-    }
+    if(u===start&&l===1)return true;
 
-    if (lesson > 1) {
-        return isCompleted(unit, lesson - 1);
-    }
+    if(l>1)return done(u,l-1);
 
-    return isCompleted(unit - 1, 10);
+    return done(u-1,10);
 }
 
 /* =========================================================
    LANGUAGE
 ========================================================= */
 
-function changeLanguage(language) {
+function changeLanguage(newLanguage){
 
-    currentLanguage = language;
+    language=newLanguage;
 
-    localStorage.setItem(
-        "currentLanguage",
-        currentLanguage
-    );
+    localStorage.setItem("language",language);
 
-    if (!getPlacement()) {
-        startPlacement();
-        return;
-    }
+    page=placement()?"dashboard":"test";
 
-    currentPage = "dashboard";
     render();
 }
 
@@ -1556,58 +1634,104 @@ function changeLanguage(language) {
    PLACEMENT TEST
 ========================================================= */
 
-function startPlacement() {
+const tests={
 
-    testIndex = 0;
-    testFirstWrong = null;
-    currentPage = "test";
+Python:[
+["Which symbol starts a Python comment?","#","//","<!--",";"],
+["What does an if statement do?","Repeats forever","Checks a condition","Creates a list","Prints a picture"],
+["Which structure repeats code?","A loop","A string","A comment","A variable"],
+["What is a function?","A reusable block of code","A number","A file","A comment"],
+["Which collection stores ordered values?","List","Comment","Boolean","Condition"],
+["What stores labeled values?","Dictionary","Loop","String","Operator"],
+["What can input() do?","Ask the user for information","Draw a picture","Delete a file","Create a loop"],
+["What is debugging?","Finding and fixing problems","Adding random code","Deleting a program","Changing fonts"],
+["What does a class help create?","Objects","Comments","Numbers","Errors"],
+["What is a module useful for?","Organizing reusable code","Changing a monitor","Deleting variables","Making HTML"]
+],
+
+JavaScript:[
+["Which keyword creates a changeable variable?","let","const","class","html"],
+["What does console.log() do?","Writes to the console","Creates a button","Changes CSS","Starts a loop"],
+["Which structure makes a decision?","if","array","comment","string"],
+["Which symbol checks strict equality?","===","=","=>","!="],
+["Which collection stores ordered values?","Array","Object","Boolean","Function"],
+["What does an object contain?","Properties and values","Only loops","Only text","Only numbers"],
+["What does an event represent?","Something that happens","A variable type","A CSS color","An HTML file"],
+["What does the DOM represent?","The webpage structure","A Python list","A CSS animation","A server"],
+["What can localStorage do?","Save small browser data","Create a font","Play every video","Compile Python"],
+["What is a JavaScript function?","Reusable behavior","A color","An HTML tag","A browser"]
+],
+
+HTML:[
+["What is HTML mainly used for?","Structure","Animation","Calculations","Database storage"],
+["Which tag creates a heading?","h1","p","img","div"],
+["Which tag creates a link?","a","link","url","href"],
+["Which attribute describes an image?","alt","src","href","class"],
+["Which element contains visible page content?","body","head","title","meta"],
+["Which element creates a form?","form","input","label","button"],
+["Which element represents the main content?","main","footer","aside","title"],
+["What does semantic HTML provide?","Meaningful structure","Random colors","Animations","Passwords"],
+["Which element creates a table row?","tr","td","th","table-row"],
+["What does aria-label help provide?","An accessible label","A background image","A CSS animation","A script"]
+],
+
+CSS:[
+["What does CSS control?","Appearance and layout","Database storage","Python code","HTML meaning"],
+["Which symbol selects a class?",".", "#","@","$"],
+["Which property changes text color?","color","font","text","paint"],
+["Which property creates space inside a box?","padding","margin","gap","space"],
+["Which property creates space outside a box?","margin","padding","border","outside"],
+["What is Flexbox used for?","Layout","Database storage","HTML validation","Python"],
+["What does border-radius do?","Rounds corners","Changes text","Moves a page","Adds HTML"],
+["What does transition do?","Makes property changes smooth","Creates a database","Changes HTML","Adds JavaScript"],
+["What does a media query help with?","Responsive styles","Python loops","HTML forms","Audio"],
+["What are CSS variables useful for?","Reusable values","Running JavaScript","Creating HTML","Saving files"]
+]
+
+};
+
+function startTest(){
+
+    testIndex=0;
+    firstWrong=null;
+    page="test";
 
     render();
 }
 
-function answerTest(answer) {
+function answerTest(choice){
 
-    const question =
-        placementQuestions[testIndex];
+    const questions=tests[language];
+    const q=questions[testIndex];
 
-    if (
-        answer !== question.correct &&
-        testFirstWrong === null
-    ) {
-        testFirstWrong = testIndex + 1;
+    if(choice!==q[1]&&firstWrong===null){
+        firstWrong=testIndex+1;
     }
 
     testIndex++;
 
-    if (testIndex >= 10) {
+    if(testIndex>=10){
 
-        let startingUnit;
+        let start;
 
-        if (testFirstWrong === null) {
-
-            startingUnit = 10;
-
-        } else {
-
-            startingUnit =
-                Math.max(1, testFirstWrong - 1);
-
+        if(firstWrong===null){
+            start=10;
+        }else{
+            start=Math.max(1,firstWrong-1);
         }
 
-        placements[currentLanguage] =
-            startingUnit;
+        placements[language]=start;
 
         localStorage.setItem(
             "placements",
             JSON.stringify(placements)
         );
 
-        currentUnit = startingUnit;
-        currentLesson = 1;
-        currentPage = "dashboard";
+        unit=start;
+        lesson=1;
+        page="dashboard";
 
         render();
-
         return;
     }
 
@@ -1615,183 +1739,62 @@ function answerTest(answer) {
 }
 
 /* =========================================================
-   LESSON CONTENT
+   LESSONS
 ========================================================= */
 
-function getLessonContent(language, unit, lesson) {
+function openLesson(u,l){
 
-    const topic =
-        lessonTopics[unit - 1][lesson - 1];
+    if(!unlocked(u,l))return;
 
-    const content = {
-
-        Python: {
-            explanation:
-                "Python lets you give clear instructions to a computer. This lesson introduces " +
-                topic.toLowerCase() +
-                " and shows how it fits into a real program.",
-
-            code:
-`name = "Abby"
-
-print("Hello, " + name)`,
-
-            tip:
-                "Try changing the value of name and run the program again."
-        },
-
-        JavaScript: {
-            explanation:
-                "JavaScript makes websites interactive. In this lesson, you'll learn about " +
-                topic.toLowerCase() +
-                " and how it can become part of a real webpage.",
-
-            code:
-`let name = "Abby";
-
-console.log("Hello, " + name);`,
-
-            tip:
-                "Try changing the text inside the quotes and see what happens."
-        },
-
-        HTML: {
-            explanation:
-                "HTML creates the structure of a webpage. This lesson introduces " +
-                topic.toLowerCase() +
-                " and shows how HTML elements fit together.",
-
-            code:
-`<section>
-    <h2>Hello!</h2>
-    <p>Welcome to my website.</p>
-</section>`,
-
-            tip:
-                "Try changing the words inside the HTML tags."
-        },
-
-        CSS: {
-            explanation:
-                "CSS controls the appearance of a webpage. This lesson introduces " +
-                topic.toLowerCase() +
-                " and shows how you can use CSS to style a page.",
-
-            code:
-`.card {
-    background: #e5f0e2;
-    padding: 20px;
-    border-radius: 16px;
-}`,
-
-            tip:
-                "Try changing the padding, background color, or border radius."
-        }
-
-    };
-
-    return content[language];
-}
-
-/* =========================================================
-   OPEN LESSON
-========================================================= */
-
-function openLesson(unit, lesson) {
-
-    if (!lessonUnlocked(unit, lesson)) {
-        return;
-    }
-
-    currentUnit = unit;
-    currentLesson = lesson;
-    currentPage = "lesson";
+    unit=u;
+    lesson=l;
+    page="lesson";
 
     render();
 }
 
-/* =========================================================
-   COMPLETE LESSON
-========================================================= */
+function completeLesson(){
 
-function completeLesson() {
-
-    completeStoredLesson(
-        currentUnit,
-        currentLesson
-    );
-
+    markDone(unit,lesson);
     updateStreak();
 
     render();
 }
 
-/* =========================================================
-   NEXT LESSON
-========================================================= */
+function nextLesson(){
 
-function nextLesson() {
-
-    completeStoredLesson(
-        currentUnit,
-        currentLesson
-    );
-
+    markDone(unit,lesson);
     updateStreak();
 
-    if (currentLesson < 10) {
-
-        currentLesson++;
-
-    } else if (currentUnit < 10) {
-
-        currentUnit++;
-        currentLesson = 1;
-
-    } else {
-
-        currentPage = "finished";
+    if(lesson<10){
+        lesson++;
+    }else if(unit<10){
+        unit++;
+        lesson=1;
+    }else{
+        page="finished";
         render();
         return;
     }
 
-    currentPage = "lesson";
+    page="lesson";
 
     render();
 }
 
-/* =========================================================
-   FIND NEXT LESSON
-========================================================= */
+function continueLearning(){
 
-function openNextAvailable() {
+    const start=placement();
 
-    const placement =
-        getPlacement();
+    for(let u=start;u<=10;u++){
 
-    if (!placement) {
-        startPlacement();
-        return;
-    }
+        for(let l=1;l<=10;l++){
 
-    for (
-        let unit = placement;
-        unit <= 10;
-        unit++
-    ) {
-
-        for (
-            let lesson = 1;
-            lesson <= 10;
-            lesson++
-        ) {
-
-            if (
-                lessonUnlocked(unit, lesson) &&
-                !isCompleted(unit, lesson)
-            ) {
-
-                openLesson(unit, lesson);
+            if(unlocked(u,l)&&!done(u,l)){
+                unit=u;
+                lesson=l;
+                page="lesson";
+                render();
                 return;
             }
 
@@ -1799,7 +1802,7 @@ function openNextAvailable() {
 
     }
 
-    currentPage = "finished";
+    page="finished";
     render();
 }
 
@@ -1807,584 +1810,412 @@ function openNextAvailable() {
    STREAK
 ========================================================= */
 
-function updateStreak() {
+function updateStreak(){
 
-    const today =
-        new Date().toDateString();
+    const today=new Date().toDateString();
+    const last=localStorage.getItem("lastCodingDay");
 
-    const lastDay =
-        localStorage.getItem("lastCodingDay");
-
-    if (lastDay !== today) {
+    if(last!==today){
 
         streak++;
 
-        localStorage.setItem(
-            "codingStreak",
-            streak
-        );
+        localStorage.setItem("streak",streak);
+        localStorage.setItem("lastCodingDay",today);
 
-        localStorage.setItem(
-            "lastCodingDay",
-            today
-        );
-
-        document.getElementById(
-            "streakNumber"
-        ).textContent = streak;
+        document.getElementById("streak").textContent=streak;
     }
-}
-
-/* =========================================================
-   LESSON PAGE
-========================================================= */
-
-function renderLesson() {
-
-    const topic =
-        lessonTopics[currentUnit - 1][currentLesson - 1];
-
-    const content =
-        getLessonContent(
-            currentLanguage,
-            currentUnit,
-            currentLesson
-        );
-
-    const done =
-        isCompleted(
-            currentUnit,
-            currentLesson
-        );
-
-    let nextText = "Next Lesson →";
-
-    if (
-        currentLesson === 10 &&
-        currentUnit === 10
-    ) {
-        nextText = "Finish Course ✦";
-    } else if (currentLesson === 10) {
-        nextText = "Next Unit →";
-    }
-
-    let html = "";
-
-    html += '<div class="lesson-page">';
-
-    html +=
-        '<button class="back-button" onclick="goDashboard()">' +
-        '← Back to lessons' +
-        '</button>';
-
-    html += '<div class="lesson-header">';
-
-    html +=
-        '<span class="lesson-tag">' +
-        currentLanguage +
-        ' · Unit ' +
-        currentUnit +
-        '</span>';
-
-    html +=
-        '<h2>' +
-        topic +
-        '</h2>';
-
-    html +=
-        '<p>Lesson ' +
-        currentLesson +
-        ' of 10</p>';
-
-    html += '</div>';
-
-    html += '<div class="lesson-content">';
-
-    html +=
-        '<h3>Let\'s learn it!</h3>';
-
-    html +=
-        '<p>' +
-        content.explanation +
-        '</p>';
-
-    html +=
-        '<div class="code-label">Example</div>';
-
-    /*
-       IMPORTANT:
-       The code is inserted with textContent below.
-       It is NOT placed directly into HTML.
-       This prevents JavaScript/HTML examples
-       from accidentally becoming page markup.
-    */
-
-    html +=
-        '<pre class="code-box" id="lessonCode"></pre>';
-
-    html +=
-        '<div class="tip"><strong>Little tip:</strong> ' +
-        content.tip +
-        '</div>';
-
-    html += '<div class="lesson-actions">';
-
-    if (done) {
-
-        html +=
-            '<div>' +
-            '<strong>✓ Lesson complete!</strong>' +
-            '<span>You finished this lesson. Keep going!</span>' +
-            '</div>';
-
-        html +=
-            '<button class="next-button" onclick="nextLesson()">' +
-            nextText +
-            '</button>';
-
-    } else {
-
-        html +=
-            '<div>' +
-            '<strong>Ready?</strong>' +
-            '<span>Finish this lesson to unlock the next one.</span>' +
-            '</div>';
-
-        html +=
-            '<button class="next-button" onclick="completeLesson()">' +
-            '✓ Complete Lesson' +
-            '</button>';
-    }
-
-    html += '</div>';
-
-    html += '</div>';
-
-    html += '</div>';
-
-    return {
-        html: html,
-        code: content.code
-    };
 }
 
 /* =========================================================
    DASHBOARD
 ========================================================= */
 
-function renderDashboard() {
+function renderDashboard(){
 
-    const progress =
-        getProgress();
+    const start=placement();
+    const progress=totalCompleted();
 
-    const placement =
-        getPlacement() || 1;
+    let html=`
 
-    let html = "";
+    <div class="page">
 
-    html += '<div class="page">';
+        <div class="welcome">
 
-    html += '<div class="welcome">';
+            <div>
+                <h2>Keep coding,<br>keep creating.</h2>
+                <p>You're learning ${language}.</p>
+            </div>
 
-    html += '<div>';
+            <div class="progressBox">
 
-    html +=
-        '<h2>Keep coding,<br>keep creating.</h2>';
+                <div class="progressLabel">
+                    <span>Your progress</span>
+                    <span>${progress}%</span>
+                </div>
 
-    html +=
-        '<p>You\'re learning ' +
-        currentLanguage +
-        '.</p>';
+                <div class="progress">
+                    <div class="progressBar"
+                    style="width:${progress}%"></div>
+                </div>
 
-    html += '</div>';
+            </div>
 
-    html += '<div class="progress-box">';
+        </div>
 
-    html +=
-        '<div class="progress-label">' +
-        '<span>Your progress</span>' +
-        '<span>' + progress + '%</span>' +
-        '</div>';
+        <div class="cards">
 
-    html +=
-        '<div class="progress">' +
-        '<div class="progress-bar" style="width:' +
-        progress +
-        '%"></div>' +
-        '</div>';
+            <div class="card continueCard">
 
-    html += '</div>';
+                <div class="kicker">Continue learning</div>
 
-    html += '</div>';
+                <h3>
+                    Unit ${start} · ${course()[start-1][0][0]}
+                </h3>
 
-    html += '<div class="cards">';
+                <p>
+                    Your placement test put you here.
+                    Finish lessons in order to unlock the next ones.
+                </p>
 
-    html += '<div class="card continue-card">';
+                <button class="button"
+                onclick="continueLearning()">
+                    Continue lesson →
+                </button>
 
-    html +=
-        '<div class="card-kicker">Continue learning</div>';
+            </div>
 
-    html +=
-        '<h3>Unit ' +
-        placement +
-        ' · ' +
-        unitNames[placement - 1] +
-        '</h3>';
+            <div class="card statsCard">
 
-    html +=
-        '<p>Pick up where you left off and keep unlocking your coding journey.</p>';
+                <div class="stat">
+                    <span>Language</span>
+                    <strong>${language}</strong>
+                </div>
 
-    html +=
-        '<button class="big-button" onclick="openNextAvailable()">' +
-        'Continue lesson →' +
-        '</button>';
+                <div class="stat">
+                    <span>Lessons</span>
+                    <strong>${progress}/100</strong>
+                </div>
 
-    html += '</div>';
+                <div class="stat">
+                    <span>Streak</span>
+                    <strong>${streak} days</strong>
+                </div>
 
-    html += '<div class="card stats-card">';
+            </div>
 
-    html +=
-        '<div class="stat">' +
-        '<span>Language</span>' +
-        '<strong>' + currentLanguage + '</strong>' +
-        '</div>';
+        </div>
 
-    html +=
-        '<div class="stat">' +
-        '<span>Lessons done</span>' +
-        '<strong>' + progress + '/100</strong>' +
-        '</div>';
+        <div class="duckArea">
 
-    html +=
-        '<div class="stat">' +
-        '<span>Streak</span>' +
-        '<strong>' + streak + ' days</strong>' +
-        '</div>';
+            <span class="duckNote"
+            style="left:18%;top:25%">♪</span>
 
-    html += '</div>';
+            <span class="duckNote"
+            style="right:28%;bottom:22%">♫</span>
 
-    html += '</div>';
+            ${duck(8,48)}
+            ${duck(70,35)}
 
-    html += '<div class="duck-area">';
+        </div>
 
-    html +=
-        '<span class="duck-note" style="left:18%;top:25%">♪</span>';
+        <div class="sectionTitle">
+            <h3>Unit ${start} · ${course()[start-1][0][0]}</h3>
+        </div>
 
-    html +=
-        '<span class="duck-note" style="right:28%;bottom:22%">♫</span>';
+        <div class="lessonList">
+    `;
 
-    html += createDuck(8, 48);
-    html += createDuck(70, 35);
+    for(let l=1;l<=10;l++){
 
-    html += '</div>';
+        const item=course()[start-1][l-1];
 
-    html +=
-        '<div class="section-title">' +
-        '<h3>Your lessons</h3>' +
-        '</div>';
+        const canOpen=unlocked(start,l);
+        const isDone=done(start,l);
 
-    html += '<div class="lesson-list">';
+        html+=`
 
-    for (
-        let lesson = 1;
-        lesson <= 10;
-        lesson++
-    ) {
+        <div class="lesson
+            ${canOpen?"unlocked":"locked"}
+            ${isDone?"completed":""}"
 
-        const unlocked =
-            lessonUnlocked(
-                placement,
-                lesson
-            );
+            ${canOpen?
+            `onclick="openLesson(${start},${l})"`:
+            ""}>
 
-        const done =
-            isCompleted(
-                placement,
-                lesson
-            );
+            <div class="lessonNumber">
+                ${isDone?"✓":l}
+            </div>
 
-        html +=
-            '<div class="lesson ' +
-            (unlocked ? "unlocked " : "locked ") +
-            (done ? "completed" : "") +
-            '"' +
-            (
-                unlocked
-                ?
-                ' onclick="openLesson(' +
-                placement +
-                ',' +
-                lesson +
-                ')"'
-                :
-                ''
-            ) +
-            '>';
+            <div class="lessonInfo">
 
-        html +=
-            '<div class="lesson-number">' +
-            (done ? "✓" : lesson) +
-            '</div>';
+                <div class="lessonTitle">
+                    ${item[0]}
+                </div>
 
-        html += '<div class="lesson-info">';
+                <div class="lessonSub">
+                    Lesson ${l}
+                </div>
 
-        html +=
-            '<div class="lesson-title">' +
-            lessonTopics[placement - 1][lesson - 1] +
-            '</div>';
+            </div>
 
-        html +=
-            '<div class="lesson-sub">Lesson ' +
-            lesson +
-            '</div>';
+            <div class="arrow">
+                ${canOpen?"→":"🔒"}
+            </div>
 
-        html += '</div>';
+        </div>
 
-        html +=
-            '<div class="lesson-arrow">' +
-            (unlocked ? "→" : "🔒") +
-            '</div>';
-
-        html += '</div>';
+        `;
     }
 
-    html += '</div>';
-    html += '</div>';
+    html+=`
+        </div>
+
+    </div>
+    `;
 
     return html;
 }
 
 /* =========================================================
-   DUCK HTML
+   LESSON PAGE
 ========================================================= */
 
-function createDuck(left, top) {
+function renderLesson(){
 
-    return (
-        '<div class="duck" ' +
-        'style="left:' + left + '%;top:' + top + '%"' +
-        ' onclick="duckClicked(this)">' +
+    const data=course()[unit-1][lesson-1];
 
-        '<div class="body"></div>' +
-        '<div class="head"></div>' +
-        '<div class="eye"></div>' +
-        '<div class="beak"></div>' +
-        '<div class="wing"></div>' +
+    const title=data[0];
+    const explanation=data[1];
+    const code=data[2];
+    const challenge=data[3];
+    const tip=data[4];
 
-        '</div>'
-    );
-}
+    const isDone=done(unit,lesson);
 
-/* =========================================================
-   SIDEBAR
-========================================================= */
+    let nextText="Next Lesson →";
 
-function renderUnits() {
-
-    const list =
-        document.getElementById("unitList");
-
-    if (!list) {
-        return;
+    if(unit===10&&lesson===10){
+        nextText="Finish Course ✦";
+    }else if(lesson===10){
+        nextText="Next Unit →";
     }
 
-    const placement =
-        getPlacement();
+    return `
 
-    if (!placement) {
-        list.innerHTML = "";
-        return;
-    }
+    <div class="lessonPage">
 
-    let html = "";
+        <button class="back"
+        onclick="goDashboard()">
+            ← Back to lessons
+        </button>
 
-    for (
-        let unit = 1;
-        unit <= 10;
-        unit++
-    ) {
+        <div class="lessonHeader">
 
-        const unlocked =
-            unit >= placement &&
-            (
-                unit === placement ||
-                isCompleted(unit - 1, 10)
-            );
+            <span class="tag">
+                ${language} · Unit ${unit}
+            </span>
 
-        html +=
-            '<div class="unit ' +
-            (unit === currentUnit ? "current " : "") +
-            (unlocked ? "" : "locked") +
-            '"' +
-            (
-                unlocked
-                ?
-                ' onclick="openUnit(' +
-                unit +
-                ')"'
-                :
-                ''
-            ) +
-            '>';
+            <h2>${title}</h2>
 
-        html +=
-            '<span class="unit-number">' +
-            unit +
-            '</span>' +
-            unitNames[unit - 1];
+            <p>
+                Lesson ${lesson} of 10
+            </p>
 
-        html += '</div>';
-    }
+        </div>
 
-    list.innerHTML = html;
-}
+        <div class="lessonContent">
 
-function openUnit(unit) {
+            <h3>Let's learn it!</h3>
 
-    if (!lessonUnlocked(unit, 1)) {
-        return;
-    }
+            <p>
+                ${explanation}
+            </p>
 
-    currentUnit = unit;
+            <div class="codeLabel">
+                Example
+            </div>
 
-    for (
-        let lesson = 1;
-        lesson <= 10;
-        lesson++
-    ) {
+            <pre class="codeBox"
+            id="codeBox"></pre>
 
-        if (
-            lessonUnlocked(unit, lesson) &&
-            !isCompleted(unit, lesson)
-        ) {
+            <div class="challenge">
 
-            currentLesson = lesson;
-            currentPage = "lesson";
-            render();
-            return;
-        }
+                <strong>Your challenge</strong>
 
-    }
+                <p>
+                    ${challenge}
+                </p>
+
+            </div>
+
+            <div class="tip">
+                <strong>Little tip:</strong>
+                ${tip}
+            </div>
+
+            <div class="actions">
+
+                <div>
+
+                    <strong>
+                        ${isDone?
+                        "✓ Lesson complete!":
+                        "Ready to move on?"}
+                    </strong>
+
+                    <span>
+                        ${isDone?
+                        "You've unlocked the next lesson.":
+                        "Complete this lesson to unlock the next one."}
+                    </span>
+
+                </div>
+
+                <button class="button"
+                onclick="${isDone?
+                "nextLesson()":
+                "completeLesson()"}">
+
+                    ${isDone?
+                    nextText:
+                    "✓ Complete Lesson"}
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    `;
 }
 
 /* =========================================================
    TEST PAGE
 ========================================================= */
 
-function renderTest() {
+function renderTest(){
 
-    const question =
-        placementQuestions[testIndex];
+    const q=tests[language][testIndex];
 
-    const percent =
-        (testIndex / 10) * 100;
+    return `
 
-    let html = "";
+    <div class="testScreen">
 
-    html += '<div class="test-screen">';
+        <div class="testCard">
 
-    html += '<div class="test-card">';
+            <div class="kicker">
+                Placement test · ${language}
+            </div>
 
-    html +=
-        '<div class="card-kicker">Placement test</div>';
+            <h2>
+                Let's see where you belong.
+            </h2>
 
-    html +=
-        '<h2>Let\'s see where you belong.</h2>';
+            <p>
+                There is one question for each unit.
+                Your first wrong answer places you on
+                the unit immediately before that question.
+                If you get everything right, you start at Unit 10.
+            </p>
 
-    html +=
-        '<p>Answer these 10 questions. Your first wrong answer determines where your lessons begin.</p>';
+            <div class="testProgress">
 
-    html +=
-        '<div class="test-progress">' +
-        '<div class="test-progress-bar" style="width:' +
-        percent +
-        '%"></div>' +
-        '</div>';
+                <div class="testProgressBar"
+                style="width:${testIndex*10}%">
+                </div>
 
-    html +=
-        '<div class="question">' +
-        (testIndex + 1) +
-        '. ' +
-        question.q +
-        '</div>';
+            </div>
 
-    html += '<div class="answers">';
+            <div class="question">
 
-    for (
-        let i = 0;
-        i < question.answers.length;
-        i++
-    ) {
+                ${testIndex+1}. ${q[0]}
 
-        html +=
-            '<button class="answer" onclick="answerTest(' +
-            i +
-            ')">' +
-            question.answers[i] +
-            '</button>';
-    }
+            </div>
 
-    html += '</div>';
+            <div class="answers">
 
-    html += '</div>';
-    html += '</div>';
+                ${q.slice(1).map(answer=>`
+                    <button class="answer"
+                    onclick='answerTest(${JSON.stringify(answer)})'>
+                        ${answer}
+                    </button>
+                `).join("")}
 
-    return html;
+            </div>
+
+        </div>
+
+    </div>
+    `;
 }
 
 /* =========================================================
-   FINISHED PAGE
+   FINISHED
 ========================================================= */
 
-function renderFinished() {
+function renderFinished(){
 
-    return (
-        '<div class="finished">' +
+    return `
 
-        '<div class="finished-card">' +
+    <div class="finished">
 
-        '<h2>You finished! ✦</h2>' +
+        <div class="finishedCard">
 
-        '<p>You completed all 100 lessons in ' +
-        currentLanguage +
-        '.</p>' +
+            <h2>You finished! ✦</h2>
 
-        '<p>' +
-        'Now you get to use what you learned to build something completely your own.' +
-        '</p>' +
+            <p>
+                You completed all 100 lessons
+                in ${language}.
+            </p>
 
-        '<button class="big-button" onclick="goDashboard()">' +
-        'Back to dashboard' +
-        '</button>' +
+            <p>
+                That's a LOT of coding.
+                Now it's time to build something
+                completely your own.
+            </p>
 
-        '</div>' +
+            <button class="button"
+            onclick="goDashboard()">
+                Back to dashboard
+            </button>
 
-        '</div>'
-    );
+        </div>
+
+    </div>
+    `;
 }
 
 /* =========================================================
-   DUCK CONFETTI
+   DUCK
 ========================================================= */
 
-function duckClicked(duck) {
+function duck(left,top){
 
-    if (duck.classList.contains("clicked")) {
-        return;
-    }
+    return `
 
-    const rect =
-        duck.getBoundingClientRect();
+    <div class="duck"
+    style="left:${left}%;top:${top}%"
+    onclick="duckClick(this)">
 
-    const centerX =
-        rect.left + rect.width / 2;
+        <div class="body"></div>
+        <div class="head"></div>
+        <div class="eye"></div>
+        <div class="beak"></div>
+        <div class="wing"></div>
 
-    const centerY =
-        rect.top + rect.height / 2;
+    </div>
+    `;
+}
 
-    duck.classList.add("clicked");
+function duckClick(element){
 
-    const colors = [
+    const rect=element.getBoundingClientRect();
+
+    const x=rect.left+rect.width/2;
+    const y=rect.top+rect.height/2;
+
+    const colors=[
         "#f2cbd3",
         "#a9c7ad",
         "#f5d77d",
@@ -2392,151 +2223,205 @@ function duckClicked(duck) {
         "#ddd5eb"
     ];
 
-    for (
-        let i = 0;
-        i < 24;
-        i++
-    ) {
+    for(let i=0;i<24;i++){
 
-        const piece =
-            document.createElement("div");
+        const piece=document.createElement("div");
 
-        piece.className = "confetti";
+        piece.className="confetti";
 
-        piece.style.background =
-            colors[i % colors.length];
+        piece.style.background=
+            colors[i%colors.length];
 
-        piece.style.left =
-            centerX + "px";
-
-        piece.style.top =
-            centerY + "px";
+        piece.style.left=x+"px";
+        piece.style.top=y+"px";
 
         piece.style.setProperty(
             "--x",
-            ((Math.random() * 180) - 90) + "px"
+            ((Math.random()*180)-90)+"px"
         );
 
         piece.style.setProperty(
             "--y",
-            ((Math.random() * 150) - 75) + "px"
+            ((Math.random()*150)-75)+"px"
         );
 
         document.body.appendChild(piece);
 
-        setTimeout(function() {
+        setTimeout(()=>{
             piece.remove();
-        }, 950);
+        },950);
     }
 
-    setTimeout(function() {
+    element.style.opacity="0";
 
-        duck.classList.remove("clicked");
+    setTimeout(()=>{
 
-        duck.style.left =
-            (5 + Math.random() * 82) + "%";
+        element.style.left=
+            (5+Math.random()*82)+"%";
 
-        duck.style.top =
-            (20 + Math.random() * 55) + "%";
+        element.style.top=
+            (20+Math.random()*55)+"%";
 
-    }, 2200);
+        element.style.opacity="1";
+
+    },1800);
 }
 
 /* =========================================================
-   DASHBOARD
+   SIDEBAR
 ========================================================= */
 
-function goDashboard() {
+function renderUnits(){
 
-    currentPage = "dashboard";
+    const box=document.getElementById("units");
 
+    if(!box)return;
+
+    const start=placement();
+
+    if(!start){
+        box.innerHTML="";
+        return;
+    }
+
+    let html="";
+
+    for(let u=1;u<=10;u++){
+
+        const canOpen=
+            u>=start &&
+            (
+                u===start ||
+                done(u-1,10)
+            );
+
+        html+=`
+
+        <div class="unit
+        ${u===unit?"current":""}
+        ${canOpen?"":"locked"}"
+
+        ${canOpen?
+        `onclick="openUnit(${u})"`:
+        ""}>
+
+            <span class="unitNumber">
+                ${u}
+            </span>
+
+            ${course()[u-1][0][0]}
+
+        </div>
+
+        `;
+    }
+
+    box.innerHTML=html;
+}
+
+function openUnit(u){
+
+    if(!unlocked(u,1))return;
+
+    for(let l=1;l<=10;l++){
+
+        if(unlocked(u,l)&&!done(u,l)){
+
+            unit=u;
+            lesson=l;
+            page="lesson";
+
+            render();
+            return;
+        }
+    }
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function goDashboard(){
+
+    page="dashboard";
     render();
+
 }
 
 /* =========================================================
-   MAIN RENDER
+   RENDER
 ========================================================= */
 
-function render() {
+function render(){
 
-    const main =
-        document.getElementById("main");
+    const main=document.getElementById("main");
 
-    if (currentPage === "test") {
+    if(page==="test"){
+        main.innerHTML=renderTest();
+    }
 
-        main.innerHTML =
-            renderTest();
+    else if(page==="lesson"){
 
-    } else if (currentPage === "lesson") {
-
-        const lesson =
-            renderLesson();
-
-        main.innerHTML =
-            lesson.html;
+        main.innerHTML=renderLesson();
 
         /*
-           This is intentionally textContent.
-           The browser will display the code instead
-           of trying to run it as page HTML.
+            IMPORTANT:
+            Code goes into textContent, not innerHTML.
+            This is what prevents HTML/JS examples
+            from breaking the lesson page.
         */
 
-        const codeBox =
-            document.getElementById("lessonCode");
+        const box=document.getElementById("codeBox");
 
-        if (codeBox) {
-            codeBox.textContent =
-                lesson.code;
+        if(box){
+            box.textContent=
+                course()[unit-1][lesson-1][2];
         }
 
-    } else if (currentPage === "finished") {
+    }
 
-        main.innerHTML =
-            renderFinished();
+    else if(page==="finished"){
+        main.innerHTML=renderFinished();
+    }
 
-    } else {
-
-        main.innerHTML =
-            renderDashboard();
+    else{
+        main.innerHTML=renderDashboard();
     }
 
     document
-        .querySelectorAll(".language-button")
-        .forEach(function(button) {
+        .querySelectorAll(".languageButton")
+        .forEach(button=>{
 
             button.classList.toggle(
                 "active",
-                button.textContent.trim() === currentLanguage
+                button.textContent.trim()===language
             );
 
         });
 
     renderUnits();
 
-    document.getElementById(
-        "streakNumber"
-    ).textContent = streak;
+    document.getElementById("streak").textContent=streak;
 }
 
 /* =========================================================
-   OPENING ANIMATION
+   INTRO
 ========================================================= */
 
-setTimeout(function() {
+setTimeout(()=>{
 
-    const intro =
-        document.getElementById("intro");
+    document
+        .getElementById("intro")
+        .classList.add("hide");
 
-    intro.classList.add("hide");
-
-}, 2500);
+},2500);
 
 /* =========================================================
    START
 ========================================================= */
 
-if (!getPlacement()) {
-    currentPage = "test";
+if(!placement()){
+    page="test";
 }
 
 render();
